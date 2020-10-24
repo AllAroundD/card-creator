@@ -1,5 +1,5 @@
 import './App.css';
-import Splash from './Components'
+import Splash from './Components/Splash'
 import Card from './Components/Card';
 
 

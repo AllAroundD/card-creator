@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Splash = props => {
+const Splash = () => {
     return (<>
-        <div className="jumbotron" style='margin-top:5%' id='jumboIntro'>
+        <div className="jumbotron" style={{ marginTop: '5%' }} id='jumboIntro'>
             <h1 className="display-4">Card Generator</h1>
             <p className="lead">Create cards with their own face properties. Prepare decks of cards.</p>
             <hr className="my-4" />

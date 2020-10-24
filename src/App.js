@@ -1,14 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
 import Splash from './Components'
+import Card from './Components/Card';
+
 
 function App() {
   return (
-    <Splash />
     <div className="app">
+      <Splash />
       <h1>This is the app</h1>
+      This is the main
+      <Card />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

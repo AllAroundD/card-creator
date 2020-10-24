@@ -1,12 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Card from './Components/Card';
 
 function App() {
   return (
-    <div className="app">
-      <h1>This is the app</h1>
+    <div className='app'>
+      This is the main
+      <Card />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

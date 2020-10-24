@@ -45,7 +45,7 @@ Input the desired card properties in the forms and submit with the buttons.
 
 ## Contributing
 
-Submit a pull request and the repository owner will review your changes.
+This project isn't open to other contributors at this time.
 
 <a id='toc-tests'></a>
 

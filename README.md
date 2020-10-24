@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+![Forks](https://img.shields.io/github/forks/AllAroundD/card-creator) ![Stars](https://img.shields.io/github/stars/AllAroundD/card-creator) ![License](https://img.shields.io/github/license/AllAroundD/card-creator)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# card-generator
 
-## Available Scripts
+1. [Description](#toc-desc)
 
-In the project directory, you can run:
+2. [Installation](#toc-install)
 
-### `yarn start`
+3. [Usage](#toc-usage)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4. [License](#toc-license)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+5. [Contributing](#toc-contrib)
 
-### `yarn test`
+6. [Tests](#toc-tests)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+7. [Questions](#toc-contact)
 
-### `yarn build`
+<a id='toc-desc'></a>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Description
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Create and edit cards. Organize by deck.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<a id='toc-install'></a>
 
-### `yarn eject`
+## Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Use app at heroku instance linked [here](tbd).
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<a id='toc-usage'></a>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Usage
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Input the desired card properties in the forms and submit with the buttons.
+![Demo](./public/assets/img/demo.gif)
 
-## Learn More
+<a id='toc-license'></a>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[MIT](LICENSE)
 
-### Code Splitting
+<a id='toc-contrib'></a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Contributing
 
-### Analyzing the Bundle Size
+Submit a pull request and the repository owner will review your changes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<a id='toc-tests'></a>
 
-### Making a Progressive Web App
+## Tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+No tests.
 
-### Advanced Configuration
+<a id='toc-contact'></a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Questions
 
-### Deployment
+<a href="https://github.com/EddiEsteban" rel="some text">![Profile picture of EddiEsteban](https://avatars1.githubusercontent.com/u/60436198?v=4)</a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Please direct any questions, concerns, and compliments to [EddiEsteban](https://github.com/EddiEsteban) and [Doug](https://github.com/AllAroundD/)

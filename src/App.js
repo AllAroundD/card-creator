@@ -3,11 +3,11 @@ import Card from './Components/Card';
 
 function App() {
   return (
-    <div className='app'>
+    <div className="app">
       This is the main
       <Card />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

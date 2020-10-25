@@ -4,15 +4,15 @@ import Card from './Components/Card';
 import Inventory from './Components/Inventory'
 
 function App() {
-  return (
-    <div className="app">
-      <Inventory />
-      <Splash />
-      <h1>This is the app</h1>
+    return (
+        <div className="app">
+            <Inventory />
+            <Splash />
+            <h1>This is the app</h1>
             This is the main
-      <Card />
-    </div>
-  );
+            <Card />
+        </div>
+    );
 }
 
 export default App;

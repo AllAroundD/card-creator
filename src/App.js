@@ -7,7 +7,7 @@ import CardsList from './Components/CardsList';
 function App() {
     return (
         <div className="app">
-            <Inventory />
+            <LeftDrawer />
             <Splash />
             <h1>This is the app</h1>
             <CardsList />

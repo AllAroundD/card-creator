@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Inventory = () => {
+const LeftDrawer = () => {
     const classes = useStyles();
 
     return (
@@ -102,4 +102,4 @@ const Inventory = () => {
 }
 
 
-export default Inventory
+export default LeftDrawer

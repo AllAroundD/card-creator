@@ -48,7 +48,7 @@
   align-items: center;
 }
 
-.card-btn > .MuiSvgIcon-root {
+.card-btn>.MuiSvgIcon-root {
   padding: 4px;
   color: white;
   font-size: large;
@@ -58,7 +58,8 @@
   border-radius: 6px;
 }
 
-.card-btn > .MuiSvgIcon-root:hover {
+.card-btn>.MuiSvgIcon-root:hover {
   color: rgb(19, 34, 167);
   /* background-color: rgb(83, 77, 77); */
+  /* transform: scale(1.1); */
 }

@@ -12,11 +12,8 @@ function App() {
         <div className="app">
             <Actions />
             <Splash />
-            <h1>This is the app</h1>
             <Drawer>
                 <CardsList />
-            </Drawer>
-            <Drawer>
                 <DeckList />
             </Drawer>
         </div>

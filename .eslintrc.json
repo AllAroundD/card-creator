@@ -33,8 +33,16 @@
     "no-redeclare": "error",
     "camelcase": "error",
     "brace-style": "error",
-    "indent": ["warn", 4],
-    "quotes": ["error", "single"],
-    "semi": ["off"]
+    "indent": [
+      "warn",
+      4
+    ],
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "semi": [
+      "off"
+    ]
   }
 }

@@ -9,16 +9,16 @@ function Deck({title, src }) {
 
     const editDeck = () => {
         alert.success('Edit deck');
-        return true
+        // return true
     }
 
     const deleteDeck = () => {
         alert.success('Delete deck');
-        return true
+        // return true
     }
 
     return (
-        <div className='card'>
+        <div className='deckMain'>
             <div className="row deck">
                 <div className="col-8 deck-image">
                     <img src={src} className="deck-img-top" alt="deck image" />

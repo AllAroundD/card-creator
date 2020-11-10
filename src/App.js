@@ -4,6 +4,7 @@ import Splash from './Components/Splash';
 import LeftDrawer from './Components/LeftDrawer'
 import CardsList from './Components/CardsList';
 import DeckList from './Components/DeckList';
+import CardEdit from './Components/CardEdit';
 
 function App() {
     return (
@@ -14,6 +15,8 @@ function App() {
             <CardsList />
             <hr />
             <DeckList />
+            <hr />
+            <CardEdit />
         </div>
     );
 }

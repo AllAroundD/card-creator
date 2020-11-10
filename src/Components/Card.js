@@ -16,15 +16,15 @@ function Card({title, src }) {
     }
 
     return (
-        <div className='card'>
-            <div className="card-image">
-                <img src={src} className="card-img-top" alt="card image" />
+        <div className='card cardMain'>
+            <div className="card__image">
+                <img src={src} className="card__img__top" alt="card image" />
             </div>
-            <div className="card-body">
-                <h5 className="card-title">{title}</h5>
+            <div className="card__body">
+                <h5 className="card__title">{title}</h5>
                 <div className="card-buttons">
-                    <a href="#" onClick={editCard} className="card-btn"><EditIcon /></a>
-                    <a href="#" onClick={deleteCard} className="card-btn"><DeleteIcon /></a>
+                    <a href="#" onClick={editCard} className="card__btn"><EditIcon /></a>
+                    <a href="#" onClick={deleteCard} className="card__btn"><DeleteIcon /></a>
                 </div>
             </div>
         </div>

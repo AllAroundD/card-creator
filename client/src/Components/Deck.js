@@ -21,14 +21,14 @@ function Deck({title, src }) {
         <div className='deckMain'>
             <div className="row deck">
                 <div className="col-8 deck-image">
-                    <img src={src} className="deck-img-top" alt="deck image" />
+                    <img src={src} className="deck-img-top" alt="deck" />
                 </div>
                 <div className="col-4 deck-buttons">
-                    <div className="row deck-buttons__row">
-                        <a href="#" onClick={editDeck} className="deck-btn"><EditIcon /></a>
+                    <div className="deck-buttons__row">
+                        <button onClick={editDeck} className="deck-btn"><EditIcon /></button>
                     </div>
-                    <div className="row deck-buttons__row">
-                        <a href="#" onClick={deleteDeck} className="deck-btn"><DeleteIcon /></a>
+                    <div className="deck-buttons__row">
+                        <button onClick={deleteDeck} className="deck-btn"><DeleteIcon /></button>
                     </div>
                 </div>
             </div>

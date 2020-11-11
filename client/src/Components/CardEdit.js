@@ -20,7 +20,7 @@ function CardEdit({ id }) {
         <div className='cardEdit'>
             <h1>Edit Card</h1>
             <div className="cardEdit__image">
-                <img src="./assets/img/cardsample1.jpg" className="cardEdit__img__top" alt="card image" />
+                <img src="/assets/img/cardsample1.jpg" className="cardEdit__img__top" alt="card image" />
             </div>
             <div className="cardEdit__body">
                 <form>

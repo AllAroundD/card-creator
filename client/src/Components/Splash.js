@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default () => {
+export default function Splash() {
     return (<>
         <div className="jumbotron" style={{ marginTop: '5%' }} id='jumboIntro'>
             <h1 className="display-4">Card Generator</h1>

@@ -1,8 +1,13 @@
 import React from 'react'
 import Drawer from '@material-ui/core/Drawer'
 import Button from '@material-ui/core/Button'
+// import { makeStyles } from '@material-ui/core/styles';
 
-export default (props) => {
+// const useStyles = makeStyles(theme => ({
+//     drawer: { height: 100 }
+// }))
+
+export default function DrawerBottom(props) {
     const [state, setState] = React.useState(false)
     let anchor = 'bottom'
     const toggleDrawer = (anchor, open) => (event) => {
@@ -12,6 +17,7 @@ export default (props) => {
 
         setState({ ...state, [anchor]: open });
     };
+    // const classes = useStyles()
     return (<>
         <React.Fragment key={anchor}>
             <Button onClick={toggleDrawer(anchor, true)}>(Splayed Cards Graphic)</Button>

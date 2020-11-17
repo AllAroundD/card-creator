@@ -1,67 +1,67 @@
-.cardMain {
+.cardEdit {
   display: flex;
   align-items: center;
   padding: 10px;
-  width: 200px;
+  width: 100%;
   background-color: rgb(83, 77, 77);
   margin: 10px;
   color: white;
 }
 
-.card__image {
+.cardEdit__image {
   padding: 10px;
-  max-height: 90%;
-  height: 90%;
+  max-height: 80%;
+  height: 80%;
   justify-content: center;
   align-items: center;
   background-color: gray;
   border-radius: 6px;
 }
 
-.card__img__top {
+.cardEdit__img__top {
   width: 100%;
+  object-fit: contain;
 }
 
-.card__body {
+.cardEdit__body {
   width: 90%;
+  height: 700px;
+  padding: 10px;
+  /* align-items: center; */
+  /* text-align: center; */
+  /* border: 2px solid black; */
+}
+
+.cardEdit__buttons {
+  width: 30%;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.card__buttons {
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  /* padding: 5px; */
+  padding: 0;
   margin: 0;
-  text-align: center;
 }
 
-.card__btn {
-  width: 40%;
-  background-color: gray;
+.cardEdit__btn {
+  width: 50%;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
   padding-left: 5px;
   justify-content: center;
   align-items: center;
-  border-radius: 6px;
-  margin: 5px;
 }
 
-.card__btn>.MuiSvgIcon-root {
+.cardEdit__btn > .MuiSvgIcon-root {
   padding: 4px;
   color: white;
   font-size: large;
-  width: 50px;
-  height: 50px;
+  width: 40%;
+  height: 40%;
   background-color: gray;
   border-radius: 6px;
 }
 
-.card__btn>.MuiSvgIcon-root:hover {
+.cardEdit__btn > .MuiSvgIcon-root:hover {
   color: rgb(19, 34, 167);
   /* background-color: rgb(83, 77, 77); */
   /* transform: scale(1.1); */

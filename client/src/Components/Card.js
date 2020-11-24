@@ -1,10 +1,10 @@
-import React from 'react'
+import React from './node_modules/react'
 import './Card.css'
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { useAlert } from 'react-alert';
+import EditIcon from './node_modules/@material-ui/icons/Edit';
+import DeleteIcon from './node_modules/@material-ui/icons/Delete';
+import { useAlert } from './node_modules/react-alert';
 
-function Card({title, src }) {
+function Card({ title, src }) {
     const alert = useAlert();
 
     const editCard = () => {

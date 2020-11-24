@@ -56,7 +56,7 @@
   border: none;
 }
 
-.cardEdit__btn>.MuiSvgIcon-root {
+.cardEdit__btn > .MuiSvgIcon-root {
   padding: 4px;
   color: white;
   font-size: large;
@@ -67,7 +67,7 @@
   /* border: 2px solid blue; */
 }
 
-.cardEdit__btn>.MuiSvgIcon-root:hover {
+.cardEdit__btn > .MuiSvgIcon-root:hover {
   color: rgb(19, 34, 167);
   /* background-color: rgb(83, 77, 77); */
   /* transform: scale(1.1); */
@@ -81,6 +81,7 @@
 
 #cardNamePreview {
   border: 1px solid green;
+  color: black;
 }
 
 #cardImgPreview {

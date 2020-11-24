@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import './CardEdit.css'
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -7,6 +7,7 @@ import { useAlert } from 'react-alert';
 function CardEdit({ id }) {
     let attrEnum
     const alert = useAlert();
+    const [cardName, setCardName] = useState('')
 
     const saveCard = (e) => {
         e.preventDefault();
@@ -75,7 +76,7 @@ function CardEdit({ id }) {
                         <label for={cardNameInputId}>
                             <h5>Name of card</h5>
                         </label>
-                        <input type='text' name='cardNameInput' id={cardNameInputId} className='form-control'
+                        <input onChange={event => setCardName(event.target.value)} type='text' name='cardNameInput' id={cardNameInputId} className='form-control'
                             // onInput={previewMatch(cardNameInputId)} 
                             />
                     </div>
@@ -116,7 +117,7 @@ function CardEdit({ id }) {
             </div>
             <div className='cardPreviewBlock'>
                 <div className="card" id='cardPreview'>
-                    <h5 className="card-title card-body" id='cardNamePreview'>Card title</h5>
+                    <h5 className="card-title card-body" id='cardNamePreview'>{cardName}</h5>
                     <img src="/assets/img/blank_deck.jpg" className="card-img-top img-fluid" id='cardImgPreview'
                         alt="example" />
                     <p className="card-text card-body" id='cardDescPreview'>Some quick example text to build on the card

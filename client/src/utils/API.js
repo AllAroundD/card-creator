@@ -1,36 +1,38 @@
 import axios from "axios";
 
-export default {
+const api = {
     // Gets all cards
-    getBooks: function () {
+    getCards: function () {
         return axios.get("/api/cards");
     },
     // Gets the card with the given id
-    getBook: function (id) {
+    getCard: function (id) {
         return axios.get("/api/cards/" + id);
     },
     // Deletes the card with the given id
-    deleteBook: function (id) {
+    deleteCard: function (id) {
         return axios.delete("/api/cards/" + id);
     },
     // Saves a card to the database
-    saveBook: function (bookData) {
-        return axios.post("/api/cards", bookData);
+    saveCard: function (cardData) {
+        return axios.post("/api/cards", cardData);
     },
     // Gets all decks
-    getBooks: function () {
+    getDecks: function () {
         return axios.get("/api/decks");
     },
     // Gets the deck with the given id
-    getBook: function (id) {
+    getDeck: function (id) {
         return axios.get("/api/decks/" + id);
     },
     // Deletes the deck with the given id
-    deleteBook: function (id) {
+    deleteDeck: function (id) {
         return axios.delete("/api/decks/" + id);
     },
     // Saves a deck to the database
-    saveBook: function (bookData) {
-        return axios.post("/api/decks", bookData);
+    saveDeck: function (deckData) {
+        return axios.post("/api/decks", deckData);
     }
 };
+
+export default api;

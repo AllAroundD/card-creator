@@ -90,4 +90,9 @@
 
 #cardDescPreview {
   border: 1px solid blue;
+  color: black;
+}
+
+#cardAttrListPreview {
+  color: black;
 }

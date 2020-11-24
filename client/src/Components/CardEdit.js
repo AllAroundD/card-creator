@@ -8,6 +8,8 @@ function CardEdit({ id }) {
     let attrEnum
     const alert = useAlert();
     const [cardName, setCardName] = useState('')
+    const [cardDescription, setCardDescription] = useState('')
+    const [cardAttributes, setCardAttributes] = useState(["sample","sample1"])
 
     const saveCard = (e) => {
         e.preventDefault();
@@ -19,20 +21,21 @@ function CardEdit({ id }) {
         alert.success('Delete card');
     }
 
-    const userInputGenerator = (e, attrval = { attr: '', val: '' }) => {
+    const userInputGenerator = (e, attrval = { attr: 'sample', val: 'sample1' }) => {
         e.preventDefault();
         console.log('inputGen', attrval)
-        let attrHTML = `<label for='attr${attrEnum}Input'>Attribute name</label><input type='text' name='attr${attrEnum}Input' id='attr${attrEnum}Input' class='form-control' onInput='previewMatch(id)' value=${attrval.attr}>`
-        let valHTML = `<label for='val${attrEnum}Input'>Value</label><textarea name='val${attrEnum}Input' id='val${attrEnum}Input' class='form-control' onInput='previewMatch(id)'>${attrval.val}</textarea>`
+        let attrHTML = `<label for='attr${attrEnum}Input'>Attribute name</label><input type='text' name='attr${attrEnum}Input' id='attr${attrEnum}Input' class='form-control' value=${attrval.attr}>`
+        let valHTML = `<label for='val${attrEnum}Input'>Value</label><textarea name='val${attrEnum}Input' id='val${attrEnum}Input' class='form-control' >${attrval.val}</textarea>`
         return `<div class='form-row mb-2' id='attrval${attrEnum}'><div class='col-md-6 col-lg-4'>${attrHTML}</div><div class='col-md-6 col-md-8'>${valHTML}</div></div>`
     }
 
-    const addAttribute = (attrval = { attr: '', val: '' }) => {
+    const addAttribute = (attrval = { attr: 'sample', val: 'sample1' }) => {
         let attrListEl = document.querySelector('#cardAttrInputList')
         let previewAttrEl = document.querySelector('#cardAttrListPreview')
-        console.log({ attrval, attrListEl, previewAttrEl })
+        // console.log({ attrval, attrListEl, previewAttrEl })
         attrListEl.innerHTML += userInputGenerator(attrval)
         previewAttrEl.innerHTML += `<li class='list-group-item'><div class='row'><div class='col' id='attr${attrEnum}Preview'>${attrval.attr}</div><div class='col' id='val${attrEnum}Preview'>${attrval.val}</div></div></li>`
+        console.log('previewAttrEl: ',previewAttrEl)
         attrEnum += 1
     }
     
@@ -84,7 +87,7 @@ function CardEdit({ id }) {
                         <label for={cardNameInputDesc}>
                             <h5>Description</h5>
                         </label>
-                        <textarea name='cardDescInput' id={cardNameInputDesc} className='form-control'
+                        <textarea onChange={event => setCardDescription(event.target.value)} name='cardDescInput' id={cardNameInputDesc} className='form-control'
                             // onInput={previewMatch(cardNameInputDesc)}
                             ></textarea>
                     </div>
@@ -117,11 +120,13 @@ function CardEdit({ id }) {
             </div>
             <div className='cardPreviewBlock'>
                 <div className="card" id='cardPreview'>
-                    <h5 className="card-title card-body" id='cardNamePreview'>{cardName}</h5>
+                    <h5 className="card-title card-body" id='cardNamePreview'>{cardName ? cardName : "Sample Card Name"}</h5>
                     <img src="/assets/img/blank_deck.jpg" className="card-img-top img-fluid" id='cardImgPreview'
                         alt="example" />
-                    <p className="card-text card-body" id='cardDescPreview'>Some quick example text to build on the card
-                        title and make up the bulk of the card's content.</p>
+                    <p className="card-text card-body" id='cardDescPreview'>
+                        {cardDescription ? cardDescription : "Some quick example text to build on the card title and make up the bulk of the card's content."}
+                    </p>
+                    {/* <ul className="list-group list-group-flush" id='cardAttrListPreview'>{`${cardAttributes[0]} : ${cardAttributes[1]}`}</ul> */}
                     <ul className="list-group list-group-flush" id='cardAttrListPreview'></ul>
                 </div>
             </div>

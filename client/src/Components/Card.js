@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React, { useState } from 'react'
 import './Card.css'
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -6,7 +6,7 @@ import { useAlert } from 'react-alert';
 import { Link } from "react-router-dom";
 
 
-function Card({id = 1, title = "This is a sample card title", src }) {
+function Card({ id = 1, title = "This is a sample card title", src }) {
     const alert = useAlert();
 
     // const editCard = () => {
@@ -28,7 +28,7 @@ function Card({id = 1, title = "This is a sample card title", src }) {
                     <Link to={`/cardedit/${id}`}>
                         <button value={id} className="card__btn"><EditIcon /></button>
                     </Link>
-                <button onClick={deleteCard} className="card__btn"><DeleteIcon /></button>
+                    <button onClick={deleteCard} className="card__btn"><DeleteIcon /></button>
                 </div>
             </div>
         </div>

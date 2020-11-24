@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
+const routes = require("./routes");
 const history = require('connect-history-api-fallback')
 
 const PORT = process.env.PORT || 8080
@@ -35,9 +36,8 @@ mongoose.connect(
     }
 )
 
-// app routes
-require('./routes/apiRoutes')(app)
-// require('./routes/htmlRoutes')(app)
+// Add routes, both API and view
+app.use(routes);
 
 // send all requests to React app
 app.get('*', function (req, res) {

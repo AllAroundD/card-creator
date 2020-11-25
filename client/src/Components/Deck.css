@@ -1,0 +1,69 @@
+.deckMain {
+  width: 300px;
+  margin: 10px;
+}
+
+.deck {
+  margin: 5px;
+  padding: 10px;
+  width: 100%;
+  background-color: rgb(83, 77, 77);
+  color: white;
+  border-radius: 6px;
+}
+
+.deck-image {
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+  border-radius: 6px;
+}
+
+.deck-img-top {
+  width: 90%;
+}
+
+.deck-body {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.deck-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  margin: 0;
+  padding: 10px;
+}
+
+.deck-buttons__row {
+  /* vertical-align: middle; */
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.deck-btn {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+  border-radius: 6px;
+}
+
+.deck-btn>.MuiSvgIcon-root {
+  color: white;
+  font-size: large;
+  width: 40px;
+  height: 40px;
+  background-color: gray;
+  border-radius: 6px;
+}
+
+.deck-btn>.MuiSvgIcon-root:hover {
+  color: rgb(19, 34, 167);
+}

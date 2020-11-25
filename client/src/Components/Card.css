@@ -1,64 +1,67 @@
-.card {
+.cardMain {
   display: flex;
   align-items: center;
   padding: 10px;
-  width: 20%;
+  width: 200px;
   background-color: rgb(83, 77, 77);
   margin: 10px;
   color: white;
 }
 
-.card-image {
+.card__image {
   padding: 10px;
   max-height: 90%;
   height: 90%;
   justify-content: center;
   align-items: center;
   background-color: gray;
+  border-radius: 6px;
 }
 
-.card-img-top {
+.card__img__top {
   width: 100%;
 }
 
-.card-body {
-  justify-content: center;
+.card__body {
   width: 90%;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
-.card-buttons {
+.card__buttons {
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 0;
+  /* padding: 5px; */
   margin: 0;
   text-align: center;
 }
 
-.card-btn {
-  width: 100%;
+.card__btn {
+  width: 40%;
+  background-color: gray;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
   padding-left: 5px;
   justify-content: center;
   align-items: center;
+  border-radius: 6px;
+  margin: 5px;
 }
 
-.card-btn>.MuiSvgIcon-root {
+.card__btn>.MuiSvgIcon-root {
   padding: 4px;
   color: white;
   font-size: large;
-  width: 40%;
-  height: 40%;
+  width: 50px;
+  height: 50px;
   background-color: gray;
   border-radius: 6px;
 }
 
-.card-btn>.MuiSvgIcon-root:hover {
+.card__btn>.MuiSvgIcon-root:hover {
   color: rgb(19, 34, 167);
   /* background-color: rgb(83, 77, 77); */
   /* transform: scale(1.1); */

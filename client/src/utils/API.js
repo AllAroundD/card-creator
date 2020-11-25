@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default {
+const api = {
     // Gets all cards
     getCards: function () {
         return axios.get("/api/cards");
@@ -34,3 +34,5 @@ export default {
         return axios.post("/api/decks", deckData);
     }
 };
+
+export default api;

@@ -1,13 +1,13 @@
-import React from './node_modules/react'
+import React from 'react'
 import Card from './Card'
 import './CardsList.css'
 
 function CardsList() {
     return (
         <div className="cardslist">
-            <p>This is the CardsList</p>
-            <Card title="Card 1" src="https://images.freeimages.com/images/large-previews/dfc/hands-card-1238263.jpg" />
-            <Card title="Card 2" src="https://images.freeimages.com/images/large-previews/63c/cards-2-1417061.jpg" />
+            <p>Cards</p><br />
+            <Card id="5fb94fb7e05e9971eceab3ad" title="Card 1" src="/assets/img/cardsample1.jpg" />
+            <Card id="5fb94fb7e05e9971eceab3ae" title="Card 2" src="/assets/img/cardsample2.jpg" />
         </div>
     )
 }

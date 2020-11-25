@@ -1,11 +1,11 @@
-require("dotenv").config()
+require('dotenv').config()
 const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
-const routes = require("./routes");
+const routes = require('./routes');
 const history = require('connect-history-api-fallback')
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 3001
 const app = express()
 
 // middleware defined
@@ -40,8 +40,8 @@ mongoose.connect(
 app.use(routes);
 
 // send all requests to React app
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
 // app listener

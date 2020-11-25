@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require('../models');
 
 // Defining methods for the cardsController
 module.exports = {
@@ -10,6 +10,7 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     findById: function (req, res) {
+        console.log('req.params.id',req.params.id);
         db.Cards
             .findById(req.params.id)
             .then(dbModel => res.json(dbModel))

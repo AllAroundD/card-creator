@@ -9,15 +9,16 @@ function CardEdit(props) {
     let attrEnum
     const alert = useAlert();
     // Setting our component's initial state
-    const [cardInfo, setCardInfo] = useState([])
+    const [cardInfo, setCardInfo] = useState({})
     const [cardName, setCardName] = useState('')
     const [cardDescription, setCardDescription] = useState('');
     const [cardAttributes, setCardAttributes] = useState(["sample","sample1"]);
 
-    const id = window.location.pathname.substr(10);
-    console.log('card id', id)    
+    let id
     // Load all card info and store them with setCard
     useEffect(() => {
+        let id = window.location.pathname.substr(10);
+        console.log('card id', id)    
         loadCardInfo(id);
         console.log('cardInfo',cardInfo)
     }, [])

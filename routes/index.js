@@ -1,44 +1,13 @@
-const db = require('../models')
-const router = require('express').Router()
+const path = require('path');
+const router = require('express').Router();
+const apiRoutes = require('./api');
 
+// API Routes
+router.use('/api', apiRoutes);
 
+// If no API routes are hit, send the React app
+router.use(function(req, res) {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
-
-module.exports = function (app) {
-    // retrieve all cards
-    router.get('/api/cards', (req, res) => {
-        db.Cards.find({})
-            .then(dbCard => {
-                res.json(dbCard)
-            })
-            .catch(err => {
-                res.status(404).json(err)
-            })
-    })
-
-    // // retrieve specific card
-    // router.get("/api/card", (req, res) => {
-    //     db.Cards.find({})
-    //         .then(dbCard => {
-    //             res.json(dbCard)
-    //         })
-    //         .catch(err => {
-    //             res.status(404).json(err)
-    //         })
-    // })
-
-    // add new card
-    router.post('/api/cards', ({ body }, res) => {
-        db.Cards.create(body)
-            .then(dbCard => {
-                res.json(dbCard)
-            })
-            .catch(err => {
-                res.status(404).json(err)
-            })
-    })
-
-    // delete specific card
-
-
-}
+module.exports = router;

@@ -1,19 +1,46 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import './CardEdit.css'
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
+import API from "../utils/API";
 
-function CardEdit({ id }) {
+function CardEdit(props) {
     let attrEnum
     const alert = useAlert();
+    // Setting our component's initial state
+    const [cardInfo, setCardInfo] = useState([])
     const [cardName, setCardName] = useState('')
-    const [cardDescription, setCardDescription] = useState('')
-    const [cardAttributes, setCardAttributes] = useState(["sample","sample1"])
+    const [cardDescription, setCardDescription] = useState('');
+    const [cardAttributes, setCardAttributes] = useState(["sample","sample1"]);
+
+    const id = window.location.pathname.substr(10);
+    console.log('card id', id)    
+    // Load all card info and store them with setCard
+    useEffect(() => {
+        loadCardInfo(id);
+        console.log('cardInfo',cardInfo)
+    }, [])
+
+    // Loads all card info and sets them to Card
+    function loadCardInfo(id) {
+        console.log("calling API.getCard")
+        API.getCard(id)
+        .then(res => 
+            setCardInfo(res.data)
+        )
+        .catch(err => console.log(err));
+    };
 
     const saveCard = (e) => {
         e.preventDefault();
-        alert.success('Save card');
+        console.log("calling API.saveCard")
+        API.saveCard(id)
+        .then(res => 
+            setCardInfo(res.data)
+        )
+        .catch(err => console.log(err));
+        alert.success('Saved card');
     }
 
     const deleteCard = (e) => {
@@ -76,7 +103,7 @@ function CardEdit({ id }) {
                     <input className='d-none' type='text' name='cardId' id='cardId' value='defaultCardId' />
                     <input className='d-none' type='text' name='cardImgUrl' id='cardImgUrl' value='defaultImgUrl' />
                     <div className='form-group'>
-                        <label for={cardNameInputId}>
+                        <label htmlFor={cardNameInputId}>
                             <h5>Name of card</h5>
                         </label>
                         <input onChange={event => setCardName(event.target.value)} type='text' name='cardNameInput' id={cardNameInputId} className='form-control'
@@ -84,7 +111,7 @@ function CardEdit({ id }) {
                             />
                     </div>
                     <div className='form-group'>
-                        <label for={cardNameInputDesc}>
+                        <label htmlFor={cardNameInputDesc}>
                             <h5>Description</h5>
                         </label>
                         <textarea onChange={event => setCardDescription(event.target.value)} name='cardDescInput' id={cardNameInputDesc} className='form-control'
@@ -94,7 +121,7 @@ function CardEdit({ id }) {
 
 
                     <div className="form-group">
-                        <label for='imageFile'>
+                        <label htmlFor='imageFile'>
                             <h5>Card art</h5>
                         </label>
                         {/* <input type="file" id="imageFile" name='imageFile' onChange={previewImg(event.target.value)}
@@ -104,7 +131,7 @@ function CardEdit({ id }) {
                     <div id='apiMessage' className="alert alert-success d-none"></div>
 
                     <div className='form-group'>
-                        <label for='cardAttrInputList'>
+                        <label htmlFor='cardAttrInputList'>
                             <h5>Attributes</h5>
                         </label>
                         <div id='cardAttrInputList'></div>

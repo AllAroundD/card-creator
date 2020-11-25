@@ -1,7 +1,7 @@
-import React from './node_modules/react';
-import { makeStyles } from './node_modules/@material-ui/core/styles';
-import Fab from './node_modules/@material-ui/core/Fab';
-import Box from './node_modules/@material-ui/core/Box'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+import Box from '@material-ui/core/Box'
 import { ReactComponent as AddCardIcon } from '../add-card-plain.svg'
 import { ReactComponent as AddDeckIcon } from '../add-deck-plain.svg'
 

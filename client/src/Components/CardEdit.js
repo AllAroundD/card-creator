@@ -9,39 +9,51 @@ function CardEdit(props) {
     let attrEnum
     const alert = useAlert();
     // Setting our component's initial state
-    const [cardInfo, setCardInfo] = useState({})
-    const [cardName, setCardName] = useState('')
-    const [cardDescription, setCardDescription] = useState('');
+    const [cardInfo, setCardInfo] = useState({
+        name: "",
+        desc: ""
+    })
+
+    const handleChange = (evt) => {
+        const value = evt.target.value;
+        setCardInfo({
+          ...cardInfo,
+          [evt.target.name]: value
+        });
+        // console.log('handleChange: evt.target.name', evt.target.name) 
+        // console.log('handleChange: cardInfo', cardInfo) 
+    }
+
     const [cardAttributes, setCardAttributes] = useState(["sample","sample1"]);
 
     let id
     // Load all card info and store them with setCard
     useEffect(() => {
         let id = window.location.pathname.substr(10);
-        console.log('card id', id)    
         loadCardInfo(id);
-        console.log('cardInfo',cardInfo)
     }, [])
 
+
+
     // Loads all card info and sets them to Card
-    function loadCardInfo(id) {
-        console.log("calling API.getCard")
+    const loadCardInfo = (id) => {
+        // console.log("calling API.getCard")
         API.getCard(id)
         .then(res => 
             setCardInfo(res.data)
         )
         .catch(err => console.log(err));
+        // console.log("cardInfo load ", cardInfo)
     };
 
     const saveCard = (e) => {
         e.preventDefault();
-        console.log("calling API.saveCard")
-        API.saveCard(id)
-        .then(res => 
-            setCardInfo(res.data)
+        // console.log("calling API.saveCard")
+        // console.log("cardInfo in saveCard: ", cardInfo)
+        API.editCard(cardInfo._id, cardInfo)
+        .then(alert.success('Saved card')
         )
         .catch(err => console.log(err));
-        alert.success('Saved card');
     }
 
     const deleteCard = (e) => {
@@ -107,17 +119,27 @@ function CardEdit(props) {
                         <label htmlFor={cardNameInputId}>
                             <h5>Name of card</h5>
                         </label>
-                        <input onChange={event => setCardName(event.target.value)} type='text' name='cardNameInput' id={cardNameInputId} className='form-control'
+                        <input 
+                            onChange={handleChange} 
+                            type='text' name='name' id={cardNameInputId} 
+                            className='form-control' 
+                            placeholder="Sample Card Name"
                             // onInput={previewMatch(cardNameInputId)} 
+                            value={cardInfo.name}
                             />
                     </div>
                     <div className='form-group'>
                         <label htmlFor={cardNameInputDesc}>
                             <h5>Description</h5>
                         </label>
-                        <textarea onChange={event => setCardDescription(event.target.value)} name='cardDescInput' id={cardNameInputDesc} className='form-control'
+                        <textarea 
+                            onChange={handleChange} 
+                            name='desc' id={cardNameInputDesc} 
+                            className='form-control' 
+                            placeholder="Some quick example text to build on the card title and make up the bulk of the card's content."
                             // onInput={previewMatch(cardNameInputDesc)}
-                            ></textarea>
+                            value={cardInfo.desc}
+                        />
                     </div>
 
 
@@ -148,11 +170,11 @@ function CardEdit(props) {
             </div>
             <div className='cardPreviewBlock'>
                 <div className="card" id='cardPreview'>
-                    <h5 className="card-title card-body" id='cardNamePreview'>{cardName ? cardName : "Sample Card Name"}</h5>
+                    <h5 className="card-title card-body" id='cardNamePreview'>{cardInfo.name ? cardInfo.name : "Sample Card Name"}</h5>
                     <img src="/assets/img/blank_deck.jpg" className="card-img-top img-fluid" id='cardImgPreview'
                         alt="example" />
                     <p className="card-text card-body" id='cardDescPreview'>
-                        {cardDescription ? cardDescription : "Some quick example text to build on the card title and make up the bulk of the card's content."}
+                        {cardInfo.desc ? cardInfo.desc : "Some quick example text to build on the card title and make up the bulk of the card's content."}
                     </p>
                     {/* <ul className="list-group list-group-flush" id='cardAttrListPreview'>{`${cardAttributes[0]} : ${cardAttributes[1]}`}</ul> */}
                     <ul className="list-group list-group-flush" id='cardAttrListPreview'></ul>

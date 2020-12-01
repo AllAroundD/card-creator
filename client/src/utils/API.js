@@ -13,9 +13,13 @@ const api = {
     deleteCard: function (id) {
         return axios.delete("/api/cards/" + id);
     },
+    // Creates a card to the database
+    createCard: function (cardData) {
+        return axios.put("/api/cards/", cardData);
+    },
     // Saves a card to the database
-    saveCard: function (cardData) {
-        return axios.post("/api/cards", cardData);
+    editCard: function (id, cardData) {
+        return axios.put("/api/cards/" + id, cardData);
     },
     // Gets all decks
     getDecks: function () {

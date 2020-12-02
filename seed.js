@@ -22,9 +22,35 @@ let cardSeed = [
         properties: {}
     },
 ]
+let deckSeed = [
+    {
+        name: "Doug Deck",
+        desc: 'hi deck',
+        imgId: '123123',
+        cards: []
+    },
+    {
+        name: "Eddi Deck",
+        desc: 'it me deck',
+        imgId: '234234234',
+        cards: []
+    },
+]
+
 // delete any data that was there and then insert the data
 db.Cards.deleteMany({})
     .then(() => db.Cards.collection.insertMany(cardSeed))
+    .then(data => {
+        console.log(data.result.n + " records inserted!")
+        process.exit(0)
+    })
+    .catch(err => {
+        console.error(err)
+        process.exit(1)
+    })
+
+db.Decks.deleteMany({})
+    .then(() => db.Decks.collection.insertMany(deckSeed))
     .then(data => {
         console.log(data.result.n + " records inserted!")
         process.exit(0)

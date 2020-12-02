@@ -4,7 +4,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
 import API from "../utils/API";
-import { Redirect, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function CardEdit(props) {
     let attrEnum
@@ -24,6 +24,8 @@ function CardEdit(props) {
         // console.log('handleChange: evt.target.name', evt.target.name) 
         // console.log('handleChange: cardInfo', cardInfo) 
     }
+
+    let history = useHistory();
 
     const [cardAttributes, setCardAttributes] = useState(["sample","sample1"]);
 
@@ -64,7 +66,7 @@ function CardEdit(props) {
         )
         .catch(err => console.log(err));
         console.log("redirecting");
-        
+        history.push("/");
         
     }
 

@@ -4,6 +4,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
 import API from "../utils/API";
+import { Redirect, Link } from "react-router-dom";
 
 function CardEdit(props) {
     let attrEnum
@@ -58,7 +59,13 @@ function CardEdit(props) {
 
     const deleteCard = (e) => {
         e.preventDefault();
-        alert.success('Delete card');
+        API.deleteCard(cardInfo._id)
+        .then(alert.success('Deleted card')
+        )
+        .catch(err => console.log(err));
+        console.log("redirecting");
+        
+        
     }
 
     const userInputGenerator = (e, attrval = { attr: 'sample', val: 'sample1' }) => {

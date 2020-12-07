@@ -8,6 +8,7 @@ import DeckList from './Components/DeckList';
 import CardEdit from './Components/CardEdit';
 import DeckEdit from './Components/DeckEdit';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import DeckCreate from './Components/DeckCreate';
 
 function App() {
     return (
@@ -21,6 +22,10 @@ function App() {
                     <Route path="/deckedit">
                         <Actions />
                         <DeckEdit />
+                    </Route>
+                    <Route path="/deckcreate">
+                        <Actions />
+                        <DeckCreate />
                     </Route>
                     <Route path="/">
                         <Actions />

@@ -26,16 +26,20 @@ const Actions = () => {
     <Box className={classes.root} display='flex' flexDirection='column' position='fixed' top='0' left='0'>
       <Switch>
         <Route exact path='/'>
-          <Fab color="primary">
-            <Tooltip title="Create Card" arrow >
-              <AddCardIcon width='40%' height='100%' />
-            </Tooltip>
-          </Fab>
-          <Fab color='primary'>
-            <Tooltip title="Create Deck" arrow >
-              <AddDeckIcon width='70%' height='100%' />
-            </Tooltip>
-          </Fab>
+          <Link to='/cardcreate'>
+            <Fab color="primary">
+              <Tooltip title="Create Card" arrow >
+                <AddCardIcon width='40%' height='100%' />
+              </Tooltip>
+            </Fab>
+          </Link>
+          <Link to='/deckcreate'>
+            <Fab color='primary'>
+              <Tooltip title="Create Deck" arrow >
+                <AddDeckIcon width='70%' height='100%' />
+              </Tooltip>
+            </Fab>
+          </Link>
         </Route>
         <Route path='/cardedit'>
           <Link to='/'>

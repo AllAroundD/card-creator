@@ -4,9 +4,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
 import { Link } from "react-router-dom";
+import API from "../utils/API";
 
-
-function Card({ id = 1, title = "This is a sample card title", src }) {
+function Card({ id, title, src }) {
     const alert = useAlert();
 
     // const editCard = () => {
@@ -14,7 +14,13 @@ function Card({ id = 1, title = "This is a sample card title", src }) {
     // }
 
     const deleteCard = () => {
-        alert.success('Delete card');
+        console.log('card id', id)
+        API.deleteCard(id)
+        .then(alert.success('Deleted card')
+        )
+        .catch(err => console.log(err));
+        console.log("need to refresh list");
+
     }
 
     return (
@@ -28,7 +34,9 @@ function Card({ id = 1, title = "This is a sample card title", src }) {
                     <Link to={`/cardedit/${id}`}>
                         <button value={id} className="card__btn"><EditIcon /></button>
                     </Link>
-                    <button onClick={deleteCard} className="card__btn"><DeleteIcon /></button>
+                    {/* <form action="/"> */}
+                        <button onClick={deleteCard} className="card__btn"><DeleteIcon /></button>
+                    {/* </form> */}
                 </div>
             </div>
         </div>

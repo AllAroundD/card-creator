@@ -65,7 +65,7 @@ function CardEdit(props) {
         .then(alert.success('Deleted card')
         )
         .catch(err => console.log(err));
-        console.log("redirecting");
+        // console.log(`Deleted card ${cardInfo._id} . Redirecting`);
         history.push("/");
         
     }

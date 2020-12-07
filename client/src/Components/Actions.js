@@ -5,7 +5,8 @@ import Box from '@material-ui/core/Box'
 import { Home } from '@material-ui/icons'
 import { ReactComponent as AddCardIcon } from '../add-card-plain.svg'
 import { ReactComponent as AddDeckIcon } from '../add-deck-plain.svg'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,10 +27,14 @@ const Actions = () => {
       <Switch>
         <Route exact path='/'>
           <Fab color="primary">
-            <AddCardIcon width='40%' height='100%' />
+            <Tooltip title="Create Card" arrow >
+              <AddCardIcon width='40%' height='100%' />
+            </Tooltip>
           </Fab>
           <Fab color='primary'>
-            <AddDeckIcon width='70%' height='100%' />
+            <Tooltip title="Create Deck" arrow >
+              <AddDeckIcon width='70%' height='100%' />
+            </Tooltip>
           </Fab>
         </Route>
         <Route path='/cardedit'>

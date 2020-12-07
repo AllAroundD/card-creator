@@ -9,10 +9,6 @@ import API from "../utils/API";
 function Card({ id, title, src }) {
     const alert = useAlert();
 
-    // const editCard = () => {
-    //     alert.success('Editting card');
-    // }
-
     const deleteCard = () => {
         console.log('card id', id)
         API.deleteCard(id)
@@ -34,9 +30,7 @@ function Card({ id, title, src }) {
                     <Link to={`/cardedit/${id}`}>
                         <button value={id} className="card__btn"><EditIcon /></button>
                     </Link>
-                    {/* <form action="/"> */}
-                        <button onClick={deleteCard} className="card__btn"><DeleteIcon /></button>
-                    {/* </form> */}
+                    <button onClick={deleteCard} className="card__btn"><DeleteIcon /></button>
                 </div>
             </div>
         </div>

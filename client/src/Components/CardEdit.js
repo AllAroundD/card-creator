@@ -180,7 +180,7 @@ function CardEdit(props) {
             <div className='cardPreviewBlock'>
                 <div className="card" id='cardPreview'>
                     <h5 className="card-title card-body" id='cardNamePreview'>{cardInfo.name ? cardInfo.name : "Sample Card Name"}</h5>
-                    <img src="/assets/img/blank_deck.jpg" className="card-img-top img-fluid" id='cardImgPreview'
+                    <img src={`/assets/img/${cardInfo.imgId}`} className="card-img-top img-fluid" id='cardImgPreview'
                         alt="example" />
                     <p className="card-text card-body" id='cardDescPreview'>
                         {cardInfo.desc ? cardInfo.desc : "Some quick example text to build on the card title and make up the bulk of the card's content."}

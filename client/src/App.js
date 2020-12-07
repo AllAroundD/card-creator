@@ -6,6 +6,7 @@ import CardsList from './Components/CardsList';
 import Drawer from './Components/Drawer';
 import DeckList from './Components/DeckList';
 import CardEdit from './Components/CardEdit';
+import DeckEdit from './Components/DeckEdit';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -16,6 +17,10 @@ function App() {
                     <Route path="/cardedit">
                         <Actions />
                         <CardEdit />
+                    </Route>
+                    <Route path="/deckedit">
+                        <Actions />
+                        <DeckEdit />
                     </Route>
                     <Route path="/">
                         <Actions />

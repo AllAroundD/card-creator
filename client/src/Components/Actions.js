@@ -44,6 +44,13 @@ const Actions = () => {
             </Fab>
           </Link>
         </Route>
+        <Route path='/deckedit'>
+          <Link to='/'>
+            <Fab color='primary'>
+              <Home width='100%' height='100%' style={{ color: '#777' }} />
+            </Fab>
+          </Link>
+        </Route>
       </Switch>
     </Box>
   );

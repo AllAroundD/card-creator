@@ -29,6 +29,10 @@ const api = {
     getDeck: function (id) {
         return axios.get("/api/decks/" + id);
     },
+    // Saves a card to the database
+    editDeck: function (id, deckData) {
+        return axios.put("/api/decks/" + id, deckData);
+    },
     // Deletes the deck with the given id
     deleteDeck: function (id) {
         return axios.delete("/api/decks/" + id);

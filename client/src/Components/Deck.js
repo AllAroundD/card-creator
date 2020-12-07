@@ -3,14 +3,16 @@ import './Deck.css'
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
+import { Link } from "react-router-dom";
+import API from "../utils/API";
 
-function Deck({title, src }) {
+function Deck({id, title, src }) {
     const alert = useAlert();
 
-    const editDeck = () => {
-        alert.success('Edit deck');
-        // return true
-    }
+    // const editDeck = () => {
+    //     alert.success('Edit deck');
+    //     // return true
+    // }
 
     const deleteDeck = () => {
         alert.success('Delete deck');
@@ -25,7 +27,9 @@ function Deck({title, src }) {
                 </div>
                 <div className="col-4 deck-buttons">
                     <div className="deck-buttons__row">
-                        <button onClick={editDeck} className="deck-btn"><EditIcon /></button>
+                        <Link to={`/deckedit/${id}`}>
+                            <button className="deck-btn"><EditIcon /></button>
+                        </Link>
                     </div>
                     <div className="deck-buttons__row">
                         <button onClick={deleteDeck} className="deck-btn"><DeleteIcon /></button>

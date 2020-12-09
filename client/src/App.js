@@ -9,12 +9,17 @@ import CardEdit from './Components/CardEdit';
 import DeckEdit from './Components/DeckEdit';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import DeckCreate from './Components/DeckCreate';
+import CardCreate from './Components/CardCreate';
 
 function App() {
     return (
         <div className="app">
             <Router>
                 <Switch>
+                    <Route path="/cardcreate">
+                        <Actions />
+                        <CardCreate />
+                    </Route>
                     <Route path="/cardedit">
                         <Actions />
                         <CardEdit />

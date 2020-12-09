@@ -41,7 +41,21 @@ const Actions = () => {
             </Fab>
           </Link>
         </Route>
+        <Route path='/cardcreate'>
+          <Link to='/'>
+            <Fab color='primary'>
+              <Home width='100%' height='100%' style={{ color: '#777' }} />
+            </Fab>
+          </Link>
+        </Route>
         <Route path='/cardedit'>
+          <Link to='/'>
+            <Fab color='primary'>
+              <Home width='100%' height='100%' style={{ color: '#777' }} />
+            </Fab>
+          </Link>
+        </Route>
+        <Route path='/deckcreate'>
           <Link to='/'>
             <Fab color='primary'>
               <Home width='100%' height='100%' style={{ color: '#777' }} />

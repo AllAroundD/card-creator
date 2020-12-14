@@ -15,11 +15,15 @@ const api = {
     },
     // Creates a card to the database
     createCard: function (cardData) {
-        return axios.put("/api/cards/", cardData);
+        return axios.post("/api/cards/", cardData);
     },
-    // Saves a card to the database
+    // Edits a card in the database
     editCard: function (id, cardData) {
-        return axios.put("/api/cards/" + id, cardData);
+        return axios.put("/api/cards/" + id, cardData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
     },
     // Gets all decks
     getDecks: function () {
@@ -33,8 +37,8 @@ const api = {
     deleteDeck: function (id) {
         return axios.delete("/api/decks/" + id);
     },
-    // Saves a deck to the database
-    saveDeck: function (deckData) {
+    // Creates a deck to the database
+    createDeck: function (deckData) {
         return axios.post("/api/decks", deckData);
     }
 };

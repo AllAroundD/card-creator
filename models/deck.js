@@ -14,6 +14,10 @@ const DeckSchema = new Schema({
     imgId: {
         type: String
     },
+    img: {
+        data: Buffer,
+        contentType: String
+    },
     cards: [{ type: Schema.Types.ObjectId, ref: "Cards" }],
     createdAt: { type: Date, default: Date.now }
 })

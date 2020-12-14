@@ -4,6 +4,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import ClearIcon from '@material-ui/icons/Clear';
 import { useAlert } from 'react-alert';
 import API from "../utils/API";
+import CardAttributes from './CardAttributes'
 
 function CardCreate(props) {
     let attrEnum=0
@@ -15,6 +16,7 @@ function CardCreate(props) {
         imgId: "cardsample2.jpg",
         properties: []
     })
+    const [ cardAttributes, setCardAttributes ] = useState([])
 
     const handleChange = (evt) => {
         const value = evt.target.value;
@@ -25,8 +27,6 @@ function CardCreate(props) {
         // console.log('handleChange: evt.target.name', evt.target.name) 
         // console.log('handleChange: cardInfo', cardInfo) 
     }
-
-    const [cardAttributes, setCardAttributes] = useState(["",""]);
 
     let id
 
@@ -156,15 +156,18 @@ function CardCreate(props) {
                     <div id='apiMessage' className="alert alert-success d-none"></div>
 
                     <div className='form-group'>
-                        <label htmlFor='cardAttrInputList'>
+                        {/* <label htmlFor='cardAttrInputList'>
                             <h5>Attributes</h5>
-                        </label>
-                        <div id='cardAttrInputList'></div>
-                        <button type="button" className='btn btn-primary mt-3' onClick={addAttribute}>Add
-                            attribute</button>
+                        </label> */}
+                        {/* <div id='cardAttrInputList'></div> */}
+                        {/* <button type="button" className='btn btn-primary mt-3' onClick={addAttribute}>Add
+                            attribute
+                        </button> */}
+                        <CardAttributes />
                     </div>
                     <div className="cardEdit__buttons">
-                        <button disabled={cardAttributes === [] ? "true" : "false" } onClick={saveCard} className="cardEdit__btn"><SaveIcon /></button>
+                        <button disabled={
+                            cardInfo.name === "" ? true : false } onClick={saveCard} className="cardEdit__btn"><SaveIcon /></button>
                         <button onClick={clearCard} className="cardEdit__btn"><ClearIcon /></button>
                     </div>
 

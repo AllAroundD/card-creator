@@ -4,6 +4,8 @@ const path = require('path')
 const mongoose = require('mongoose')
 const routes = require('./routes');
 const history = require('connect-history-api-fallback')
+const bodyParser = require('body-parser')
+const fs = require('fs')
 
 const PORT = process.env.PORT || 3001
 const app = express()

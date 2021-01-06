@@ -17,7 +17,6 @@ function CardCreate(props) {
     const [cardInfo, setCardInfo] = useState({
         name: "",
         desc: "",
-        imgId: "cardsample2.jpg",
         properties: []
     })
     const [cardAttributes, setCardAttributes] = useState([])
@@ -67,22 +66,47 @@ function CardCreate(props) {
 
     const saveCard = async (e) => {
         e.preventDefault();
-        // console.log("calling API.saveCard")
-        // console.log("cardInfo in saveCard: ", cardInfo)
+
         try {
-            let response = await API.createCard(cardInfo)
-            alert.success('Saved card')
+            const { name, desc } = cardInfo;
+            if (name.trim() !== '' && desc.trim() !== '') {
+                if (file) {
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    formData.append('name', name);
+                    formData.append('desc', desc);
+
+                    setErrorMsg('');
+                    await API.createCard(formData)
+                    alert.success('Saved card')
+                } else {
+                    setErrorMsg('Please select a file to add.');
+                }
+            } else {
+                setErrorMsg('Please enter all the field values.');
+            }
         } catch (error) {
-            console.log(error)
+            // console.log(error)
+            error.response && setErrorMsg('Invalid file format.');
         }
-    }
+    };
+    // const saveCard = async (e) => {
+    //     e.preventDefault();
+    //     // console.log("calling API.saveCard")
+    //     // console.log("cardInfo in saveCard: ", cardInfo)
+    //     try {
+    //         let response = await API.createCard(cardInfo)
+    //         alert.success('Saved card')
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     const clearCard = (e) => {
         e.preventDefault();
         setCardInfo({
             name: "",
             desc: "",
-            imgId: "cardsample2.jpg",
             properties: []
         });
         alert.success('Cleared card')
@@ -196,10 +220,22 @@ function CardCreate(props) {
                                 </div>
                             )}
                         </Dropzone>
+
+                    </div>
+                    <div className="cardEdit__buttons">
+                        <Button onClick={saveCard} className="cardEdit__btn" type='submit'><SaveIcon /></Button>
+                        <Button onClick={clearCard} className="cardEdit__btn" type='submit'><ClearIcon /></Button>
+                    </div>
+                </Form>
+                <div className='cardPreviewBlock'>
+                    <div className="card" id='cardPreview'>
+                        <h5 className="card-title card-body" id='cardNamePreview'>{cardInfo.name ? cardInfo.name : "Sample Card Name"}</h5>
+                        {/* <img src={`/assets/img/${cardInfo.imgId}`} className="card-img-top img-fluid" id='cardImgPreview'
+                            alt="example" /> */}
                         {previewSrc ? (
                             isPreviewAvailable ? (
                                 <div className="image-preview">
-                                    <img className="preview-image" src={previewSrc} alt="Preview" />
+                                    <img className='preview-image card-img-top img-fluid' src={previewSrc} alt="Preview" id='cardImgPreview' />
                                 </div>
                             ) : (
                                     <div className="preview-message">
@@ -211,17 +247,6 @@ function CardCreate(props) {
                                     <p>Image preview will be shown here after selection</p>
                                 </div>
                             )}
-                    </div>
-                    <div className="cardEdit__buttons">
-                        <Button onClick={saveCard} className="cardEdit__btn" type='submit'><SaveIcon /></Button>
-                        <Button onClick={clearCard} className="cardEdit__btn" type='submit'><ClearIcon /></Button>
-                    </div>
-                </Form>
-                <div className='cardPreviewBlock'>
-                    <div className="card" id='cardPreview'>
-                        <h5 className="card-title card-body" id='cardNamePreview'>{cardInfo.name ? cardInfo.name : "Sample Card Name"}</h5>
-                        <img src={`/assets/img/${cardInfo.imgId}`} className="card-img-top img-fluid" id='cardImgPreview'
-                            alt="example" />
                         <p className="card-text card-body" id='cardDescPreview'>
                             {cardInfo.desc ? cardInfo.desc : "Some quick example text to build on the card title and make up the bulk of the card's content."}
                         </p>

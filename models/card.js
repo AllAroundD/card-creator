@@ -14,8 +14,19 @@ const CardSchema = new Schema({
     imgId: {
         type: String
     },
-    properties: [{ type: Schema.Types.ObjectId, ref: "Properties" }],
+    // properties: [{ type: Schema.Types.ObjectId, ref: "Properties" }],
+    properties: [
+        { 
+            name: {
+                type: String
+            },
+            value: {
+                type: String
+            }
+        }
+    ],
     createdAt: { type: Date, default: Date.now }
 })
 
+// module.exports = mongoose.model("Cards", CardSchema);
 module.exports = mongoose.model("Cards", CardSchema);

@@ -12,13 +12,15 @@ let cardSeed = [
     {
         name: "Doug",
         desc: 'hi',
-        imgId: '111111',
+        file_path: 'assets/img/cardsample1.jpg',
+        file_mimetype: 'image/jpg',
         properties: {}
     },
     {
         name: "Eddi",
         desc: 'it me',
-        imgId: '111111',
+        file_path: 'assets/img/cardsample2.jpg',
+        file_mimetype: 'image/jpg',
         properties: {}
     },
 ]

@@ -11,8 +11,13 @@ const CardSchema = new Schema({
         type: String,
         trim: true,
     },
-    imgId: {
-        type: String
+    file_path: {
+        type: String,
+        required: true
+    },
+    file_mimetype: {
+        type: String,
+        required: true
     },
     // properties: [{ type: Schema.Types.ObjectId, ref: "Properties" }],
     properties: [

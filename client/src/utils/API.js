@@ -15,7 +15,7 @@ const api = {
     },
     // Creates a card to the database
     createCard: function (cardData) {
-        return axios.post("/api/cards/", cardData);
+        return axios.post("/api/cards/", cardData, { headers: { 'Content-Type': 'multipart/form-data' } });
     },
     // Saves a card to the database
     editCard: function (id, cardData) {

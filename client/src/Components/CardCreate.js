@@ -112,13 +112,14 @@ function CardCreate(props) {
 
         try {
             const { name, desc, properties } = newCardInfo;
+            console.log('properties: ', properties)
             if (name.trim() !== '' && desc.trim() !== '') {
                 if (file) {
                     const formData = new FormData();
                     formData.append('file', file);
                     formData.append('name', name);
                     formData.append('desc', desc);
-                    formData.append('properties', properties);
+                    // formData.append('properties', JSON.stringify(properties));
 
                     setErrorMsg('');
 

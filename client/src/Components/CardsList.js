@@ -25,7 +25,7 @@ const CardsList = () => {
         <div className="cardslist">
             <p>Cards</p><br />
             {cards.map((card) => (
-                <Card key={card._id} id={card._id} title={card.name} src={card.file_path.startsWith('assets') ? card.file_path : card.file_path.split('client\\public\\').pop()} />
+                <Card key={card._id} id={card._id} title={card.name} src={card.file_path.startsWith('assets') ? card.file_path : `uploads/${card.file_path.split(/[\\\/]/).slice(-1)[0]}`} />
             ))}
         </div>
     )

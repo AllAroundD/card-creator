@@ -90,24 +90,19 @@ function CardCreate(props) {
     const saveCard = async (e) => {
         e.preventDefault();
         // console.log("calling API.saveCard")
-
-        console.log("pre cardInfo in saveCard: ", cardInfo)
-        console.log("cardAttributes: ", cardAttributes)
+        // console.log("pre cardInfo in saveCard: ", cardInfo)
+        // console.log("cardAttributes: ", cardAttributes)
 
         const newCardInfo = cardInfo
         newCardInfo.properties = cardAttributes
 
         setCardInfo(newCardInfo)
 
-
-        // setTimeout(function(){ console.log("cardInfo in saveCard: ", cardInfo); }, 3000);
-
         console.log("cardInfo in saveCard: ", newCardInfo)
         // API.createCard(cardInfo)
         //     .then(alert.success('Saved card')
         // )
         // .catch(err => console.log(err));
-
         // history.push('/cardedit')
 
         try {
@@ -119,10 +114,8 @@ function CardCreate(props) {
                     formData.append('file', file);
                     formData.append('name', name);
                     formData.append('desc', desc);
-                    // formData.append('properties', JSON.stringify(properties));
-
+                    formData.append('properties', JSON.stringify(properties));
                     setErrorMsg('');
-
                     console.log('formData: ', formData)
                     await API.createCard(formData)
                     alert.success('Saved card')
@@ -133,7 +126,7 @@ function CardCreate(props) {
                 setErrorMsg('Please enter all the field values.');
             }
         } catch (error) {
-            // console.log(error)
+            console.log('this is the error object: ', error)
             error.response && setErrorMsg('Invalid file format.');
         }
     }

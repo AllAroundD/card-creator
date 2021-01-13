@@ -18,17 +18,15 @@ module.exports = {
     },
     create: async (req, res) => {
         try {
-            console.log('req: ', req)
             const { name, desc, properties } = req.body
             const { path, mimetype } = req.file
             const card = new db.Cards({
                 name,
                 desc,
-                properties,
                 file_path: path,
-                file_mimetype: mimetype
+                file_mimetype: mimetype,
+                properties: JSON.parse(properties)
             })
-            console.log('card: ', card)
             await card.save()
             res.send('file uploaded successfully')
             // let response = await db.Cards.create(req.body)

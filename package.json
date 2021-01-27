@@ -7,7 +7,7 @@
         "start": "by-node-env",
         "start:production": "node server.js",
         "start:development": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-        "client": "cd client && npm run start:dev",
+        "client": "cd client && npm run start:development",
         "seed": "node seed.js",
         "install": "cd client && npm install",
         "build": "cd client && npm run build",

@@ -6,14 +6,18 @@ import { useAlert } from 'react-alert';
 import API from "../utils/API";
 import { useHistory } from "react-router-dom";
 
+const initialState = {
+    name: "",
+    desc: "",
+    file_path: "/assets/img/cardsample2.jpg",
+    properties: []
+}
+
 function CardEdit(props) {
     let attrEnum
     const alert = useAlert();
     // Setting our component's initial state
-    const [cardInfo, setCardInfo] = useState({
-        name: "",
-        desc: ""
-    })
+    const [cardInfo, setCardInfo] = useState(initialState)
 
     const handleChange = (evt) => {
         const value = evt.target.value;
@@ -27,26 +31,33 @@ function CardEdit(props) {
 
     let history = useHistory();
 
-    const [cardAttributes, setCardAttributes] = useState(["sample","sample1"]);
+    const [ cardAttributes, setCardAttributes ] = useState([{"name": "attribute1", "value": "value1"}])
+    const [previewSrc, setPreviewSrc] = useState('')
 
     let id
     // Load all card info and store them with setCard
     useEffect(() => {
         let id = window.location.pathname.substr(10);
         loadCardInfo(id);
+        console.log("cardInfo useEffect: ", cardInfo)
+        // const fileReader = new FileReader();
+        // fileReader.onload = () => {
+        setPreviewSrc(cardInfo.file_path);
+        // };
+
     }, [])
 
 
 
     // Loads all card info and sets them to Card
-    const loadCardInfo = (id) => {
+    const loadCardInfo = async (id) => {
         // console.log("calling API.getCard")
-        API.getCard(id)
+        await API.getCard(id)
         .then(res => 
             setCardInfo(res.data)
         )
         .catch(err => console.log(err));
-        // console.log("cardInfo load ", cardInfo)
+        setPreviewSrc(cardInfo.file_path);
     };
 
     const saveCard = (e) => {
@@ -102,13 +113,13 @@ function CardEdit(props) {
         previewEl.innerHTML = fieldEl.value
     }
 
-    const previewImg = (event) => {
-        let output = document.getElementById('cardImgPreview');
-        output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = function () {
-            URL.revokeObjectURL(output.src) // free memory
-        }
-    }
+    // const previewImg = (event) => {
+    //     let output = document.getElementById('cardImgPreview');
+    //     output.src = URL.createObjectURL(event.target.files[0]);
+    //     output.onload = function () {
+    //         URL.revokeObjectURL(output.src) // free memory
+    //     }
+    // }
 
     let cardNameInputId = 'cardNameInput'
     let cardNameInputDesc = 'cardDescInputDesc'
@@ -180,7 +191,7 @@ function CardEdit(props) {
             <div className='cardPreviewBlock'>
                 <div className="card" id='cardPreview'>
                     <h5 className="card-title card-body" id='cardNamePreview'>{cardInfo.name ? cardInfo.name : "Sample Card Name"}</h5>
-                    <img src={`/assets/img/${cardInfo.imgId}`} className="card-img-top img-fluid" id='cardImgPreview'
+                    <img src={`uploads/${cardInfo.file_path.split(/[\\\/]/).slice(-1)[0]}`} className="card-img-top img-fluid" id='cardImgPreview'
                         alt="example" />
                     <p className="card-text card-body" id='cardDescPreview'>
                         {cardInfo.desc ? cardInfo.desc : "Some quick example text to build on the card title and make up the bulk of the card's content."}
@@ -189,26 +200,6 @@ function CardEdit(props) {
                     <ul className="list-group list-group-flush" id='cardAttrListPreview'></ul>
                 </div>
             </div>
-
-                    {/* <label for="cardEdit__title">Title:</label>
-                    <input value="Card 1" type="text" id="cardEdit__title" /><br />
-                    <label for="cardEdit__desc">Description:</label>
-                    <input value="This is the card's description" type="text" id="cardEdit__desc" /><br /><br /><br />
-                    <button onClick="addAttribute()" id="cardEdit__attributes">Add Attribute</button><br /><br />
-                    <div className="cardEdit__buttons">
-                        <button onClick={saveCard} className="cardEdit__btn"><SaveIcon /></button>
-                        <button onClick={deleteCard} className="cardEdit__btn"><DeleteIcon /></button>
-                    </div>
-
-                    <div className='form-group'>
-                        <label for='cardAttrInputList'>
-                            <h5>Attributes</h5>
-                        </label>
-                        <div id='cardAttrInputList'></div>
-                        <button type="button" className='btn btn-primary mt-3' onClick='addAttribute(e)'>Add
-                            attribute</button>
-                    </div> */}
-
         </div>
     )
 }

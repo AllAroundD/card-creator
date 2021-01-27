@@ -126,7 +126,6 @@ function CardCreate(props) {
                 setErrorMsg('Please enter all the field values.');
             }
         } catch (error) {
-            console.log('this is the error object: ', error)
             error.response && setErrorMsg('Invalid file format.');
         }
     }

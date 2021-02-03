@@ -16,6 +16,8 @@
 
 7. [Questions](#toc-contact)
 
+8. [Our Notes](#notes)
+
 <a id='toc-desc'></a>
 
 ## Description
@@ -60,3 +62,31 @@ No tests.
 <a href="https://github.com/EddiEsteban" rel="some text">![Profile picture of EddiEsteban](https://avatars1.githubusercontent.com/u/60436198?v=4)</a>
 
 Please direct any questions, concerns, and compliments to [EddiEsteban](https://github.com/EddiEsteban) and [Doug](https://github.com/AllAroundD/)
+
+<a id='notes'></a>
+
+THINGS COMPLETE
+
+- requests and responses
+- image upload
+- dynamic attribute data
+- card upload
+- card/image retrieval
+  THINGS TO DO NOW
+- bugs to fix
+  - constant monitoring of cardList component (useEffect responsible?) -- possibly fixed
+- unite UI (css → react bootstrap)
+  - fix cardList appearance
+  - fix create/edit appearance
+  - create new detailed-card component showcasing (showing description and attributes without having to go into edit mode)
+- decks (copy card functionality)
+  - list cards within deck
+  - add cards to deck
+- image upload (during editing)
+  THINGS TO DO LATER
+- user login
+  - user-dependent data
+- responsive web design (make it mobile-friendly)
+- exporting cards/decks
+- sharing
+- hosting server on platform (AWS/heroku/etc)

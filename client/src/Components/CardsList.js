@@ -5,20 +5,16 @@ import './CardsList.css'
 
 const CardsList = () => {
     let [cards, setCards] = useState([])
-    React.useEffect(() => {
+    useEffect(() => {
         loadCards()
     }, [])
-
-    React.useEffect(() => {
-        loadCards()
-    }, [cards])
 
     async function loadCards() {
         try {
             let result = await API.getCards()
             setCards(result.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     return (

@@ -24,20 +24,20 @@ function App() {
                         <Actions />
                         <CardEdit />
                     </Route>
-                    <Route path="/deckedit">
+                    {/* <Route path="/deckedit">
                         <Actions />
                         <DeckEdit />
-                    </Route>
+                    </Route> */}
                     <Route path="/deckcreate">
                         <Actions />
-                        <DeckCreate />
+                        {/* <DeckCreate /> */}
                     </Route>
                     <Route path="/">
                         <Actions />
                         <Splash />
                         <Drawer>
                             <CardsList />
-                            <DeckList />
+                            {/* <DeckList /> */}
                         </Drawer>
                     </Route>
                 </Switch>

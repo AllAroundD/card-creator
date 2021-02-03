@@ -9,15 +9,12 @@ function DeckList(props) {
         loadDecks()
     }, [])
 
-    React.useEffect(() => {
-        loadDecks()
-    }, [decks])
     async function loadDecks() {
         try {
             let result = await API.getDecks()
             setDecks(result.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     return (

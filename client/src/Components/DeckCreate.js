@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import './DeckCreate.css'
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
 import API from "../utils/API";
+import '../styles/DeckCreate.css'
 
 function DeckCreate(props) {
     const alert = useAlert();

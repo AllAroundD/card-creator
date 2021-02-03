@@ -1,15 +1,15 @@
 import './App.css';
-import Splash from './Components/Splash';
+import Splash from './components/Splash';
 // import Card from './Components/Card';
-import Actions from './Components/Actions'
-import CardsList from './Components/CardsList';
-import Drawer from './Components/Drawer';
-import DeckList from './Components/DeckList';
-import CardEdit from './Components/CardEdit';
-import DeckEdit from './Components/DeckEdit';
+import Actions from './components/Actions'
+import CardsList from './components/CardsList';
+import Drawer from './components/Drawer';
+import DeckList from './components/DeckList';
+import CardEdit from './components/CardEdit';
+import DeckEdit from './components/DeckEdit';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import DeckCreate from './Components/DeckCreate';
-import CardCreate from './Components/CardCreate';
+import DeckCreate from './components/DeckCreate';
+import CardCreate from './components/CardCreate';
 
 function App() {
     return (

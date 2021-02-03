@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Card from './Card'
 import API from '../utils/API'
-import './CardsList.css'
+import '../styles/CardsList.css'
 
 const CardsList = () => {
     let [cards, setCards] = useState([])

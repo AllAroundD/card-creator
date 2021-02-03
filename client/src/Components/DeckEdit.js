@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import './DeckEdit.css'
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
 import API from "../utils/API";
 import { useHistory } from "react-router-dom";
+import '../styles/DeckEdit.css'
 
 function DeckEdit(props) {
     let attrEnum

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import './Card.css'
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
 import { Link } from "react-router-dom";
 import API from "../utils/API";
+import '../styles/Card.css'
 
 function Card({ id, title, src }) {
     const alert = useAlert();

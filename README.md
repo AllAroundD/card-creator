@@ -65,6 +65,8 @@ Please direct any questions, concerns, and compliments to [EddiEsteban](https://
 
 <a id='notes'></a>
 
+## Notes
+
 THINGS COMPLETE
 
 - requests and responses

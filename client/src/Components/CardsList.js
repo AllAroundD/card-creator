@@ -21,13 +21,17 @@ const CardsList = () => {
             console.log(err)
         }
     }
-    return (
-        <div className="cardslist">
-            <p>Cards</p><br />
+    return (<>
+        
+        <div className="cards__list">
+            <p>Cards</p>
             {cards.map((card) => (
-                <Card key={card._id} id={card._id} title={card.name} src={card.file_path.startsWith('assets') ? card.file_path : `uploads/${card.file_path.split(/[\\\/]/).slice(-1)[0]}`} />
+                <Card key={card._id} id={card._id} title={card.name} 
+                src={card.file_path.startsWith('assets') ? card.file_path : `uploads/${card.file_path.split(/[\\\/]/).slice(-1)[0]}`} 
+                />
             ))}
         </div>
+        </>
     )
 }
 

@@ -191,7 +191,7 @@ function CardEdit(props) {
             <div className='cardPreviewBlock'>
                 <div className="card" id='cardPreview'>
                     <h5 className="card-title card-body" id='cardNamePreview'>{cardInfo.name ? cardInfo.name : "Sample Card Name"}</h5>
-                    <img src={`uploads/${cardInfo.file_path.split(/[\\\/]/).slice(-1)[0]}`} className="card-img-top img-fluid" id='cardImgPreview'
+                    <img src={`../uploads/${cardInfo.file_path.split(/[\\\/]/).slice(-1)[0]}`} className="card-img-top img-fluid" id='cardImgPreview'
                         alt="example" />
                     <p className="card-text card-body" id='cardDescPreview'>
                         {cardInfo.desc ? cardInfo.desc : "Some quick example text to build on the card title and make up the bulk of the card's content."}

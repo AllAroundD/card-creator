@@ -2,13 +2,13 @@ import React, { useState, useRef, useEffect, Fragment } from 'react'
 import SaveIcon from '@material-ui/icons/Save';
 import ClearIcon from '@material-ui/icons/Clear';
 import { useAlert } from 'react-alert';
-import API from "../utils/API";
+import API from "../../utils/API";
 // import CardAttributes from './CardAttributes'
 import { useHistory } from "react-router-dom";
 // import CardAttributes from './CardAttributes'
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
-import '../styles/CardCreate.css'
+import '../../styles/CardCreate.css'
 
 const initialState = {
     name: "",

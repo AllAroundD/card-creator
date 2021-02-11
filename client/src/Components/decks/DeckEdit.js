@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
-import API from "../utils/API";
-import '../styles/DeckCreate.css'
+import API from "../../utils/API";
+import { useHistory } from "react-router-dom";
+import '../../styles/DeckEdit.css'
 
-function DeckCreate(props) {
+function DeckEdit(props) {
+    let attrEnum
     const alert = useAlert();
     // Setting our component's initial state
     const [deckInfo, setDeckInfo] = useState({
@@ -20,25 +22,51 @@ function DeckCreate(props) {
           ...deckInfo,
           [evt.target.name]: value
         });
-        console.log(deckInfo)
     }
+
+    let history = useHistory();
+
+    let id
+    // Load all deck info and store them with setDeck
+    useEffect(() => {
+        let id = window.location.pathname.substr(10);
+        loadDeckInfo(id);
+    }, [])
+
+
+
+    // Loads all deck info and sets them to Deck
+    const loadDeckInfo = (id) => {
+        // console.log("calling API.getDeck")
+        API.getDeck(id)
+        .then(res => 
+            setDeckInfo(res.data)
+        )
+        .catch(err => console.log(err));
+        // console.log("deckInfo load ", deckInfo)
+    };
 
     const saveDeck = (e) => {
         e.preventDefault();
-        console.log("deckInfo in saveDeck: ", saveDeck)
-        API.saveDeck(deckInfo)
+        // console.log("deckInfo in saveDeck: ", saveDeck)
+        API.editDeck(deckInfo._id, deckInfo)
         .then(alert.success('Saved deck')
         )
         .catch(err => console.log(err));
     }
 
-    const cancelDeck = (e) => {
+    const deleteDeck = (e) => {
         e.preventDefault();
-        alert.success('Cleared deck')
+        API.deleteDeck(deckInfo._id)
+        .then(alert.success('Deleted deck')
+        )
+        .catch(err => console.log(err));
+        // console.log(`Deleted deck ${deckInfo._id} . Redirecting`);
+        history.push("/");   
     }
 
     return (
-        <div className='deckCreate'>
+        <div className='deckEdit'>
             <h1>Edit Deck</h1>
             <div className='col-md-6 col-lg-8' id='deckForm'>
                 <form id='mediaForm' encType="multipart/form-data" method="POST">
@@ -76,9 +104,9 @@ function DeckCreate(props) {
                         </label>
                     </div>
                     <div id='apiMessage' className="alert alert-success d-none"></div>
-                    <div className="deckCreate__buttons">
+                    <div className="deckEdit__buttons">
                         <button onClick={saveDeck} className="deckEdit__btn"><SaveIcon /></button>
-                        <button onClick={cancelDeck} className="deckEdit__btn"><DeleteIcon /></button>
+                        <button onClick={deleteDeck} className="deckEdit__btn"><DeleteIcon /></button>
                     </div>
                 </form>
             </div>
@@ -96,4 +124,4 @@ function DeckCreate(props) {
     )
 }
 
-export default DeckCreate
+export default DeckEdit

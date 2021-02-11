@@ -1,7 +1,7 @@
 import React from 'react'
 import Deck from './Deck'
-import API from '../utils/API'
-import '../styles/DeckList.css'
+import API from '../../utils/API'
+import '../../styles/DeckList.css'
 
 function DeckList(props) {
     let [decks, setDecks] = React.useState([])

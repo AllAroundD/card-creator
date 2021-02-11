@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
-import API from "../utils/API";
+import API from "../../utils/API";
 import { useHistory } from "react-router-dom";
-import '../styles/CardEdit.css'
+import '../../styles/CardEdit.css'
 
 const initialState = {
     name: "",

@@ -3,8 +3,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
 import { Link } from "react-router-dom";
-import API from "../utils/API";
-import '../styles/Deck.css'
+import API from "../../utils/API";
+import '../../styles/Deck.css'
 
 function Deck({id, title, src }) {
     const alert = useAlert();

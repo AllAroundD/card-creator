@@ -25,7 +25,7 @@ function Card({ id, title, src }) {
         <div className='card cardMain'>
             <div className="card__image rounded-top">
                 <Img src={[src, 'assets/img/cardsample2.jpg']}
-                    loader=''
+                    loader={'assets/img/spinner.gif'}
                     onerror={console.log(`error at ${src}`)} 
                     className="card__img__top rounded-top" 
                     alt="card" />

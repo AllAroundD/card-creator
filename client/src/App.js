@@ -1,6 +1,6 @@
 import './App.css';
 import Splash from './components/Splash';
-// import Card from './Components/Card';
+// import Card from './components/Card';
 import Actions from './components/Actions'
 import CardsList from './components/cards/CardsList';
 import Drawer from './components/Drawer';

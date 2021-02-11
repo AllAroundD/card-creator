@@ -8,18 +8,18 @@ import '../../styles/Card.css'
 
 function Card({ id, title, src }) {
     const alert = useAlert();
+    const [card, setCard] = useState({id, title, src})
 
     const deleteCard = () => {
-        console.log('card id', id)
         API.deleteCard(id)
         .then(alert.success('Deleted card')
         )
         .catch(err => console.log(err));
-        console.log("need to refresh list");
-
+        setCard('')
     }
 
     return (
+        card && (
         <div className='card cardMain'>
             <div className="card__image">
                 <img src={src} className="card__img__top" alt="card" />
@@ -34,7 +34,7 @@ function Card({ id, title, src }) {
                 </div>
             </div>
         </div>
-    )
+    ))
 }
 
 export default Card

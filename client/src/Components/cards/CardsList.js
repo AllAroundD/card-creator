@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react'
 import Card from './Card'
 import API from '../../utils/API'
 import '../../styles/CardsList.css'
+import { useAlert } from 'react-alert';
 
 const CardsList = () => {
+const alert = useAlert();
+
     let [cards, setCards] = useState([])
     useEffect(() => {
         loadCards()
@@ -17,6 +20,7 @@ const CardsList = () => {
             console.error(err)
         }
     }
+
     return (
         <div className="cardslist">
             <p>Cards</p><br />

@@ -1,7 +1,7 @@
 import React from 'react'
 import Deck from './Deck'
-import API from '../utils/API'
-import './DeckList.css'
+import API from '../../utils/API'
+import '../../styles/DeckList.css'
 
 function DeckList(props) {
     let [decks, setDecks] = React.useState([])
@@ -9,15 +9,12 @@ function DeckList(props) {
         loadDecks()
     }, [])
 
-    React.useEffect(() => {
-        loadDecks()
-    }, [decks])
     async function loadDecks() {
         try {
             let result = await API.getDecks()
             setDecks(result.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     return (

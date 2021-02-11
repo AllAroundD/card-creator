@@ -1,26 +1,27 @@
-import React, { useState} from 'react'
-import './Card.css'
+
+import React, { useState } from 'react'
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useAlert } from 'react-alert';
 import { Link } from "react-router-dom";
-import API from "../utils/API";
+import API from "../../utils/API";
+import '../../styles/Card.css'
 import {Img} from 'react-image'
 
 function Card({ id, title, src }) {
     const alert = useAlert();
+    const [card, setCard] = useState({id, title, src})
 
     const deleteCard = () => {
-        console.log('card id', id)
         API.deleteCard(id)
         .then(alert.success('Deleted card')
         )
         .catch(err => console.log(err));
-        console.log("need to refresh list");
-
+        setCard('')
     }
 
     return (
+        card && (
         <div className='card cardMain'>
             <div className="card__image rounded-top">
                 <Img src={[src, 'assets/img/cardsample2.jpg']}
@@ -35,7 +36,7 @@ function Card({ id, title, src }) {
                 <div className="card__title"><h3>{title}</h3></div>
             </div>
         </div>
-    )
+    ))
 }
 
 export default Card

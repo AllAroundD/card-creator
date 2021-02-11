@@ -1,45 +1,47 @@
 import './App.css';
-import Splash from './Components/Splash';
+import Splash from './components/Splash';
 // import Card from './Components/Card';
-import Actions from './Components/Actions'
-import CardsList from './Components/CardsList';
-import Drawer from './Components/Drawer';
-import DeckList from './Components/DeckList';
-import CardEdit from './Components/CardEdit';
-import DeckEdit from './Components/DeckEdit';
+import Actions from './components/Actions'
+import CardsList from './components/cards/CardsList';
+import Drawer from './components/Drawer';
+import DeckList from './components/decks/DeckList';
+import CardEdit from './components/cards/CardEdit';
+import DeckEdit from './components/decks/DeckEdit';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import DeckCreate from './Components/DeckCreate';
-import CardCreate from './Components/CardCreate';
+import DeckCreate from './components/decks/DeckCreate';
+import CardCreate from './components/cards/CardCreate';
+import NotFound from './components/layout/NotFound'
 
 function App() {
     return (
         <div className="app">
             <Router>
                 <Switch>
-                    <Route path="/cardcreate">
+                    <Route exact path="/cardcreate">
                         <Actions />
                         <CardCreate />
                     </Route>
-                    <Route path="/cardedit">
+                    <Route exact path="/cardedit">
                         <Actions />
                         <CardEdit />
                     </Route>
-                    <Route path="/deckedit">
+                    {/* <Route path="/deckedit">
                         <Actions />
                         <DeckEdit />
-                    </Route>
-                    <Route path="/deckcreate">
+                    </Route> */}
+                    <Route exact path="/deckcreate">
                         <Actions />
-                        <DeckCreate />
+                        {/* <DeckCreate /> */}
                     </Route>
-                    <Route path="/">
+                    <Route exact path="/">
                         <Actions />
                         <Splash />
                         <Drawer>
                             <CardsList />
-                            <DeckList />
+                            {/* <DeckList /> */}
                         </Drawer>
                     </Route>
+                    <Route component={NotFound} />
                 </Switch>
             </Router>
         </div>

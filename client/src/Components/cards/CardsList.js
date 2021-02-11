@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import Card from './Card'
-import API from '../utils/API'
-import './CardsList.css'
+import API from '../../utils/API'
+import '../../styles/CardsList.css'
+import { useAlert } from 'react-alert';
 
 const CardsList = () => {
+const alert = useAlert();
+
     let [cards, setCards] = useState([])
-    React.useEffect(() => {
+    useEffect(() => {
         loadCards()
     }, [])
-
-    React.useEffect(() => {
-        loadCards()
-    }, [cards])
 
     async function loadCards() {
         try {
             let result = await API.getCards()
             setCards(result.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     return (<>

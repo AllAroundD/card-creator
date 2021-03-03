@@ -1,3 +1,14 @@
+:root {
+  --primary-color: #faeedd;
+  --secondary-color: #00917c;
+  --tertiary-color: #025955;
+  --dark-color: #433520;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+
 .app {
   text-align: center;
   margin-left: 90px;

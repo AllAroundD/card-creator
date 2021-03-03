@@ -126,6 +126,7 @@ function CardCreate(props) {
       properties: [],
     });
     setFile("");
+    setCardAttributes([{ name: "", value: "" }]);
     //   setCardInfo(...initialState)
     // console.log('cardAttributes: ', cardAttributes)
     alert.success("Cleared card");
@@ -234,10 +235,18 @@ function CardCreate(props) {
             </Dropzone>
           </div>
           <div className="cardEdit__buttons">
-            <Button onClick={saveCard} className="cardEdit__btn" type="submit">
+            <Button
+              onClick={saveCard}
+              className="cardCreate__btn"
+              type="submit"
+            >
               <SaveIcon />
             </Button>
-            <Button onClick={clearCard} className="cardEdit__btn" type="submit">
+            <Button
+              onClick={clearCard}
+              className="cardCreate__btn"
+              type="submit"
+            >
               <ClearIcon />
             </Button>
           </div>
@@ -286,7 +295,18 @@ function CardCreate(props) {
             <ul
               className="list-group list-group-flush"
               id="cardAttrListPreview"
-            ></ul>
+            >
+              {/* {JSON.stringify(cardAttributes)} */}
+              {cardAttributes.length > 0 &&
+                cardAttributes.map((attribute) => {
+                  return (
+                    <>
+                      <p>Name: {attribute.name}</p>
+                      <p>Value: {attribute.value}</p>
+                    </>
+                  );
+                })}
+            </ul>
           </div>
         </div>
       </div>

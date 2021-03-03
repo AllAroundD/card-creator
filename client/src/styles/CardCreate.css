@@ -1,5 +1,5 @@
 .cardCreate {
-  display: flex;
+  display: block;
   align-items: center;
   padding: 10px;
   width: 100%;
@@ -78,15 +78,29 @@
 
 .cardPreviewBlock {
   border: 1px solid red;
-  object-fit: contain;
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
-  width: 350px;
+  /* object-fit: contain; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  /* margin: auto; */
+  /* position: relative; */
+  color: black;
+}
+
+#cardPreview {
+  border: 1px solid lightgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #cardForm {
-  /* border: 2px solid purple; */
+  border: 2px solid purple;
+  display: grid;
+  padding: 10px;
+  width: 100%;
 }
 
 #cardNamePreview {

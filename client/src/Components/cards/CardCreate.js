@@ -14,28 +14,19 @@ const initialState = {
   name: "",
   desc: "",
   file_path: "/assets/img/cardsample2.jpg",
-  // properties: [{"name": "attribute1", "value": "value1"}]
   properties: [],
 };
 
 function CardCreate(props) {
-  let attrEnum = 0;
   const alert = useAlert();
   // Setting our component's initial state
-
   const [cardInfo, setCardInfo] = useState(initialState);
   const [cardAttributes, setCardAttributes] = useState([
-    { name: "attribute1", value: "value1" },
+    { name: "", value: "" },
   ]);
 
   const [file, setFile] = useState(null);
   const [previewSrc, setPreviewSrc] = useState("/assets/img/cardsample2.jpg");
-  // const [cardInfo, setCardInfo] = useState({
-  //     name: "",
-  //     desc: "",
-  //     properties: []
-  // })
-  // const [cardAttributes, setCardAttributes] = useState([])
   const [errorMsg, setErrorMsg] = useState("");
   const [isPreviewAvailable, setIsPreviewAvailable] = useState(false);
   const dropRef = useRef();
@@ -45,8 +36,6 @@ function CardCreate(props) {
       ...cardInfo,
       [evt.target.name]: evt.target.value,
     });
-    // console.log('handleChange: evt.target.name', evt.target.name)
-    // console.log('handleChange: cardInfo', cardInfo)
   };
 
   const handleAttributeChange = (index, event) => {
@@ -91,9 +80,6 @@ function CardCreate(props) {
 
   const saveCard = async (e) => {
     e.preventDefault();
-    // console.log("calling API.saveCard")
-    // console.log("pre cardInfo in saveCard: ", cardInfo)
-    // console.log("cardAttributes: ", cardAttributes)
 
     const newCardInfo = cardInfo;
     newCardInfo.properties = cardAttributes;
@@ -139,6 +125,7 @@ function CardCreate(props) {
       desc: "",
       properties: [],
     });
+    setFile("");
     //   setCardInfo(...initialState)
     // console.log('cardAttributes: ', cardAttributes)
     alert.success("Cleared card");
@@ -147,11 +134,13 @@ function CardCreate(props) {
   return (
     <div className="cardCreate">
       <h1>Create Card</h1>
+
       {/* <div className="cardEdit__image">
                 <img src="/assets/img/cardsample1.jpg" className="cardEdit__img__top" alt="card" />
             </div>
             <div className="cardEdit__body"> */}
-      <div className="col-md-6 col-lg-8" id="cardForm">
+
+      <div className="col-sm-11" id="cardForm">
         <Form className="search-form" onSubmit={saveCard}>
           {errorMsg && <p className="errorMsg">{errorMsg}</p>}
           <Form.Group controlId="name">
@@ -187,33 +176,35 @@ function CardCreate(props) {
             <div id="cardAttrInputList">
               {cardAttributes.map((cardAttribute, index) => (
                 <Fragment key={`${cardAttribute}~${index}`}>
-                  <label htmlFor="attrInput">Attribute name</label>
+                  <Form.Label htmlFor="attrInput">Attribute name</Form.Label>
                   <input
                     type="text"
                     name="attrInput"
                     id="attrInput"
                     className="form-control"
                     value={cardAttribute.name}
+                    placeholder="attribute1"
                     onChange={(event) => handleAttributeChange(index, event)}
                   />
-                  <label htmlFor="valInput">Value</label>
+                  <Form.Label htmlFor="valInput">Value</Form.Label>
                   <textarea
                     name="valInput"
                     id="valInput"
                     className="form-control"
                     value={cardAttribute.value}
+                    placeholder="value1"
                     onChange={(event) => handleAttributeChange(index, event)}
                   ></textarea>
                 </Fragment>
               ))}
             </div>
-            <button
+            <Button
               type="button"
               className="btn btn-primary mt-3"
               onClick={handleAddAttributes}
             >
               Add attribute
-            </button>
+            </Button>
 
             {/* <CardAttributes /> */}
           </Form.Group>
@@ -230,7 +221,9 @@ function CardCreate(props) {
                   ref={dropRef}
                 >
                   <input {...getInputProps()} />
-                  <p>Drag and drop a file OR click here to select a file</p>
+                  <Button className="btn btn-secondary mt-3">
+                    Drag and drop a file OR click here to select a file
+                  </Button>
                   {file && (
                     <div>
                       <strong>Selected file:</strong> {file.name}
@@ -249,18 +242,26 @@ function CardCreate(props) {
             </Button>
           </div>
         </Form>
-        <div className="cardPreviewBlock">
+        <div className="container-fluid cardPreviewBlock">
           <div className="card" id="cardPreview">
             <h5 className="card-title card-body" id="cardNamePreview">
               {cardInfo.name ? cardInfo.name : "Sample Card Name"}
             </h5>
             {/* <img src={`/assets/img/${cardInfo.imgId}`} className="card-img-top img-fluid" id='cardImgPreview'
                             alt="example" /> */}
+            {
+              /* {JSON.stringify(previewSrc)} */
+              console.log("previewSrc", previewSrc)
+            }
+            {
+              /* {JSON.stringify(isPreviewAvailable)} */
+              console.log("isPreviewAvailable", isPreviewAvailable)
+            }
             {previewSrc ? (
               isPreviewAvailable ? (
                 <div className="image-preview">
                   <img
-                    className="preview-image card-img-top img-fluid"
+                    className="preview-image card-img-top img-fluid img-thumbnail"
                     src={previewSrc}
                     alt="Preview"
                     id="cardImgPreview"

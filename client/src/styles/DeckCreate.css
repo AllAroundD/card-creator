@@ -1,11 +1,15 @@
 .deckCreate {
-  display: flex;
+  display: grid;
   align-items: center;
+  justify-content: center;
   padding: 10px;
   width: 100%;
   background-color: var(--secondary-color);
   margin: 10px;
   color: white;
+  border: 1px solid red;
+  border-radius: 5px;
+  place-items: center;
 }
 
 .deckCreate__image {
@@ -56,7 +60,7 @@
   border: none;
 }
 
-.deckEdit__btn > .MuiSvgIcon-root {
+.deckCreate__btn > .MuiSvgIcon-root {
   padding: 4px;
   color: white;
   font-size: large;
@@ -67,7 +71,7 @@
   /* border: 2px solid blue; */
 }
 
-.deckEdit__btn > .MuiSvgIcon-root:hover {
+.deckCreate__btn > .MuiSvgIcon-root:hover {
   color: rgb(19, 34, 167);
   /* background-color: rgb(83, 77, 77); */
   /* transform: scale(1.1); */
@@ -75,8 +79,30 @@
 
 .deckPreviewBlock {
   border: 1px solid red;
-  object-fit: contain;
-  width: 350px;
+  /* object-fit: contain; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  /* margin: auto; */
+  /* position: relative; */
+  color: black;
+}
+
+#deckPreview {
+  border: 1px solid lightgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#deckForm {
+  border: 2px solid purple;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: 10px;
+  width: 100%;
 }
 
 #deckNamePreview {
@@ -91,6 +117,10 @@
 #deckDescPreview {
   border: 1px solid blue;
   color: black;
+}
+
+.preview-message {
+  height: 200px;
 }
 
 #deckAttrListPreview {

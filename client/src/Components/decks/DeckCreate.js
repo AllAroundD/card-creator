@@ -1,99 +1,335 @@
-import React, { useState, useEffect } from 'react'
-import SaveIcon from '@material-ui/icons/Save';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { useAlert } from 'react-alert';
+import React, { useState, useRef, useEffect, Fragment } from "react";
+import SaveIcon from "@material-ui/icons/Save";
+import ClearIcon from "@material-ui/icons/Clear";
+import { useAlert } from "react-alert";
 import API from "../../utils/API";
-import '../../styles/DeckCreate.css'
+// import DeckAttributes from './DeckAttributes'
+import { useHistory } from "react-router-dom";
+// import DeckAttributes from './DeckAttributes'
+import { Form, Row, Col, Button } from "react-bootstrap";
+import Dropzone from "react-dropzone";
+import "../../styles/DeckCreate.css";
+
+const initialState = {
+  name: "",
+  desc: "",
+  file_path: "/assets/img/decksample1.png",
+  properties: [],
+};
 
 function DeckCreate(props) {
-    const alert = useAlert();
-    // Setting our component's initial state
-    const [deckInfo, setDeckInfo] = useState({
-        name: "",
-        desc: "",
-        imgId: ""
-    })
+  const alert = useAlert();
+  // Setting our component's initial state
+  const [deckInfo, setDeckInfo] = useState(initialState);
+  const [deckAttributes, setDeckAttributes] = useState([]);
 
-    const handleChange = (evt) => {
-        const value = evt.target.value;
-        setDeckInfo({
-          ...deckInfo,
-          [evt.target.name]: value
-        });
-        console.log(deckInfo)
+  const [file, setFile] = useState(null);
+  const [previewSrc, setPreviewSrc] = useState("/assets/img/decksample2.png");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isPreviewAvailable, setIsPreviewAvailable] = useState(false);
+  const dropRef = useRef();
+
+  const handleChange = (evt) => {
+    setDeckInfo({
+      ...deckInfo,
+      [evt.target.name]: evt.target.value,
+    });
+  };
+
+  const handleAttributeChange = (index, event) => {
+    const values = [...deckAttributes];
+    if (event.target.name === "attrInput") {
+      values[index].name = event.target.value;
+    } else {
+      values[index].value = event.target.value;
     }
 
-    const saveDeck = (e) => {
-        e.preventDefault();
-        console.log("deckInfo in saveDeck: ", saveDeck)
-        API.saveDeck(deckInfo)
-        .then(alert.success('Saved deck')
-        )
-        .catch(err => console.log(err));
-    }
+    setDeckAttributes(values);
+  };
 
-    const cancelDeck = (e) => {
-        e.preventDefault();
-        alert.success('Cleared deck')
-    }
+  const onDrop = (files) => {
+    const [uploadedFile] = files;
+    setFile(uploadedFile);
 
-    return (
-        <div className='deckCreate'>
-            <h1>Edit Deck</h1>
-            <div className='col-md-6 col-lg-8' id='deckForm'>
-                <form id='mediaForm' encType="multipart/form-data" method="POST">
-                    <input className='d-none' type='text' name='deckId' id='deckId' value='defaultDeckId' />
-                    <input className='d-none' type='text' name='deckImgUrl' id='deckImgUrl' value='defaultImgUrl' />
-                    <div className='form-group'>
-                        <label htmlFor="deckNameInput">
-                            <h5>Name of Deck</h5>
-                        </label>
-                        <input 
-                            onChange={handleChange} 
-                            type='text' name='name' id='deckNameInput' 
-                            className='form-control' 
-                            placeholder="Sample Deck Name"
-                            // onInput={previewMatch(cardNameInputId)} 
-                            value={deckInfo.name}
-                            />
-                    </div>
-                    <div className='form-group'>
-                        <label htmlFor='deckNameInputDesc'>
-                            <h5>Description</h5>
-                        </label>
-                        <textarea 
-                            onChange={handleChange} 
-                            name='desc' id='deckNameInputDesc' 
-                            className='form-control' 
-                            placeholder="Some quick example text to build on the deck title and make up the bulk of the card's content."
-                            // onInput={previewMatch(deckNameInputDesc)}
-                            value={deckInfo.desc}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor='imageFile'>
-                            <h5>Deck art</h5>
-                        </label>
-                    </div>
-                    <div id='apiMessage' className="alert alert-success d-none"></div>
-                    <div className="deckCreate__buttons">
-                        <button onClick={saveDeck} className="deckEdit__btn"><SaveIcon /></button>
-                        <button onClick={cancelDeck} className="deckEdit__btn"><DeleteIcon /></button>
-                    </div>
-                </form>
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setPreviewSrc(fileReader.result);
+    };
+    fileReader.readAsDataURL(uploadedFile);
+    setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
+  };
+
+  const updateBorder = (dragState) => {
+    if (dragState === "over") {
+      dropRef.current.style.border = "2px solid #000";
+    } else if (dragState === "leave") {
+      dropRef.current.style.border = "2px dashed #e9ebeb";
+    }
+  };
+
+  const handleAddAttributes = () => {
+    const values = [...deckAttributes];
+    values.push({ name: "", value: "" });
+    setDeckAttributes(values);
+  };
+
+  let id;
+  let history = useHistory();
+
+  const saveDeck = async (e) => {
+    e.preventDefault();
+
+    const newDeckInfo = deckInfo;
+    newDeckInfo.properties = deckAttributes;
+
+    setDeckInfo(newDeckInfo);
+
+    console.log("deckInfo in saveDeck: ", newDeckInfo);
+    // API.createDeck(deckInfo)
+    //     .then(alert.success('Saved card')
+    // )
+    // .catch(err => console.log(err));
+    // history.push('/cardedit')
+
+    try {
+      const { name, desc, properties } = newDeckInfo;
+      console.log("properties: ", properties);
+      if (name.trim() !== "" && desc.trim() !== "") {
+        if (file) {
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("name", name);
+          formData.append("desc", desc);
+          formData.append("properties", JSON.stringify(properties));
+          setErrorMsg("");
+          console.log("formData: ", formData);
+          await API.createDeck(formData);
+          alert.success("Saved deck");
+        } else {
+          setErrorMsg("Please select a file to add.");
+        }
+      } else {
+        setErrorMsg("Please enter all the field values.");
+      }
+    } catch (error) {
+      alert.error("Invalid file format.");
+      error.response && setErrorMsg("Invalid file format.");
+    }
+  };
+
+  const clearDeck = (e) => {
+    e.preventDefault();
+    setDeckInfo({
+      name: "",
+      desc: "",
+      properties: [],
+    });
+    setFile("");
+    setDeckAttributes([]);
+    //   setDeckInfo(...initialState)
+    // console.log('deckAttributes: ', deckAttributes)
+    alert.success("Cleared deck");
+  };
+
+  return (
+    <div className="deckCreate">
+      <h1>Create Deck</h1>
+
+      {/* <div className="cardEdit__image">
+                <img src="/assets/img/cardsample1.jpg" className="cardEdit__img__top" alt="card" />
             </div>
-            <div className='deckPreviewBlock'>
-                <div className="card" id='deckPreview'>
-                    <h5 className="card-title card-body" id='deckNamePreview'>{deckInfo.name ? deckInfo.name : "Sample Card Name"}</h5>
-                    <img src={`/assets/img/${deckInfo.imgId}`} className="card-img-top img-fluid" id='deckImgPreview'
-                        alt="example" />
-                    <p className="card-text card-body" id='cardDescPreview'>
-                        {deckInfo.desc ? deckInfo.desc : "Some quick example text to build on the card title and make up the bulk of the card's content."}
-                    </p>
+            <div className="cardEdit__body"> */}
+
+      <div className="col-sm-11" id="deckForm">
+        <Form className="search-form" onSubmit={saveDeck}>
+          <Row>
+            <Col>
+              <Form.Group controlId="name">
+                <Form.Label>
+                  <h5>Name of deck</h5>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={deckInfo.name || ""}
+                  placeholder="Sample Deck Name"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="desc">
+                <Form.Label>
+                  <h5>Description of Deck</h5>
+                </Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  cols={100}
+                  type="text"
+                  name="desc"
+                  id="desc"
+                  value={deckInfo.desc || ""}
+                  placeholder="Some quick example text to build on the Deck title and make up the bulk of the deck's content."
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <label htmlFor="deckAttrInputList">
+                  <h5>Attributes</h5>
+                </label>
+                <div id="deckAttrInputList">
+                  {deckAttributes.map((deckAttribute, index) => (
+                    <Fragment key={`${deckAttribute}~${index}`}>
+                      <Form.Label htmlFor="attrInput">
+                        Attribute name
+                      </Form.Label>
+                      <input
+                        type="text"
+                        name="attrInput"
+                        id="attrInput"
+                        className="form-control"
+                        value={deckAttribute.name}
+                        placeholder="attribute1"
+                        onChange={(event) =>
+                          handleAttributeChange(index, event)
+                        }
+                      />
+                      <Form.Label htmlFor="valInput">Value</Form.Label>
+                      <textarea
+                        name="valInput"
+                        id="valInput"
+                        className="form-control"
+                        value={deckAttribute.value}
+                        placeholder="value1"
+                        onChange={(event) =>
+                          handleAttributeChange(index, event)
+                        }
+                      ></textarea>
+                    </Fragment>
+                  ))}
                 </div>
-            </div>
-        </div>
-    )
+                <Button
+                  type="button"
+                  className="btn btn-primary mt-3"
+                  onClick={handleAddAttributes}
+                >
+                  Add attribute
+                </Button>
+
+                {/* <DeckAttributes /> */}
+              </Form.Group>
+
+              <div className="upload-section">
+                <Dropzone
+                  onDrop={onDrop}
+                  onDragEnter={() => updateBorder("over")}
+                  onDragLeave={() => updateBorder("leave")}
+                >
+                  {({ getRootProps, getInputProps }) => (
+                    <div
+                      {...getRootProps({ className: "drop-zone" })}
+                      ref={dropRef}
+                    >
+                      <input {...getInputProps()} />
+                      <Button className="btn btn-secondary mt-3">
+                        Drag and drop a file OR click here to select a file
+                      </Button>
+                      {file && (
+                        <div>
+                          <strong>Selected file:</strong> {file.name}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </Dropzone>
+              </div>
+              <div className="deckCreate__buttons">
+                <Button
+                  onClick={saveDeck}
+                  className="deckCreate__btn"
+                  type="submit"
+                >
+                  <SaveIcon />
+                </Button>
+                <Button
+                  onClick={clearDeck}
+                  className="deckCreate__btn"
+                  type="submit"
+                >
+                  <ClearIcon />
+                </Button>
+              </div>
+              {errorMsg && (
+                <p className="errorMsg">
+                  <strong>{errorMsg}</strong>
+                </p>
+              )}
+            </Col>
+
+            <Col>
+              <div className="container-fluid deckPreviewBlock">
+                <div className="card" id="deckPreview">
+                  <h5 className="card-title card-body" id="deckNamePreview">
+                    {deckInfo.name ? deckInfo.name : "Sample Deck Name"}
+                  </h5>
+                  {/* <img src={`/assets/img/${deckInfo.imgId}`} className="card-img-top img-fluid" id='cardImgPreview'
+                            alt="example" /> */}
+                  {
+                    /* {JSON.stringify(previewSrc)} */
+                    console.log("previewSrc", previewSrc)
+                  }
+                  {
+                    /* {JSON.stringify(isPreviewAvailable)} */
+                    console.log("isPreviewAvailable", isPreviewAvailable)
+                  }
+                  {previewSrc ? (
+                    isPreviewAvailable ? (
+                      <div className="image-preview">
+                        <img
+                          className="preview-image card-img-top img-fluid img-thumbnail"
+                          src={previewSrc}
+                          alt="Preview"
+                          id="deckImgPreview"
+                        />
+                      </div>
+                    ) : (
+                      <div className="preview-message">
+                        <p>No preview available for this file</p>
+                      </div>
+                    )
+                  ) : (
+                    <div className="preview-message">
+                      <p>Image preview will be shown here after selection</p>
+                    </div>
+                  )}
+                  <p className="card-text card-body" id="deckDescPreview">
+                    {deckInfo.desc
+                      ? deckInfo.desc
+                      : "Some quick example text to build on the deck title and make up the bulk of the deck's content."}
+                  </p>
+                  {/* <ul className="list-group list-group-flush" id='cardAttrListPreview'>{`${deckAttributes[0]} : ${deckAttributes[1]}`}</ul> */}
+                  <ul
+                    className="list-group list-group-flush"
+                    id="deckAttrListPreview"
+                  >
+                    {/* {JSON.stringify(deckAttributes)} */}
+                    {deckAttributes &&
+                      deckAttributes.map((attribute) => {
+                        return (
+                          <>
+                            <p>Name: {attribute.name}</p>
+                            <p>Value: {attribute.value}</p>
+                          </>
+                        );
+                      })}
+                  </ul>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Form>
+      </div>
+    </div>
+  );
 }
 
-export default DeckCreate
+export default DeckCreate;

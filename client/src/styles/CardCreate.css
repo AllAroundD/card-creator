@@ -119,6 +119,10 @@
   color: black;
 }
 
+.preview-message {
+  height: 200px;
+}
+
 #cardAttrListPreview {
   color: black;
 }

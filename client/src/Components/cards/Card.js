@@ -33,9 +33,7 @@ function Card({ id, title, src }) {
             <Link className="edit__icon card__action" to={`/cardedit/${id}`}>
               <EditIcon />
             </Link>
-            <span className="delete__icon card__action">
-              <DeleteIcon onClick={deleteCard} />
-            </span>
+            <Link className="delete__icon card__action"><DeleteIcon onClick={deleteCard} /></Link>
           </div>
           <div className="card__title">
             <h3>{title}</h3>

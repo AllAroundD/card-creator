@@ -1,0 +1,8 @@
+.infochunk{
+    max-width: 100%;
+    min-width: 80%;
+}
+  
+.infochunk__text, .infochunk__title{
+    text-align:left;
+}

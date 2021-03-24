@@ -120,8 +120,6 @@ function CardEdit(props) {
 
   const saveCard = (e) => {
     e.preventDefault();
-    // console.log("calling API.saveCard")
-    // console.log("cardInfo in saveCard: ", cardInfo)
     API.editCard(cardInfo._id, cardInfo)
       .then(alert.success("Saved card"))
       .catch((err) => console.log(err));

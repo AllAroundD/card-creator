@@ -10,32 +10,42 @@ mongoose.connect(process.env.MONGODB_URI || process.env.DB_URL,
 // Add all the data to the array to be used
 let cardSeed = [
     {
+        // _id: '507c35dd8fada716c89d0013',
         name: "Doug",
         desc: 'hi',
         file_path: 'assets/img/cardsample1.jpg',
         file_mimetype: 'image/jpg',
-        properties: {}
+        properties: [
+            {name: 'Status', value: 'Very Cool'},
+            {name: 'Capacity of Stacks', value: 'Full'}
+        ]
     },
     {
+        // _id: '507c35dd8fada716c89d0014',
         name: "Eddi",
         desc: 'it me',
         file_path: 'assets/img/cardsample2.jpg',
         file_mimetype: 'image/jpg',
-        properties: {}
+        properties: [
+            {name: 'Hobby', value: 'Playing Piano'},
+            {name: 'Feeling', value: 'Hungry'}
+        ]
     },
 ]
 let deckSeed = [
     {
         name: "Doug Deck",
         desc: 'hi deck',
-        imgId: '123123',
-        cards: []
+        file_path: 'assets/img/decksample1.jpg',
+        file_mimetype: 'image/jpg',
+        cards: ['507c35dd8fada716c89d0014', '507c35dd8fada716c89d0013']
     },
     {
         name: "Eddi Deck",
         desc: 'it me deck',
-        imgId: '234234234',
-        cards: []
+        file_path: 'assets/img/decksample2.jpg',
+        file_mimetype: 'image/jpg',
+        cards: ['507c35dd8fada716c89d0013', '507c35dd8fada716c89d0013', '507c35dd8fada716c89d0013']
     },
 ]
 

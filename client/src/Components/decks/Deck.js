@@ -1,64 +1,40 @@
-import React from "react";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import React, { useState } from "react";
+import DeckActions from './DeckActions'
 import { useAlert } from "react-alert";
-import { Link } from "react-router-dom";
-// import API from "../../utils/API";
-import "../../styles/Deck.css";
+import API from "../../utils/API";
+import "../../styles/Decard.css";
+import { Img } from "react-image";
 
-function Deck({ id, title, src }) {
+export default function Deck({ id, title, src, context }) {
   const alert = useAlert();
-
-  // const editDeck = () => {
-  //     alert.success('Edit deck');
-  //     // return true
-  // }
+  const [deck, setDeck] = useState({ id, title, src });
 
   const deleteDeck = () => {
-    alert.success("Delete deck");
-    // return true
+    API.deleteDeck(id)
+      .then(alert.success("Deleted deck"))
+      .catch((err) => console.log(err));
+    setDeck("");
   };
 
   return (
-    <div className="deckMain">
-      <div className="row deck">
-        <div className="col-8 deck-image">
-          <img src={src} className="deck-img-top" alt="deck" />
-        </div>
-        <div className="col-4 deck-buttons">
-          <div className="deck-buttons__row">
-            <Link to={`/deckedit/${id}`}>
-              <button className="deck-btn">
-                <EditIcon />
-              </button>
-            </Link>
+    deck && (
+      <div className="deck deckMain">
+        <div className="deck__image rounded-top">
+          <Img
+            src={[src, "assets/img/decksample2.jpg"]}
+            loader={"assets/img/spinner.gif"}
+            onError={console.log(`error at ${src}`)}
+            className="deck__img__top rounded-top"
+            alt="deck"
+          />
+          <div className="deck__actions">
+            <DeckActions context={context} id={id} title={title} src={src}/>
           </div>
-          <div className="deck-buttons__row">
-            <button onClick={deleteDeck} className="deck-btn">
-              <DeleteIcon />
-            </button>
+          <div className="deck__title">
+            <h3>{title}</h3>
           </div>
         </div>
       </div>
-
-      <div className="row">
-        <div className="deck-body">
-          <h5 className="deck-title">{title}</h5>
-        </div>
-      </div>
-
-      {/* <div className="deck-image">
-                <img src={src} className="deck-img-top" alt="deck image" />
-            </div>
-            <div className="deck-body">
-                <h5 className="deck-title">{title}</h5>
-                <div className="deck-buttons">
-                    <a href="#" onClick={editDeck} className="deck-btn"><EditIcon /></a>
-                    <a href="#" onClick={deleteDeck} className="deck-btn"><DeleteIcon /></a>
-                </div>
-            </div> */}
-    </div>
+    )
   );
 }
-
-export default Deck;

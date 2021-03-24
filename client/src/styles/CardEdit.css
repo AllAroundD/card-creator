@@ -1,13 +1,15 @@
 .cardEdit {
-  display: flex;
+  display: grid;
   align-items: center;
+  justify-content: center;
   padding: 10px;
   width: 100%;
-  background-color: rgb(83, 77, 77);
+  background-color: var(--secondary-color);
   margin: 10px;
   color: white;
-  border: 1px solid black;
+  border: 1px solid red;
   border-radius: 5px;
+  place-items: center;
 }
 
 .cardEdit__image {

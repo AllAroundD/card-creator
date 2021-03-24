@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import SaveIcon from "@material-ui/icons/Save";
+import ClearIcon from "@material-ui/icons/Clear";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useAlert } from "react-alert";
 import API from "../../utils/API";
 import { useHistory } from "react-router-dom";
+import { Form, Row, Col, Button } from "react-bootstrap";
+import Dropzone from "react-dropzone";
 import "../../styles/CardEdit.css";
 
 const initialState = {
@@ -18,6 +21,15 @@ function CardEdit(props) {
   const alert = useAlert();
   // Setting our component's initial state
   const [cardInfo, setCardInfo] = useState(initialState);
+  const [cardProperties, setCardProperties] = useState([]);
+  const [loading, setloading] = useState(true);
+
+  const [file, setFile] = useState(null);
+  // const [previewSrc, setPreviewSrc] = useState("/assets/img/cardsample2.jpg");
+  const [previewSrc, setPreviewSrc] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isPreviewAvailable, setIsPreviewAvailable] = useState(false);
+  const dropRef = useRef();
 
   const handleChange = (evt) => {
     const value = evt.target.value;
@@ -29,33 +41,82 @@ function CardEdit(props) {
     // console.log('handleChange: cardInfo', cardInfo)
   };
 
+  const handlePropertyChange = (index, event) => {
+    const values = [...cardProperties];
+    if (event.target.name === "attrInput") {
+      values[index].name = event.target.value;
+    } else {
+      values[index].value = event.target.value;
+    }
+
+    setCardProperties(values);
+  };
+
+  const onDrop = (files) => {
+    const [uploadedFile] = files;
+    setFile(uploadedFile);
+
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setPreviewSrc(fileReader.result);
+    };
+    fileReader.readAsDataURL(uploadedFile);
+    setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
+  };
+
+  const updateBorder = (dragState) => {
+    if (dragState === "over") {
+      dropRef.current.style.border = "2px solid #000";
+    } else if (dragState === "leave") {
+      dropRef.current.style.border = "2px dashed #e9ebeb";
+    }
+  };
+
+  const handleAddProperties = () => {
+    const values = [...cardProperties];
+    values.push({ name: "", value: "" });
+    setCardProperties(values);
+  };
+
   let history = useHistory();
 
-  // const [ cardAttributes, setCardAttributes ] = useState([{"name": "attribute1", "value": "value1"}])
+  // const [ cardProperties, setCardProperties ] = useState([{"name": "property1", "value": "value1"}])
   //   const [previewSrc, setPreviewSrc] = useState("");
 
-  // let id
+  // let id;
+  let id = window.location.pathname.substr(10);
   // Load all card info and store them with setCard
   useEffect(() => {
-    // Loads all card info and sets them to Card
+    loadCardInfo(id);
+  }, []);
 
-    console.log("cardInfo useEffect: ", cardInfo);
-    // const fileReader = new FileReader();
-    // fileReader.onload = () => {
-    // setPreviewSrc(cardInfo.file_path);
-    // };
-  }, [cardInfo]);
+  const loadCardInfo = (id) => {
+    // console.log("calling API.getCard", id);
+    API.getCard(id)
+      .then((res) => {
+        // console.log("res.data", res.data);
+        setCardInfo(res.data);
+        let file_path = res.data.file_path.startsWith("assets")
+          ? `/${res.data.file_path}`
+          : `/uploads/${res.data.file_path.split(/[\\\/]/).slice(-1)[0]}`;
+        setPreviewSrc(file_path);
+        setIsPreviewAvailable(file_path);
+      })
 
-  const loadCardInfo = async (id) => {
-    // console.log("calling API.getCard")
-    await API.getCard(id)
-      .then((res) => setCardInfo(res.data))
       .catch((err) => console.log(err));
     // setPreviewSrc(cardInfo.file_path);
   };
+  // Loads all card info and sets them to Card
 
-  let id = window.location.pathname.substr(10);
-  loadCardInfo(id);
+  // console.log("cardInfo useEffect: ", cardInfo);
+  // const fileReader = new FileReader();
+  // fileReader.onload = () => {
+  // setPreviewSrc(cardInfo.file_path);
+  // };
+
+  // let id = window.location.pathname.substr(10);
+  // loadCardInfo(id);
+  // console.log("cardInfo.file_path", cardInfo.file_path);
 
   const saveCard = (e) => {
     e.preventDefault();
@@ -64,6 +125,20 @@ function CardEdit(props) {
     API.editCard(cardInfo._id, cardInfo)
       .then(alert.success("Saved card"))
       .catch((err) => console.log(err));
+  };
+
+  const clearCard = (e) => {
+    e.preventDefault();
+    setCardInfo({
+      name: "",
+      desc: "",
+      properties: [],
+    });
+    setFile("");
+    setCardProperties([]);
+    //   setCardInfo(...initialState)
+    // console.log('cardProperties: ', cardProperties)
+    alert.success("Cleared card");
   };
 
   const deleteCard = (e) => {
@@ -75,52 +150,6 @@ function CardEdit(props) {
     history.push("/");
   };
 
-  const userInputGenerator = (
-    e,
-    attrval = { attr: "sample", val: "sample1" }
-  ) => {
-    e.preventDefault();
-    console.log("inputGen", attrval);
-    let attrHTML = `<label for='attr${attrEnum}Input'>Attribute name</label><input type='text' name='attr${attrEnum}Input' id='attr${attrEnum}Input' class='form-control' value=${attrval.attr}>`;
-    let valHTML = `<label for='val${attrEnum}Input'>Value</label><textarea name='val${attrEnum}Input' id='val${attrEnum}Input' class='form-control' >${attrval.val}</textarea>`;
-    return `<div class='form-row mb-2' id='attrval${attrEnum}'><div class='col-md-6 col-lg-4'>${attrHTML}</div><div class='col-md-6 col-md-8'>${valHTML}</div></div>`;
-  };
-
-  const addAttribute = (attrval = { attr: "sample", val: "sample1" }) => {
-    let attrListEl = document.querySelector("#cardAttrInputList");
-    let previewAttrEl = document.querySelector("#cardAttrListPreview");
-    // console.log({ attrval, attrListEl, previewAttrEl })
-    attrListEl.innerHTML += userInputGenerator(attrval);
-    previewAttrEl.innerHTML += `<li class='list-group-item'><div class='row'><div class='col' id='attr${attrEnum}Preview'>${attrval.attr}</div><div class='col' id='val${attrEnum}Preview'>${attrval.val}</div></div></li>`;
-    console.log("previewAttrEl: ", previewAttrEl);
-    attrEnum += 1;
-  };
-
-  //   const previewMatch = (id) => {
-  //     console.log(`id: `, id);
-  //     let previewId = id.slice(0, -5) + "Preview";
-  //     console.log(`previewId: `, previewId);
-  //     let previewEl = document.querySelector(`#${previewId}`);
-  //     let fieldEl = document.querySelector(`#${id}`);
-  //     if (fieldEl.matches("input")) {
-  //       fieldEl.setAttribute("value", fieldEl.value);
-  //     } else if (fieldEl.matches("textarea")) {
-  //       fieldEl.innerHTML = fieldEl.value;
-  //     }
-  //     previewEl.innerHTML = fieldEl.value;
-  //   };
-
-  // const previewImg = (event) => {
-  //     let output = document.getElementById('cardImgPreview');
-  //     output.src = URL.createObjectURL(event.target.files[0]);
-  //     output.onload = function () {
-  //         URL.revokeObjectURL(output.src) // free memory
-  //     }
-  // }
-
-  let cardNameInputId = "cardNameInput";
-  let cardNameInputDesc = "cardDescInputDesc";
-
   return (
     <div className="cardEdit">
       <h1>Edit Card</h1>
@@ -128,109 +157,180 @@ function CardEdit(props) {
                 <img src="/assets/img/cardsample1.jpg" className="cardEdit__img__top" alt="card" />
             </div>
             <div className="cardEdit__body"> */}
-      <div className="col-md-6 col-lg-8" id="cardForm">
-        <form id="mediaForm" encType="multipart/form-data" method="POST">
-          <input
-            className="d-none"
-            type="text"
-            name="cardId"
-            id="cardId"
-            value="defaultCardId"
-          />
-          <input
-            className="d-none"
-            type="text"
-            name="cardImgUrl"
-            id="cardImgUrl"
-            value="defaultImgUrl"
-          />
-          <div className="form-group">
-            <label htmlFor={cardNameInputId}>
-              <h5>Name of card</h5>
-            </label>
-            <input
-              onChange={handleChange}
-              type="text"
-              name="name"
-              id={cardNameInputId}
-              className="form-control"
-              placeholder="Sample Card Name"
-              // onInput={previewMatch(cardNameInputId)}
-              value={cardInfo.name}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor={cardNameInputDesc}>
-              <h5>Description</h5>
-            </label>
-            <textarea
-              onChange={handleChange}
-              name="desc"
-              id={cardNameInputDesc}
-              className="form-control"
-              placeholder="Some quick example text to build on the card title and make up the bulk of the card's content."
-              // onInput={previewMatch(cardNameInputDesc)}
-              value={cardInfo.desc}
-            />
-          </div>
+      <div className="col-sm-11" id="cardForm">
+        <Form className="search-form" onSubmit={saveCard}>
+          <Row>
+            <Col>
+              <Form.Group>
+                <Form.Label>
+                  <h5>Name of card</h5>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={cardInfo?.name || ""}
+                  placeholder="Sample Card Name"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>
+                  <h5>Description of card</h5>
+                </Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  cols={100}
+                  type="text"
+                  name="desc"
+                  id="desc"
+                  value={cardInfo?.desc || ""}
+                  placeholder="Some quick example text to build on the card title and make up the bulk of the card's content."
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <label htmlFor="cardAttrInputList">
+                  <h5>Properties</h5>
+                </label>
+                <div id="cardAttrInputList">
+                  {cardProperties.map((cardProperty, index) => (
+                    <Fragment key={`${cardProperty}~${index}`}>
+                      <Form.Label htmlFor="attrInput">Property name</Form.Label>
+                      <input
+                        type="text"
+                        name="attrInput"
+                        id="attrInput"
+                        className="form-control"
+                        value={cardProperty.name}
+                        placeholder="property1"
+                        onChange={(event) => handlePropertyChange(index, event)}
+                      />
+                      <Form.Label htmlFor="valInput">Value</Form.Label>
+                      <textarea
+                        name="valInput"
+                        id="valInput"
+                        className="form-control"
+                        value={cardProperty.value}
+                        placeholder="value1"
+                        onChange={(event) => handlePropertyChange(index, event)}
+                      ></textarea>
+                    </Fragment>
+                  ))}
+                </div>
+                <Button
+                  type="button"
+                  className="btn btn-primary mt-3"
+                  onClick={handleAddProperties}
+                >
+                  Add Property
+                </Button>
 
-          <div className="form-group">
-            <label htmlFor="imageFile">
-              <h5>Card art</h5>
-            </label>
-            {/* <input type="file" id="imageFile" name='imageFile' onChange={previewImg(event.target.value)}
-                            accept="image/*" className='form-control' /> */}
-          </div>
+                {/* <CardAttributes /> */}
+              </Form.Group>
 
-          <div id="apiMessage" className="alert alert-success d-none"></div>
+              <div className="upload-section">
+                <Dropzone
+                  onDrop={onDrop}
+                  onDragEnter={() => updateBorder("over")}
+                  onDragLeave={() => updateBorder("leave")}
+                >
+                  {({ getRootProps, getInputProps }) => (
+                    <div
+                      {...getRootProps({ className: "drop-zone" })}
+                      ref={dropRef}
+                    >
+                      <input {...getInputProps()} />
+                      <Button className="btn btn-secondary mt-3">
+                        Drag and drop a file OR click here to select a file
+                      </Button>
+                      {file && (
+                        <div>
+                          <strong>Selected file:</strong> {file.name}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </Dropzone>
+              </div>
+              <div className="cardCreate__buttons">
+                <Button
+                  onClick={saveCard}
+                  className="cardCreate__btn"
+                  type="submit"
+                >
+                  <SaveIcon />
+                </Button>
+                <Button
+                  onClick={clearCard}
+                  className="cardCreate__btn"
+                  type="submit"
+                >
+                  <ClearIcon />
+                </Button>
+              </div>
+              {errorMsg && (
+                <p className="errorMsg">
+                  <strong>{errorMsg}</strong>
+                </p>
+              )}
+            </Col>
 
-          <div className="form-group">
-            <label htmlFor="cardAttrInputList">
-              <h5>Attributes</h5>
-            </label>
-            <div id="cardAttrInputList"></div>
-            <button
-              type="button"
-              className="btn btn-primary mt-3"
-              onClick={addAttribute}
-            >
-              Add attribute
-            </button>
-          </div>
-          <div className="cardEdit__buttons">
-            <button onClick={saveCard} className="cardEdit__btn">
-              <SaveIcon />
-            </button>
-            <button onClick={deleteCard} className="cardEdit__btn">
-              <DeleteIcon />
-            </button>
-          </div>
-        </form>
-      </div>
-      <div className="cardPreviewBlock">
-        <div className="card" id="cardPreview">
-          <h5 className="card-title card-body" id="cardNamePreview">
-            {cardInfo.name ? cardInfo.name : "Sample Card Name"}
-          </h5>
-          <img
-            src={`../uploads/${
-              cardInfo.file_path.split(/[\\\/]/).slice(-1)[0]
-            }`}
-            className="card-img-top img-fluid"
-            id="cardImgPreview"
-            alt="example"
-          />
-          <p className="card-text card-body" id="cardDescPreview">
-            {cardInfo.desc
-              ? cardInfo.desc
-              : "Some quick example text to build on the card title and make up the bulk of the card's content."}
-          </p>
-          {/* <ul className="list-group list-group-flush" id='cardAttrListPreview'>{`${cardAttributes[0]} : ${cardAttributes[1]}`}</ul> */}
-          <ul
-            className="list-group list-group-flush"
-            id="cardAttrListPreview"
-          ></ul>
-        </div>
+            <Col>
+              <div className="container-fluid cardPreviewBlock">
+                <div className="card" id="cardPreview">
+                  <h5 className="card-title card-body" id="cardNamePreview">
+                    {cardInfo?.name ? cardInfo?.name : "Sample Card Name"}
+                  </h5>
+                  {/* <img src={`/assets/img/${cardInfo.imgId}`} className="card-img-top img-fluid" id='cardImgPreview'
+                            alt="example" /> */}
+
+                  {previewSrc ? (
+                    isPreviewAvailable ? (
+                      <div className="image-preview">
+                        <img
+                          className="preview-image card-img-top img-fluid img-thumbnail"
+                          src={previewSrc}
+                          alt="Preview"
+                          id="cardImgPreview"
+                        />
+                      </div>
+                    ) : (
+                      <div className="preview-message">
+                        <p>No preview available for this file</p>
+                      </div>
+                    )
+                  ) : (
+                    <div className="preview-message">
+                      <p>Image preview will be shown here after selection</p>
+                    </div>
+                  )}
+                  <p className="card-text card-body" id="cardDescPreview">
+                    {cardInfo?.desc
+                      ? cardInfo?.desc
+                      : "Some quick example text to build on the card title and make up the bulk of the card's content."}
+                  </p>
+                  {/* <ul className="list-group list-group-flush" id='cardAttrListPreview'>{`${cardProperties[0]} : ${cardProperties[1]}`}</ul> */}
+                  <ul
+                    className="list-group list-group-flush"
+                    id="cardAttrListPreview"
+                  >
+                    {/* {JSON.stringify(cardProperties)} */}
+                    {cardProperties &&
+                      cardProperties.map((property) => {
+                        return (
+                          <>
+                            <p>Name: {property.name}</p>
+                            <p>Value: {property.value}</p>
+                          </>
+                        );
+                      })}
+                  </ul>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Form>
       </div>
     </div>
   );

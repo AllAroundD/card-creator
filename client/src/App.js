@@ -6,7 +6,7 @@ import CardsList from "./components/cards/CardsList";
 import Drawer from "./components/Drawer";
 import CardEdit from "./components/cards/CardEdit";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import DeckList from "./components/decks/DeckList";
+import DecksList from "./components/decks/DecksList";
 // import DeckEdit from "./components/decks/DeckEdit";
 import DeckCreate from "./components/decks/DeckCreate";
 import CardCreate from "./components/cards/CardCreate";
@@ -37,8 +37,8 @@ function App() {
             <Actions />
             <Splash />
             <Drawer>
-              <CardsList />
-              {/* <DeckList /> */}
+              <CardsList context={'review'}/>
+              <DecksList context={'review'}/>
             </Drawer>
           </Route>
           <Route component={NotFound} />

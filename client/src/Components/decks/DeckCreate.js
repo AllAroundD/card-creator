@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, Fragment } from "react";
+import CardsList from '../cards/CardsList'
 import SaveIcon from "@material-ui/icons/Save";
 import ClearIcon from "@material-ui/icons/Clear";
 import { useAlert } from "react-alert";
@@ -173,49 +174,10 @@ function DeckCreate(props) {
                 />
               </Form.Group>
               <Form.Group>
-                <label htmlFor="deckAttrInputList">
-                  <h5>Attributes</h5>
-                </label>
-                <div id="deckAttrInputList">
-                  {deckAttributes.map((deckAttribute, index) => (
-                    <Fragment key={`${deckAttribute}~${index}`}>
-                      <Form.Label htmlFor="attrInput">
-                        Attribute name
-                      </Form.Label>
-                      <input
-                        type="text"
-                        name="attrInput"
-                        id="attrInput"
-                        className="form-control"
-                        value={deckAttribute.name}
-                        placeholder="attribute1"
-                        onChange={(event) =>
-                          handleAttributeChange(index, event)
-                        }
-                      />
-                      <Form.Label htmlFor="valInput">Value</Form.Label>
-                      <textarea
-                        name="valInput"
-                        id="valInput"
-                        className="form-control"
-                        value={deckAttribute.value}
-                        placeholder="value1"
-                        onChange={(event) =>
-                          handleAttributeChange(index, event)
-                        }
-                      ></textarea>
-                    </Fragment>
-                  ))}
-                </div>
-                <Button
-                  type="button"
-                  className="btn btn-primary mt-3"
-                  onClick={handleAddAttributes}
-                >
-                  Add attribute
-                </Button>
-
-                {/* <DeckAttributes /> */}
+                <Form.Label>
+                  <h5>Cards (Deck Assembly)</h5>
+                </Form.Label>
+                <CardsList context={'createDeck'} />
               </Form.Group>
 
               <div className="upload-section">

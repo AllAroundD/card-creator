@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
-import '../styles/Card.css'
+import '../styles/Decard.css'
 import {Img} from 'react-image'
 
 function DecardSectionTitle({title, src }) {

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import CardActions from './CardActions'
 import { useAlert } from "react-alert";
-import { Link } from "react-router-dom";
 import API from "../../utils/API";
-import "../../styles/Card.css";
+import "../../styles/Decard.css";
 import { Img } from "react-image";
 
-function Card({ id, title, src }) {
+export default function Card({ id, title, src, context }) {
   const alert = useAlert();
   const [card, setCard] = useState({ id, title, src });
 
@@ -18,6 +16,8 @@ function Card({ id, title, src }) {
     setCard("");
   };
 
+
+  
   return (
     card && (
       <div className="card cardMain">
@@ -30,10 +30,7 @@ function Card({ id, title, src }) {
             alt="card"
           />
           <div className="card__actions">
-            <Link className="edit__icon card__action" to={`/cardedit/${id}`}>
-              <EditIcon />
-            </Link>
-            <Link className="delete__icon card__action"><DeleteIcon onClick={deleteCard} /></Link>
+            <CardActions context={context} id={id} title={title} src={src}/>
           </div>
           <div className="card__title">
             <h3>{title}</h3>
@@ -43,5 +40,3 @@ function Card({ id, title, src }) {
     )
   );
 }
-
-export default Card;

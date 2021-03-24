@@ -220,7 +220,7 @@ function CardEdit(props) {
                 </div>
                 <Button
                   type="button"
-                  className="btn btn-primary mt-3"
+                  className="btn mt-3 cardEdit__AddProperties_btn"
                   onClick={handleAddProperties}
                 >
                   Add Property

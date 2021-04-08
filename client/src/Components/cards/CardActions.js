@@ -13,17 +13,32 @@ export default function CardActions({id, title, src, context}) {
     const [card, setCard] = useState({ id, title, src });
 
     const deleteCard = () => {
-        API.deleteCard(id)
-          .then(alert.success("Deleted card"))
-          .catch((err) => console.log(err));
+        try {
+            API.deleteCard(id)
+            alert.success('Deleted card')
+        } catch (err) {
+            console.error(err)
+        }
+    }
         setCard("");
-      };
+
+    const addCard = () => {
+        try {
+            API.getCard(id)
+        } catch (err) {
+            console.error(err)
+        }
+    }
     if (context == 'review') {
         return <>
             <Link className="edit__icon card__action" to={`/cardedit/${id}`}><EditIcon /></Link>
             <Link className="delete__icon card__action"><DeleteIcon onClick={deleteCard} /></Link>
         </>
-    } else if (context = "createDeck"){
+    } else if (context == "addFromPool"){
+        return <>
+            <Link className="add__icon card__action"><AddIcon /></Link>
+        </>
+    } else if (context == "selection"){
         return <>
             <Link className="add__icon card__action"><AddIcon /></Link>
             <Link className="remove__icon card__action"><RemoveIcon /></Link>

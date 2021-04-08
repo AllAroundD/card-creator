@@ -38,6 +38,8 @@ function App() {
             <Splash />
             <Drawer>
               <CardsList context={'review'}/>
+            </Drawer>
+            <Drawer>
               <DecksList context={'review'}/>
             </Drawer>
           </Route>

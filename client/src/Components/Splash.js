@@ -6,7 +6,7 @@ import '../styles/Splash.css'
 export default function Splash() {
     return (<>
         <div className="jumbotron splash" style={{ marginTop: '5%' }} id='jumboIntro'>
-            <h1 className="display-4"><DecardTitle/></h1>
+            <h1 className="display-4" style={{textAlign:"center"}}><DecardTitle/></h1>
             <div className='infochunk__list'>
                 <InfoChunk title='Create Cards'>Create cards with their own face properties.</InfoChunk>
                 <InfoChunk title='Review Cards'>Examine all the cards in your inventory.</InfoChunk>

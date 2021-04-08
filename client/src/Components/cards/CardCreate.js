@@ -84,7 +84,7 @@ function CardCreate(props) {
 
     setCardInfo(newCardInfo);
 
-    console.log("cardInfo in saveCard: ", newCardInfo);
+    // console.log("cardInfo in saveCard: ", newCardInfo);
     // API.createCard(cardInfo)
     //     .then(alert.success('Saved card')
     // )
@@ -93,7 +93,7 @@ function CardCreate(props) {
 
     try {
       const { name, desc, properties } = newCardInfo;
-      console.log("properties: ", properties);
+      // console.log("properties: ", properties);
       if (name.trim() !== "" && desc.trim() !== "") {
         if (file) {
           const formData = new FormData();
@@ -102,7 +102,7 @@ function CardCreate(props) {
           formData.append("desc", desc);
           formData.append("properties", JSON.stringify(properties));
           setErrorMsg("");
-          console.log("formData: ", formData);
+          // console.log("formData: ", formData);
           await API.createCard(formData);
           alert.success("Saved card");
         } else {

@@ -3,3 +3,7 @@
   height: 100%;
   display: flex;
 }
+
+.cards__list:hover {
+  background-color: "red";
+}

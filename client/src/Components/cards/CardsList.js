@@ -33,7 +33,7 @@ export default function CardsList({ context }) {
           ""
         )}
         {cards.map((card) => (
-          <Link to={`/card/${card._id}`}>
+          <Link to={`/card/${card._id}`} className="cardslist__link">
             <Card
               key={card._id}
               id={card._id}
@@ -44,6 +44,7 @@ export default function CardsList({ context }) {
                   ? card.file_path
                   : `uploads/${card.file_path.split(/[\\\/]/).slice(-1)[0]}`
               }
+              loadCards={loadCards}
             />
           </Link>
         ))}

@@ -26,6 +26,7 @@ export default function CardsList({context}) {
             console.error(err)
         }
     }
+
     return (<React.Fragment>
             <HorizontalScroll style={{width: '100%', height:'350px', textAlign:'left'}}>
                 {context == 'review' ? <DecardSectionTitle title={"Cards"} src={`assets/`} /> : ''}

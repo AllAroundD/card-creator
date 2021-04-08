@@ -203,7 +203,7 @@ function CardCreate(props) {
                 </div>
                 <Button
                   type="button"
-                  className="btn btn-primary mt-3"
+                  className="btn btn-primary mt-3 cardCreate__AddProperties_btn"
                   onClick={handleProperties}
                 >
                   Add property

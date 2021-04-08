@@ -1,4 +1,4 @@
-.cardCreate {
+.cardView {
   display: grid;
   align-items: center;
   justify-content: center;
@@ -13,7 +13,7 @@
   place-items: center;
 }
 
-.cardCreate__image {
+.cardView__image {
   padding: 10px;
   max-height: 80%;
   height: 80%;
@@ -23,12 +23,12 @@
   border-radius: 6px;
 }
 
-.cardCreate__img__top {
+.cardView__img__top {
   width: 100%;
   object-fit: contain;
 }
 
-.cardCreate__body {
+.cardView__body {
   /* display: flex; */
   width: 90%;
   height: 700px;
@@ -38,7 +38,7 @@
   border: 2px solid black;
 }
 
-.cardCreate__buttons {
+.cardView__buttons {
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -47,7 +47,7 @@
   margin: 0;
 }
 
-.cardCreate__btn {
+.cardView__btn {
   width: 85px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -61,7 +61,7 @@
   border: none;
 }
 
-.cardCreate__btn > .MuiSvgIcon-root {
+.cardView__btn > .MuiSvgIcon-root {
   padding: 4px;
   color: white;
   font-size: large;
@@ -72,7 +72,7 @@
   /* border: 2px solid blue; */
 }
 
-.cardCreate__btn > .MuiSvgIcon-root:hover {
+.cardView__btn > .MuiSvgIcon-root:hover {
   color: rgb(19, 34, 167);
   /* background-color: rgb(83, 77, 77); */
   /* transform: scale(1.1); */
@@ -89,16 +89,6 @@
   /* margin: auto; */
   /* position: relative; */
   color: black;
-}
-
-.cardCreate__AddProperties_btn {
-  background-color: var(--dark-color);
-  border: 0;
-}
-
-.cardCreate__AddProperties_btn:hover {
-  /* background-color: var(--green); */
-  background-color: var(--dark-green);
 }
 
 #cardPreview {

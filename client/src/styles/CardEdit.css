@@ -4,12 +4,19 @@
   justify-content: center;
   padding: 10px;
   width: 100%;
-  background-color: var(--secondary-color);
+  /* background-color: var(--grey); */
   margin: 10px;
-  color: white;
+  /* color: white; */
+  color: var(--dark-color);
   border: 1px solid red;
   border-radius: 5px;
   place-items: center;
+}
+
+#cardForm {
+  background-color: var(--grey);
+  /* color: white; */
+  border-radius: 3px;
 }
 
 .cardEdit__image {
@@ -83,6 +90,16 @@
   width: 350px;
 }
 
+.cardEdit__AddProperties_btn {
+  background-color: var(--dark-color);
+  border: 0;
+}
+
+.cardEdit__AddProperties_btn:hover {
+  /* background-color: var(--green); */
+  background-color: var(--dark-green);
+}
+
 #cardNamePreview {
   border: 1px solid green;
   color: black;
@@ -99,4 +116,9 @@
 
 #cardAttrListPreview {
   color: black;
+}
+
+.propertyRow {
+  border: 1px solid red;
+  /* width: 100%; */
 }

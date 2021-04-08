@@ -94,13 +94,14 @@ function CardEdit(props) {
     // console.log("calling API.getCard", id);
     API.getCard(id)
       .then((res) => {
-        // console.log("res.data", res.data);
+        console.log("res.data", res.data);
         setCardInfo(res.data);
         let file_path = res.data.file_path.startsWith("assets")
           ? `/${res.data.file_path}`
           : `/uploads/${res.data.file_path.split(/[\\\/]/).slice(-1)[0]}`;
         setPreviewSrc(file_path);
         setIsPreviewAvailable(file_path);
+        setCardProperties(res.data.properties);
       })
 
       .catch((err) => console.log(err));
@@ -120,8 +121,6 @@ function CardEdit(props) {
 
   const saveCard = (e) => {
     e.preventDefault();
-    // console.log("calling API.saveCard")
-    // console.log("cardInfo in saveCard: ", cardInfo)
     API.editCard(cardInfo._id, cardInfo)
       .then(alert.success("Saved card"))
       .catch((err) => console.log(err));
@@ -220,7 +219,7 @@ function CardEdit(props) {
                 </div>
                 <Button
                   type="button"
-                  className="btn btn-primary mt-3"
+                  className="btn mt-3 cardEdit__AddProperties_btn"
                   onClick={handleAddProperties}
                 >
                   Add Property
@@ -317,12 +316,22 @@ function CardEdit(props) {
                   >
                     {/* {JSON.stringify(cardProperties)} */}
                     {cardProperties &&
-                      cardProperties.map((property) => {
+                      cardProperties.map((property, index) => {
                         return (
-                          <>
-                            <p>Name: {property.name}</p>
-                            <p>Value: {property.value}</p>
-                          </>
+                          // <div key={index}>
+                          //   <p>Name: {property.name}</p>
+                          //   <p>Value: {property.value}</p>
+                          // </div>
+                          <div key={index} className="propertyRow">
+                            <div className="row">
+                              <div className="col-md-6">
+                                Name: {property.name}
+                              </div>
+                              <div className="col-md-6">
+                                Value: {property.value}
+                              </div>
+                            </div>
+                          </div>
                         );
                       })}
                   </ul>

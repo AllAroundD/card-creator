@@ -1,23 +1,24 @@
 import React, { useState } from "react";
-import CardActions from './CardActions'
+import CardActions from "./CardActions";
 import { useAlert } from "react-alert";
 import API from "../../utils/API";
 import "../../styles/Decard.css";
 import { Img } from "react-image";
 
-export default function Card({ id, title, src, context }) {
+export default function Card({ id, title, src, context, loadCards }) {
   const alert = useAlert();
   const [card, setCard] = useState({ id, title, src });
 
-  const deleteCard = () => {
-    API.deleteCard(id)
-      .then(alert.success("Deleted card"))
-      .catch((err) => console.log(err));
-    setCard("");
-  };
+  // const deleteCard = () => {
+  //   API.deleteCard(id)
+  //     .then((res) => {
+  //       alert.success("Deleted card");
+  //       setCard("");
+  //       loadCards();
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
-
-  
   return (
     card && (
       <div className="card cardMain">
@@ -30,7 +31,13 @@ export default function Card({ id, title, src, context }) {
             alt="card"
           />
           <div className="card__actions">
-            <CardActions context={context} id={id} title={title} src={src}/>
+            <CardActions
+              context={context}
+              id={id}
+              title={title}
+              src={src}
+              loadCards={loadCards}
+            />
           </div>
           <div className="card__title">
             <h3>{title}</h3>

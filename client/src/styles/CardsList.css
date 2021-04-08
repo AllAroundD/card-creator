@@ -2,4 +2,12 @@
   width: 100%;
   height: 100%;
   display: flex;
+<<<<<<< HEAD
 } */
+=======
+}
+
+.cards__list:hover {
+  background-color: "red";
+}
+>>>>>>> dfc854ed13836f16d1bead2f8571004e93770198

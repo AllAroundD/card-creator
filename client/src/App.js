@@ -11,6 +11,7 @@ import DecksList from "./components/decks/DecksList";
 import DeckCreate from "./components/decks/DeckCreate";
 import CardCreate from "./components/cards/CardCreate";
 import NotFound from "./components/layout/NotFound";
+import CardView from "./components/cards/CardView";
 
 function App() {
   return (
@@ -25,10 +26,10 @@ function App() {
             <Actions />
             <CardEdit />
           </Route>
-          {/* <Route path="/deckedit">
-                        <Actions />
-                        <DeckEdit />
-                    </Route> */}
+          <Route path="/deckedit">
+            <Actions />
+            {/* <DeckEdit /> */}
+          </Route>
           <Route exact path="/deckcreate">
             <Actions />
             <DeckCreate />
@@ -42,6 +43,10 @@ function App() {
             <Drawer>
               <DecksList context={'review'}/>
             </Drawer>
+          </Route>
+          <Route path="/card/">
+            <Actions />
+            <CardView />
           </Route>
           <Route component={NotFound} />
         </Switch>

@@ -15,16 +15,16 @@
 
 .cardView__image {
   padding: 10px;
-  max-height: 80%;
-  height: 80%;
+  max-height: 60%;
+  height: 60%;
   justify-content: center;
   align-items: center;
-  background-color: gray;
+  /* background-color: gray; */
   border-radius: 6px;
 }
 
 .cardView__img__top {
-  width: 100%;
+  width: 60%;
   object-fit: contain;
 }
 
@@ -96,6 +96,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--grey);
 }
 
 #cardForm {

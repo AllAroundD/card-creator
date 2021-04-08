@@ -32,7 +32,7 @@ function CardView(props) {
   const loadCardInfo = (id) => {
     API.getCard(id)
       .then((res) => {
-        console.log("res.data", res.data);
+        // console.log("res.data", res.data);
         setCardInfo(res.data);
         let file_path = res.data.file_path.startsWith("assets")
           ? `/${res.data.file_path}`
@@ -64,7 +64,7 @@ function CardView(props) {
                     isPreviewAvailable ? (
                       <div className="image-preview">
                         <img
-                          className="preview-image card-img-top img-fluid img-thumbnail"
+                          className="preview-image cardView__img__top img-fluid img-thumbnail"
                           src={previewSrc}
                           alt="Preview"
                           id="cardImgPreview"

@@ -38,8 +38,10 @@ function App() {
             <Actions />
             <Splash />
             <Drawer>
-              <CardsList context={"review"} />
-              <DecksList context={"review"} />
+              <CardsList context={'review'}/>
+            </Drawer>
+            <Drawer>
+              <DecksList context={'review'}/>
             </Drawer>
           </Route>
           <Route path="/card/">

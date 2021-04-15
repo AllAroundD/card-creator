@@ -21,6 +21,15 @@ export default function CardActions({ id, title, src, context, loadCards }) {
       .catch((err) => console.log(err));
     setCard("");
   };
+
+      // const addCard = () => {
+    //     try {
+    //         API.getCard(id)
+    //     } catch (err) {
+    //         console.error(err)
+    //     }
+    // }
+
   if (context == "review") {
     return (
       <>

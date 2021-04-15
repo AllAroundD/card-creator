@@ -132,7 +132,7 @@ function DeckCreate(props) {
     alert.success("Cleared deck");
   };
 
-  return (
+  return (<>
     <div className="deckCreate">
       <h1>Create Deck</h1>
 
@@ -174,10 +174,12 @@ function DeckCreate(props) {
                 />
               </Form.Group>
               <Form.Group>
+                
                 <Form.Label>
                   <h5>Cards (Deck Assembly)</h5>
                 </Form.Label>
-                <CardsList context={'createDeck'} />
+                <CardsList context={'selection'} />
+                <CardsList context={'addFromPool'} />
               </Form.Group>
 
               <div className="upload-section">
@@ -288,9 +290,13 @@ function DeckCreate(props) {
               </div>
             </Col>
           </Row>
+          <Row>
+            
+          </Row>
         </Form>
       </div>
     </div>
+    </>
   );
 }
 

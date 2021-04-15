@@ -1,4 +1,5 @@
-.cardMain, .deckMain {
+.cardMain,
+.deckMain {
   display: flex;
   align-items: center;
   padding: 0px;
@@ -12,32 +13,120 @@
   user-select: none;
 }
 
-.card__image, .deck__image {
+.card__image,
+.deck__image {
   padding: 0px;
   max-height: 100%;
   height: 100%;
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color:silver;
-  background-image:
-    radial-gradient(circle at 100% 150%, silver 24%, white 24%, white 28%, silver 28%, silver 36%, white 36%, white 40%, transparent 40%, transparent),
-    radial-gradient(circle at 0    150%, silver 24%, white 24%, white 28%, silver 28%, silver 36%, white 36%, white 40%, transparent 40%, transparent),
-    radial-gradient(circle at 50%  100%, white 10%, silver 10%, silver 23%, white 23%, white 30%, silver 30%, silver 43%, white 43%, white 50%, silver 50%, silver 63%, white 63%, white 71%, transparent 71%, transparent),
-    radial-gradient(circle at 100% 50%, white 5%, silver 5%, silver 15%, white 15%, white 20%, silver 20%, silver 29%, white 29%, white 34%, silver 34%, silver 44%, white 44%, white 49%, transparent 49%, transparent),
-    radial-gradient(circle at 0    50%, white 5%, silver 5%, silver 15%, white 15%, white 20%, silver 20%, silver 29%, white 29%, white 34%, silver 34%, silver 44%, white 44%, white 49%, transparent 49%, transparent);
+  background-color: silver;
+  background-image: radial-gradient(
+      circle at 100% 150%,
+      silver 24%,
+      white 24%,
+      white 28%,
+      silver 28%,
+      silver 36%,
+      white 36%,
+      white 40%,
+      transparent 40%,
+      transparent
+    ),
+    radial-gradient(
+      circle at 0 150%,
+      silver 24%,
+      white 24%,
+      white 28%,
+      silver 28%,
+      silver 36%,
+      white 36%,
+      white 40%,
+      transparent 40%,
+      transparent
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      white 10%,
+      silver 10%,
+      silver 23%,
+      white 23%,
+      white 30%,
+      silver 30%,
+      silver 43%,
+      white 43%,
+      white 50%,
+      silver 50%,
+      silver 63%,
+      white 63%,
+      white 71%,
+      transparent 71%,
+      transparent
+    ),
+    radial-gradient(
+      circle at 100% 50%,
+      white 5%,
+      silver 5%,
+      silver 15%,
+      white 15%,
+      white 20%,
+      silver 20%,
+      silver 29%,
+      white 29%,
+      white 34%,
+      silver 34%,
+      silver 44%,
+      white 44%,
+      white 49%,
+      transparent 49%,
+      transparent
+    ),
+    radial-gradient(
+      circle at 0 50%,
+      white 5%,
+      silver 5%,
+      silver 15%,
+      white 15%,
+      white 20%,
+      silver 20%,
+      silver 29%,
+      white 29%,
+      white 34%,
+      silver 34%,
+      silver 44%,
+      white 44%,
+      white 49%,
+      transparent 49%,
+      transparent
+    );
   background-size: 100px 50px;
   position: relative;
 }
 
-.card__img__top, .deck__img__top {
+.card__img__top,
+.deck__img__top {
   width: 100%;
   height: 100%;
   object-fit: cover;
-
 }
 
-.card__actions, .card__title, .deck__actions, .deck__title, .decard__section__title {
+.card__image:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.edit__icon:hover,
+.delete__icon:hover {
+  cursor: pointer;
+  transform: scale(1.15);
+}
+
+.card__actions,
+.card__title,
+.deck__actions,
+.deck__title,
+.decard__section__title {
   position: absolute;
   top: 0;
   left: 0;
@@ -46,31 +135,35 @@
   z-index: 10;
 }
 
-.card__actions, .deck__ctions {
+.card__actions,
+.deck__actions {
   width: 100%;
-  height: 100%; 
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
 }
 
-.card__title, .deck__title {
+.card__title,
+.deck__title {
   text-align: center;
   font-family: Cooper Black;
-  -webkit-text-fill-color: white; 
+  -webkit-text-fill-color: white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }
 
-.card__body, .deck__body {
+.card__body,
+.deck__body {
   width: 90%;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-.card__buttons, .deck__buttons {
+.card__buttons,
+.deck__buttons {
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -79,7 +172,8 @@
   text-align: center;
 }
 
-.card__btn, .deck__btn {
+.card__btn,
+.deck__btn {
   width: 40%;
   background-color: gray;
   padding-top: 5px;
@@ -92,7 +186,7 @@
   margin: 5px;
 }
 
-.card__btn>.MuiSvgIcon-root {
+.card__btn > .MuiSvgIcon-root {
   padding: 4px;
   color: white;
   font-size: large;
@@ -102,7 +196,7 @@
   border-radius: 6px;
 }
 
-.card__btn>.MuiSvgIcon-root:hover {
+.card__btn > .MuiSvgIcon-root:hover {
   color: rgb(19, 34, 167);
   /* background-color: rgb(83, 77, 77); */
   /* transform: scale(1.1); */
@@ -113,15 +207,15 @@ a.card__action {
   background-color: rgba(0, 0, 0, 0.452);
 }
 
-.decard__section__title{
+.decard__section__title {
   width: 100%;
-  height: 100%; 
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-family: Cooper Black;
-  -webkit-text-fill-color: white; 
+  -webkit-text-fill-color: white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }
@@ -133,8 +227,13 @@ a.card__action {
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color: #E5E5F7;
+  background-color: #e5e5f7;
   opacity: 0.4;
-  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #E5E5F7 20px ), repeating-linear-gradient( #444CF755, #444CF7 );
+  background-image: repeating-radial-gradient(
+      circle at 0 0,
+      transparent 0,
+      #e5e5f7 20px
+    ),
+    repeating-linear-gradient(#444cf755, #444cf7);
   position: relative;
 }

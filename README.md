@@ -87,6 +87,8 @@ THINGS COMPLETE
   - list cards within deck
   - add cards to deck
 - image upload (during editing)
+- use Redux for card/deck info
+- use Sass
   THINGS TO DO LATER
 - user login
   - user-dependent data

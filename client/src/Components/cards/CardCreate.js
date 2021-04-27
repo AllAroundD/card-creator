@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 // import CardProperties from './CardProperties'
 import { Form, Row, Col, Button } from "react-bootstrap";
 import Dropzone from "react-dropzone";
-import "../../styles/CardCreate.css";
+// import "../../styles/CardCreate.css";
 
 const initialState = {
   name: "",

@@ -1,0 +1,20 @@
+@use "./styles/abstracts/variables";
+
+@use './styles/base/base';
+@use './styles/base/typography';
+
+@use './styles/components/CardAttributes';
+@use './styles/components/CardCreate';
+@use './styles/components/CardEdit';
+@use './styles/components/CardsList';
+@use './styles/components/CardView';
+@use './styles/components/Decard';
+@use './styles/components/DeckCreate';
+@use './styles/components/DeckEdit';
+@use './styles/components/DecksList';
+@use './styles/components/InfoChunk';
+@use './styles/components/Splash';
+
+body {
+  background-color: variables.$primary-color;
+}

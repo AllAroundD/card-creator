@@ -4,7 +4,7 @@ import API from "../../utils/API";
 import { useHistory } from "react-router-dom";
 // import CardProperties from './CardProperties'
 import { Form, Row, Col } from "react-bootstrap";
-import "../../styles/CardView.css";
+// import "../../styles/CardView.css";
 
 const initialState = {
   name: "",

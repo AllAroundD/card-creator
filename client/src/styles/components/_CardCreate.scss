@@ -1,3 +1,5 @@
+@use '../abstracts/variables';
+
 .cardCreate {
   display: grid;
   align-items: center;
@@ -7,7 +9,7 @@
   /* background-color: var(--secondary-color); */
   margin: 10px;
   /* color: white; */
-  color: var(--dark-color);
+  color: variables.$dark-color;
   border: 1px solid red;
   border-radius: 5px;
   place-items: center;
@@ -92,13 +94,13 @@
 }
 
 .cardCreate__AddProperties_btn {
-  background-color: var(--dark-color);
+  background-color: variables.$dark-color;
   border: 0;
 }
 
 .cardCreate__AddProperties_btn:hover {
   /* background-color: var(--green); */
-  background-color: var(--dark-green);
+  background-color: variables.$dark-green;
 }
 
 #cardPreview {

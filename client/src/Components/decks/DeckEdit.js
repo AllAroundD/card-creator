@@ -4,7 +4,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { useAlert } from "react-alert";
 import API from "../../utils/API";
 import { useHistory } from "react-router-dom";
-import "../../styles/DeckEdit.css";
+// import "../../styles/DeckEdit.css";
 
 function DeckEdit(props) {
   // let attrEnum

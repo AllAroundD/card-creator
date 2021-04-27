@@ -22,13 +22,13 @@ export default function CardActions({ id, title, src, context, loadCards }) {
     setCard("");
   };
 
-      // const addCard = () => {
-    //     try {
-    //         API.getCard(id)
-    //     } catch (err) {
-    //         console.error(err)
-    //     }
-    // }
+  // const addCard = () => {
+  //     try {
+  //         API.getCard(id)
+  //     } catch (err) {
+  //         console.error(err)
+  //     }
+  // }
 
   if (context == "review") {
     return (

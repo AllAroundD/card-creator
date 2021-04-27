@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import DeckActions from './DeckActions'
+import DeckActions from "./DeckActions";
 import { useAlert } from "react-alert";
 import API from "../../utils/API";
-import "../../styles/Decard.css";
+// import "../../styles/Decard.css";
 import { Img } from "react-image";
 
 export default function Deck({ id, title, src, context }) {
@@ -28,7 +28,7 @@ export default function Deck({ id, title, src, context }) {
             alt="deck"
           />
           <div className="deck__actions">
-            <DeckActions context={context} id={id} title={title} src={src}/>
+            <DeckActions context={context} id={id} title={title} src={src} />
           </div>
           <div className="deck__title">
             <h3>{title}</h3>

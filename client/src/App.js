@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import Splash from "./components/Splash";
 // import Card from './components/Card';
 import Actions from "./components/Actions";
@@ -38,10 +38,10 @@ function App() {
             <Actions />
             <Splash />
             <Drawer>
-              <CardsList context={'review'}/>
+              <CardsList context={"review"} />
             </Drawer>
             <Drawer>
-              <DecksList context={'review'}/>
+              <DecksList context={"review"} />
             </Drawer>
           </Route>
           <Route path="/card/">

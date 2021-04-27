@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import CardActions from "./CardActions";
 import { useAlert } from "react-alert";
 import API from "../../utils/API";
-import "../../styles/Decard.css";
+// import "../../styles/Decard.css";
 import { Img } from "react-image";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 
 export default function Card({ id, title, src, context, loadCards }) {
   const alert = useAlert();
@@ -22,21 +22,26 @@ export default function Card({ id, title, src, context, loadCards }) {
   //     .catch((err) => console.log(err));
   // };
 
-  const handleCardClick = () => {
-    history.push(`/card/${id}`);
+  const handleCardClick = (e) => {
+    console.log("card clicked", e);
+    console.log("card clicked", e.target);
+    // history.push(`/card/${id}`);
   };
 
   return (
     card && (
       <div className="card cardMain">
-        <div className="card__image rounded-top" onClick={handleCardClick}>
-          <Img
-            src={[src, "assets/img/cardsample2.jpg"]}
-            loader={"assets/img/spinner.gif"}
-            onError={console.log(`error at ${src}`)}
-            className="card__img__top rounded-top"
-            alt="card"
-          />
+        <div className="card__image rounded-top">
+          <Link to={`/card/${id}`}>
+            <Img
+              src={[src, "assets/img/cardsample2.jpg"]}
+              loader={"assets/img/spinner.gif"}
+              onError={console.log(`error at ${src}`)}
+              className="card__img__top rounded-top"
+              alt="card"
+            />
+          </Link>
+
           <div className="card__actions">
             <CardActions
               context={context}

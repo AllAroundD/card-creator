@@ -7,7 +7,7 @@ import API from "../../utils/API";
 import { useHistory } from "react-router-dom";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import Dropzone from "react-dropzone";
-import "../../styles/CardEdit.css";
+// import "../../styles/CardEdit.css";
 
 const initialState = {
   name: "",

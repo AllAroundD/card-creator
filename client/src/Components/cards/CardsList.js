@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import DecardSectionTitle from "../DecardSectionTitle";
 import API from "../../utils/API";
-import "../../styles/CardsList.css";
+// import "../../styles/CardsList.css";
 import HorizontalScroll from "react-scroll-horizontal";
 import { useAlert } from "react-alert";
 import CardView from "./CardView";

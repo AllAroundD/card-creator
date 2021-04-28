@@ -30,7 +30,7 @@ export default function Card({ id, title, src, context, loadCards }) {
 
   return (
     card && (
-      <div className="card cardMain">
+      <div className="card cardMain" onClick={handleCardClick}>
         <div className="card__image rounded-top">
           <Link to={`/card/${id}`}>
             <Img

@@ -143,6 +143,7 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
+  pointer-events: none;
 }
 
 .card__title,
@@ -200,6 +201,10 @@
   color: rgb(19, 34, 167);
   /* background-color: rgb(83, 77, 77); */
   /* transform: scale(1.1); */
+}
+
+.card__action, .deck__action {
+  pointer-events:auto;
 }
 
 a.card__action {

@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import SaveIcon from "@material-ui/icons/Save";
 import ClearIcon from "@material-ui/icons/Clear";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -7,6 +9,8 @@ import API from "../../utils/API";
 import { useHistory } from "react-router-dom";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import Dropzone from "react-dropzone";
+import { getCurrentCard } from "../../actions/card";
+
 // import "../../styles/CardEdit.css";
 
 const initialState = {
@@ -16,13 +20,13 @@ const initialState = {
   properties: [],
 };
 
-function CardEdit(props) {
+function CardEdit({ getCurrentCard, card: { card, loading } }) {
   let attrEnum;
   const alert = useAlert();
   // Setting our component's initial state
   const [cardInfo, setCardInfo] = useState(initialState);
   const [cardProperties, setCardProperties] = useState([]);
-  const [loading, setloading] = useState(true);
+  // const [loading, setloading] = useState(true);
 
   const [file, setFile] = useState(null);
   // const [previewSrc, setPreviewSrc] = useState("/assets/img/cardsample2.jpg");
@@ -92,6 +96,7 @@ function CardEdit(props) {
 
   const loadCardInfo = (id) => {
     // console.log("calling API.getCard", id);
+    getCurrentCard(id);
     API.getCard(id)
       .then((res) => {
         console.log("res.data", res.data);
@@ -149,7 +154,9 @@ function CardEdit(props) {
     history.push("/");
   };
 
-  return (
+  return loading && card === null ? (
+    <h1>Loading...</h1>
+  ) : (
     <div className="cardEdit">
       <h1>Edit Card</h1>
       {/* <div className="cardEdit__image">
@@ -345,4 +352,13 @@ function CardEdit(props) {
   );
 }
 
-export default CardEdit;
+CardEdit.propTypes = {
+  getCurrentCard: PropTypes.func.isRequired,
+  card: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  card: state.card,
+});
+
+export default connect(mapStateToProps, { getCurrentCard })(CardEdit);

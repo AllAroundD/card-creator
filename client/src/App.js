@@ -13,45 +13,51 @@ import CardCreate from "./components/cards/CardCreate";
 import NotFound from "./components/layout/NotFound";
 import CardView from "./components/cards/CardView";
 
+// Redux
+import { Provider } from "react-redux";
+import store from "./store";
+
 function App() {
   return (
-    <div className="app">
-      <Router>
-        <Switch>
-          <Route exact path="/cardcreate">
-            <Actions />
-            <CardCreate />
-          </Route>
-          <Route path="/cardedit">
-            <Actions />
-            <CardEdit />
-          </Route>
-          <Route path="/deckedit">
-            <Actions />
-            {/* <DeckEdit /> */}
-          </Route>
-          <Route exact path="/deckcreate">
-            <Actions />
-            <DeckCreate />
-          </Route>
-          <Route exact path="/">
-            <Actions />
-            <Splash />
-            <Drawer>
-              <CardsList context={"review"} />
-            </Drawer>
-            <Drawer>
-              <DecksList context={"review"} />
-            </Drawer>
-          </Route>
-          <Route path="/card/">
-            <Actions />
-            <CardView />
-          </Route>
-          <Route component={NotFound} />
-        </Switch>
-      </Router>
-    </div>
+    <Provider store={store}>
+      <div className="app">
+        <Router>
+          <Switch>
+            <Route exact path="/cardcreate">
+              <Actions />
+              <CardCreate />
+            </Route>
+            <Route path="/cardedit">
+              <Actions />
+              <CardEdit />
+            </Route>
+            <Route path="/deckedit">
+              <Actions />
+              {/* <DeckEdit /> */}
+            </Route>
+            <Route exact path="/deckcreate">
+              <Actions />
+              <DeckCreate />
+            </Route>
+            <Route exact path="/">
+              <Actions />
+              <Splash />
+              <Drawer>
+                <CardsList context={"review"} />
+              </Drawer>
+              <Drawer>
+                <DecksList context={"review"} />
+              </Drawer>
+            </Route>
+            <Route path="/card/">
+              <Actions />
+              <CardView />
+            </Route>
+            <Route component={NotFound} />
+          </Switch>
+        </Router>
+      </div>
+    </Provider>
   );
 }
 

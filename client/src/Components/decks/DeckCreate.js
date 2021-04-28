@@ -15,7 +15,7 @@ const initialState = {
   name: "",
   desc: "",
   file_path: "/assets/img/decksample1.png",
-  properties: [],
+  cards: [],
 };
 
 function DeckCreate(props) {
@@ -23,6 +23,7 @@ function DeckCreate(props) {
   // Setting our component's initial state
   const [deckInfo, setDeckInfo] = useState(initialState);
   const [deckAttributes, setDeckAttributes] = useState([]);
+  const [cards, setCards] = useState([])
 
   const [file, setFile] = useState(null);
   const [previewSrc, setPreviewSrc] = useState("/assets/img/decksample2.png");
@@ -36,17 +37,18 @@ function DeckCreate(props) {
       [evt.target.name]: evt.target.value,
     });
   };
+  
+    
+  // const handleAttributeChange = (index, event) => {
+  //   const values = [...deckAttributes];
+  //   if (event.target.name === "attrInput") {
+  //     values[index].name = event.target.value;
+  //   } else {
+  //     values[index].value = event.target.value;
+  //   }
 
-  const handleAttributeChange = (index, event) => {
-    const values = [...deckAttributes];
-    if (event.target.name === "attrInput") {
-      values[index].name = event.target.value;
-    } else {
-      values[index].value = event.target.value;
-    }
-
-    setDeckAttributes(values);
-  };
+  //   setDeckAttributes(values);
+  // };
 
   const onDrop = (files) => {
     const [uploadedFile] = files;
@@ -68,11 +70,11 @@ function DeckCreate(props) {
     }
   };
 
-  const handleAddAttributes = () => {
-    const values = [...deckAttributes];
-    values.push({ name: "", value: "" });
-    setDeckAttributes(values);
-  };
+  // const handleAddAttributes = () => {
+  //   const values = [...deckAttributes];
+  //   values.push({ name: "", value: "" });
+  //   setDeckAttributes(values);
+  // };
 
   let id;
   let history = useHistory();

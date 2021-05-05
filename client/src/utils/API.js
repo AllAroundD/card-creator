@@ -17,9 +17,9 @@ const api = {
     createCard: function (cardData) {
         return axios.post("/api/cards/", cardData, { headers: { 'Content-Type': 'multipart/form-data' } });
     },
-    // Saves a card to the database
+    // Modifies a card in the database
     editCard: function (id, cardData) {
-        return axios.put("/api/cards/" + id, cardData);
+        return axios.put("/api/cards/" + id, cardData, { headers: { 'Content-Type': 'multipart/form-data' } });
     },
     // Gets all decks
     getDecks: function () {
@@ -29,7 +29,7 @@ const api = {
     getDeck: function (id) {
         return axios.get("/api/decks/" + id);
     },
-    // Saves a card to the database
+    // Modifies a deck in the database
     editDeck: function (id, deckData) {
         return axios.put("/api/decks/" + id, deckData);
     },
@@ -37,10 +37,10 @@ const api = {
     deleteDeck: function (id) {
         return axios.delete("/api/decks/" + id);
     },
-    // Saves a deck to the database
-    saveDeck: function (deckData) {
-        return axios.post("/api/decks", deckData);
-    }
+    // Creates a deck to the database
+    createDeck: function (deckData) {
+        return axios.post("/api/decks/", deckData, { headers: { 'Content-Type': 'multipart/form-data' } });
+    },
 };
 
 export default api;

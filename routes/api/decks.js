@@ -37,7 +37,7 @@ router.route('/')
 router
     .route('/:id')
     .get(decksController.findById)
-    .put(decksController.update)
+    .put(upload.single('file'), decksController.update)
     .delete(decksController.remove);
 
 module.exports = router;

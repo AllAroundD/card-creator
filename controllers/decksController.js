@@ -16,11 +16,24 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
-    create: function (req, res) {
-        db.Decks
-            .create(req.body)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
+    create: async (req, res) => {
+        try {
+            const { name, desc, cards } = req.body
+            const { path, mimetype } = req.file
+            const deck = new db.Decks({
+                name,
+                desc,
+                file_path: path,
+                file_mimetype: mimetype,
+                cards: JSON.parse(cards)
+            })
+            await deck.save()
+            res.send('file uploaded successfully')
+            // let response = await db.Decks.create(req.body)
+            // response = res.json(response)
+        } catch (err) {
+            res.status(422).json(err)
+        }
     },
     update: function (req, res) {
         // console.log('req.body ', req.body)

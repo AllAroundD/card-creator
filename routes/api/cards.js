@@ -37,7 +37,7 @@ router.route('/')
 router
     .route('/:id')
     .get(cardsController.findById)
-    .put(cardsController.update)
+    .put(upload.single('file'), cardsController.update)
     .delete(cardsController.remove);
 
 module.exports = router;

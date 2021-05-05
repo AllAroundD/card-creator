@@ -119,13 +119,53 @@ function CardEdit(props) {
   // loadCardInfo(id);
   // console.log("cardInfo.file_path", cardInfo.file_path);
 
-  const saveCard = (e) => {
-    e.preventDefault();
-    API.editCard(cardInfo._id, cardInfo)
-      .then(alert.success("Saved card"))
-      .catch((err) => console.log(err));
-  };
+  // const saveCard = (e) => {
+  //   e.preventDefault();
+  //   API.editCard(cardInfo._id, cardInfo)
+  //     .then(alert.success("Saved card"))
+  //     .catch((err) => console.log(err));
+  // };
 
+  const saveCard = async (e) => {
+    e.preventDefault();
+
+    const newCardInfo = cardInfo;
+    newCardInfo.properties = cardProperties;
+
+    setCardInfo(newCardInfo);
+
+    // console.log("cardInfo in saveCard: ", newCardInfo);
+    // API.createCard(cardInfo)
+    //     .then(alert.success('Saved card')
+    // )
+    // .catch(err => console.log(err));
+    // history.push('/cardedit')
+
+    try {
+      const { name, desc, properties } = newCardInfo;
+      // console.log("properties: ", properties);
+      if (name.trim() !== "" && desc.trim() !== "") {
+        if (file) {
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("name", name);
+          formData.append("desc", desc);
+          formData.append("properties", JSON.stringify(properties));
+          setErrorMsg("");
+          // console.log("formData: ", formData);
+          await API.editCard(id, formData);
+          alert.success("Saved card");
+        } else {
+          setErrorMsg("Please select a file to add.");
+        }
+      } else {
+        setErrorMsg("Please enter all the field values.");
+      }
+    } catch (error) {
+      alert.error("Invalid file format.");
+      error.response && setErrorMsg("Invalid file format.");
+    }
+  };
   const clearCard = (e) => {
     e.preventDefault();
     setCardInfo({

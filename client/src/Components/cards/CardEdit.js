@@ -6,7 +6,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useAlert } from "react-alert";
 import API from "../../utils/API";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import Dropzone from "react-dropzone";
 import { getCurrentCard } from "../../actions/card";

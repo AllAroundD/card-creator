@@ -2,16 +2,16 @@ import "./App.scss";
 import Splash from "./components/Splash";
 // import Card from './components/Card';
 import Actions from "./components/Actions";
-import CardsList from "./components/cards/CardsList";
 import Drawer from "./components/Drawer";
 import CardEdit from "./components/cards/CardEdit";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import DecksList from "./components/decks/DecksList";
-// import DeckEdit from "./components/decks/DeckEdit";
 import DeckCreate from "./components/decks/DeckCreate";
+import DeckEdit from "./components/decks/DeckEdit";
+import CardsList from "./components/cards/CardsList";
 import CardCreate from "./components/cards/CardCreate";
-import NotFound from "./components/layout/NotFound";
 import CardView from "./components/cards/CardView";
+import NotFound from "./components/layout/NotFound";
 
 // Redux
 import { Provider } from "react-redux";
@@ -33,7 +33,7 @@ function App() {
             </Route>
             <Route path="/deckedit">
               <Actions />
-              {/* <DeckEdit /> */}
+              <DeckEdit />
             </Route>
             <Route exact path="/deckcreate">
               <Actions />

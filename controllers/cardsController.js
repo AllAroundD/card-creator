@@ -47,7 +47,6 @@ module.exports = {
                 file_mimetype: mimetype,
                 properties: JSON.parse(properties)
             }
-            console.log([card, req.params.id])
             await db.Cards.findOneAndUpdate({_id: req.params.id}, card)
             res.send('file uploaded successfully')
             // let response = await db.Cards.create(req.body)

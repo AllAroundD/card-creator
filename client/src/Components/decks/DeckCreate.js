@@ -22,8 +22,7 @@ function DeckCreate(props) {
   const alert = useAlert();
   // Setting our component's initial state
   const [deckInfo, setDeckInfo] = useState(initialState);
-  const [deckAttributes, setDeckAttributes] = useState([]);
-  const [cards, setCards] = useState([])
+  const [cardsSelection, setCardsSelection] = useState([])
 
   const [file, setFile] = useState(null);
   const [previewSrc, setPreviewSrc] = useState("/assets/img/decksample2.png");
@@ -83,7 +82,7 @@ function DeckCreate(props) {
     e.preventDefault();
 
     const newDeckInfo = deckInfo;
-    newDeckInfo.properties = deckAttributes;
+    newDeckInfo.cards = cardsSelection;
 
     setDeckInfo(newDeckInfo);
 
@@ -95,15 +94,15 @@ function DeckCreate(props) {
     // history.push('/cardedit')
 
     try {
-      const { name, desc, properties } = newDeckInfo;
-      console.log("properties: ", properties);
+      const { name, desc, cards } = newDeckInfo;
+      console.log("cards: ", cards);
       if (name.trim() !== "" && desc.trim() !== "") {
         if (file) {
           const formData = new FormData();
           formData.append("file", file);
           formData.append("name", name);
           formData.append("desc", desc);
-          formData.append("properties", JSON.stringify(properties));
+          formData.append("cards", JSON.stringify(cards));
           setErrorMsg("");
           console.log("formData: ", formData);
           await API.createDeck(formData);
@@ -128,7 +127,7 @@ function DeckCreate(props) {
       properties: [],
     });
     setFile("");
-    setDeckAttributes([]);
+    setCardsSelection([]);
     //   setDeckInfo(...initialState)
     // console.log('deckAttributes: ', deckAttributes)
     alert.success("Cleared deck");
@@ -277,16 +276,6 @@ function DeckCreate(props) {
                       className="list-group list-group-flush"
                       id="deckAttrListPreview"
                     >
-                      {/* {JSON.stringify(deckAttributes)} */}
-                      {deckAttributes &&
-                        deckAttributes.map((attribute) => {
-                          return (
-                            <>
-                              <p>Name: {attribute.name}</p>
-                              <p>Value: {attribute.value}</p>
-                            </>
-                          );
-                        })}
                     </ul>
                   </div>
                 </div>

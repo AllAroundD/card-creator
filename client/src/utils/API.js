@@ -31,7 +31,7 @@ const api = {
     },
     // Modifies a deck in the database
     editDeck: function (id, deckData) {
-        return axios.put("/api/decks/" + id, deckData);
+        return axios.put("/api/decks/" + id, deckData, { headers: { 'Content-Type': 'multipart/form-data' } });
     },
     // Deletes the deck with the given id
     deleteDeck: function (id) {

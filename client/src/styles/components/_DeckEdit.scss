@@ -1,11 +1,22 @@
+@use '../abstracts/variables';
+
 .deckEdit {
-  display: flex;
+  display: grid;
   align-items: center;
+  justify-content: center;
   padding: 10px;
   width: 100%;
-  background-color: rgb(83, 77, 77);
+  // background-color: rgb(83, 77, 77);
   margin: 10px;
-  color: white;
+  // color: white;
+  color: variables.$dark-color;
+  place-items: center;
+}
+
+#deckForm {
+  background-color: variables.$grey;
+  /* color: white; */
+  border-radius: 3px;
 }
 
 .deckEdit__image {
@@ -56,7 +67,7 @@
   border: none;
 }
 
-.deckEdit__btn>.MuiSvgIcon-root {
+.deckEdit__btn > .MuiSvgIcon-root {
   padding: 4px;
   color: white;
   font-size: large;
@@ -67,7 +78,7 @@
   /* border: 2px solid blue; */
 }
 
-.deckEdit__btn>.MuiSvgIcon-root:hover {
+.deckEdit__btn > .MuiSvgIcon-root:hover {
   color: rgb(19, 34, 167);
   /* background-color: rgb(83, 77, 77); */
   /* transform: scale(1.1); */

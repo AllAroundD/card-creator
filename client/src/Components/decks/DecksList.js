@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import Deck from "./Deck";
 import DecardSectionTitle from "../DecardSectionTitle";
-import API from "../../utils/API";
+// import API from "../../utils/API";
 // import '../../styles/DecksList.css'
 import HorizontalScroll from "react-scroll-horizontal";
 import { useAlert } from "react-alert";
+import { connect } from "react-redux";
+import { getDecks } from "../../actions/deck";
 
-export default function DecksList({ context }) {
+const DecksList = ({ context, getDecks, deck: { decks, loading } }) => {
   const alert = useAlert();
 
-  let [decks, setDecks] = useState([]);
+  // let [decks, setDecks] = useState([]);
   useEffect(() => {
-    loadDecks();
-  }, []);
+    // loadDecks();
+    getDecks();
+  }, [getDecks]);
 
-  async function loadDecks() {
-    try {
-      let result = await API.getDecks();
-      setDecks(result.data);
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  // async function loadDecks() {
+  //   try {
+  //     let result = await API.getDecks();
+  //     setDecks(result.data);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
   return (
     <>
       <HorizontalScroll
@@ -47,4 +51,14 @@ export default function DecksList({ context }) {
       </HorizontalScroll>
     </>
   );
-}
+};
+
+DecksList.propTypes = {
+  getDecks: PropTypes.func.isRequired,
+  deck: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  deck: state.deck,
+});
+
+export default connect(mapStateToProps, { getDecks })(DecksList);

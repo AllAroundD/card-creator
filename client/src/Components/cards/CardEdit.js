@@ -83,12 +83,13 @@ function CardEdit({ getCurrentCard, card: { card, loading } }) {
   };
 
   let history = useHistory();
+  let { id } = useParams();
 
   // const [ cardProperties, setCardProperties ] = useState([{"name": "property1", "value": "value1"}])
   //   const [previewSrc, setPreviewSrc] = useState("");
 
   // let id;
-  let id = window.location.pathname.substr(10);
+  // let id = window.location.pathname.substr(10);
   // Load all card info and store them with setCard
   useEffect(() => {
     loadCardInfo(id);

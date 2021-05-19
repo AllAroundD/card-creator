@@ -14,7 +14,7 @@ export const getDecks = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: DECK_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err.response.status, status: err.response.status },
     });
   }
 };
@@ -31,7 +31,7 @@ export const getCurrentDeck = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: DECK_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err.response.status, status: err.response.status },
     });
   }
 };

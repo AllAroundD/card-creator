@@ -27,11 +27,11 @@ function App() {
               <Actions />
               <CardCreate />
             </Route>
-            <Route path="/cardedit">
+            <Route path="/cardedit/:id">
               <Actions />
               <CardEdit />
             </Route>
-            <Route path="/deckedit">
+            <Route path="/deckedit/:id">
               <Actions />
               <DeckEdit />
             </Route>

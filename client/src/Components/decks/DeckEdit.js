@@ -5,7 +5,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useAlert } from "react-alert";
 import API from "../../utils/API";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getCurrentDeck } from "../../actions/deck";
 // import "../../styles/DeckEdit.css";
 
@@ -30,21 +30,28 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
 
   let history = useHistory();
 
-  //   let id;
+  let { id } = useParams();
+
   // Load all deck info and store them with setDeck
   useEffect(() => {
-    let id = window.location.pathname.substr(10);
+    // let id = window.location.pathname.substr(10);
+    getCurrentDeck(id);
+
     loadDeckInfo(id);
+
     // eslint-disable-next-line
   }, []);
 
   // Loads all deck info and sets them to Deck
   const loadDeckInfo = (id) => {
     // console.log("calling API.getDeck")
-    getCurrentDeck(id);
+    // setDeckInfo(deck);
+    console.log("id: ", id);
+    console.log("deck: ", deck);
     API.getDeck(id)
       .then((res) => setDeckInfo(res.data))
       .catch((err) => console.log(err));
+
     // console.log("deckInfo load ", deckInfo)
   };
 
@@ -134,7 +141,7 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
       <div className="deckPreviewBlock">
         <div className="card" id="deckPreview">
           <h5 className="card-title card-body" id="deckNamePreview">
-            {deckInfo.name ? deckInfo.name : "Sample Card Name"}
+            {deckInfo.name ? deckInfo.name : "Sample Deck Name"}
           </h5>
           <img
             src={`/assets/img/${deckInfo.imgId}`}
@@ -142,7 +149,7 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
             id="deckImgPreview"
             alt="example"
           />
-          <p className="card-text card-body" id="cardDescPreview">
+          <p className="card-text card-body" id="deckDescPreview">
             {deckInfo.desc
               ? deckInfo.desc
               : "Some quick example text to build on the card title and make up the bulk of the card's content."}

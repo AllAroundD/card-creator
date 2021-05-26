@@ -5,7 +5,7 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
 import { useAlert } from "react-alert";
-import API from "../../utils/API";
+import api from "../../utils/api";
 import { Link } from "react-router-dom";
 
 export default function CardActions({ id, title, src, context, loadCards }) {
@@ -13,7 +13,7 @@ export default function CardActions({ id, title, src, context, loadCards }) {
   const [card, setCard] = useState({ id, title, src });
 
   const deleteCard = () => {
-    API.deleteCard(id)
+    api.deleteCard(id)
       .then((res) => {
         alert.success("Deleted card");
         loadCards();
@@ -24,7 +24,7 @@ export default function CardActions({ id, title, src, context, loadCards }) {
 
   // const addCard = () => {
   //     try {
-  //         API.getCard(id)
+  //         api.getCard(id)
   //     } catch (err) {
   //         console.error(err)
   //     }

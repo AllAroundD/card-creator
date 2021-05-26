@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import DecardSectionTitle from "../DecardSectionTitle";
-import API from "../../utils/API";
+import api from "../../utils/api";
 // import "../../styles/CardsList.css";
 import HorizontalScroll from "react-scroll-horizontal";
 import { useAlert } from "react-alert";
@@ -20,7 +20,7 @@ export default function CardsList({ context }) {
   async function loadCards() {
     try {
       if (context != "selection") {
-        let result = await API.getCards();
+        let result = await api.getCards();
         setCards(result.data);
       }
     } catch (err) {

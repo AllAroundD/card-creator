@@ -1,9 +1,17 @@
 import React from "react";
+import Cookies from 'js-cookie'
 import { ReactComponent as DecardTitle } from "../decard-title-plain.svg";
 import InfoChunk from "./InfoChunk.js";
 // import '../styles/Splash.css'
+import { logout } from '../actions/auth'
+import PropTypes from 'prop-types'
 
-export default function Splash() {
+function Splash({ logout }) {
+  // const Auth = React.useContext(AuthApi)
+  // const handleOnClick = () => {
+  //   Auth.setAuth(false)
+  //   Cookies.remove('user') 
+  // }
   return (
     <>
       <div
@@ -14,6 +22,7 @@ export default function Splash() {
         <h1 className="display-4" style={{ textAlign: "center" }}>
           <DecardTitle />
         </h1>
+        <button onClick={logout}>Logout</button>
         <div className="infochunk__list">
           <InfoChunk title="Create Cards">
             Create cards with their own face properties.
@@ -42,3 +51,10 @@ export default function Splash() {
     </>
   );
 }
+
+Splash.propTypes = {
+  logout: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired, 
+}
+
+export default Splash

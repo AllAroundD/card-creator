@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useAlert } from "react-alert";
-import API from "../../utils/API";
+import api from "../../utils/api";
 import { useHistory } from "react-router-dom";
 import "../../styles/CardEdit.css";
 
@@ -47,8 +47,8 @@ function CardEdit(props) {
   }, [cardInfo]);
 
   const loadCardInfo = async (id) => {
-    // console.log("calling API.getCard")
-    await API.getCard(id)
+    // console.log("calling api.getCard")
+    await api.getCard(id)
       .then((res) => setCardInfo(res.data))
       .catch((err) => console.log(err));
     // setPreviewSrc(cardInfo.file_path);
@@ -59,16 +59,16 @@ function CardEdit(props) {
 
   const saveCard = (e) => {
     e.preventDefault();
-    // console.log("calling API.saveCard")
+    // console.log("calling api.saveCard")
     // console.log("cardInfo in saveCard: ", cardInfo)
-    API.editCard(cardInfo._id, cardInfo)
+    api.editCard(cardInfo._id, cardInfo)
       .then(alert.success("Saved card"))
       .catch((err) => console.log(err));
   };
 
   const deleteCard = (e) => {
     e.preventDefault();
-    API.deleteCard(cardInfo._id)
+    api.deleteCard(cardInfo._id)
       .then(alert.success("Deleted card"))
       .catch((err) => console.log(err));
     // console.log(`Deleted card ${cardInfo._id} . Redirecting`);

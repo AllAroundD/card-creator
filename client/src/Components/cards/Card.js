@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CardActions from "./CardActions";
 import { useAlert } from "react-alert";
-import API from "../../utils/API";
+import api from "../../utils/api";
 // import "../../styles/Decard.css";
 import { Img } from "react-image";
 import { useHistory, useParams, Link } from "react-router-dom";
@@ -13,7 +13,7 @@ export default function Card({ id, title, src, context, loadCards }) {
   let history = useHistory();
 
   // const deleteCard = () => {
-  //   API.deleteCard(id)
+  //   api.deleteCard(id)
   //     .then((res) => {
   //       alert.success("Deleted card");
   //       setCard("");

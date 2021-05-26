@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, Fragment } from "react";
 import SaveIcon from "@material-ui/icons/Save";
 import ClearIcon from "@material-ui/icons/Clear";
 import { useAlert } from "react-alert";
-import API from "../../utils/API";
+import api from "../../utils/api";
 // import CardProperties from './CardProperties'
 import { useHistory } from "react-router-dom";
 // import CardProperties from './CardProperties'
@@ -85,7 +85,7 @@ function CardCreate(props) {
     setCardInfo(newCardInfo);
 
     // console.log("cardInfo in saveCard: ", newCardInfo);
-    // API.createCard(cardInfo)
+    // api.createCard(cardInfo)
     //     .then(alert.success('Saved card')
     // )
     // .catch(err => console.log(err));
@@ -103,7 +103,7 @@ function CardCreate(props) {
           formData.append("properties", JSON.stringify(properties));
           setErrorMsg("");
           // console.log("formData: ", formData);
-          await API.createCard(formData);
+          await api.createCard(formData);
           alert.success("Saved card");
         } else {
           setErrorMsg("Please select a file to add.");

@@ -1,12 +1,12 @@
 import axios from "axios";
-import API from "../utils/API";
+import api from "../utils/api";
 
 import { GET_CARD, CARD_ERROR } from "./types";
 
 // Get the current card
 export const getCurrentCard = (id) => async (dispatch) => {
   try {
-    const res = await API.getCard(id);
+    const res = await api.getCard(id);
 
     dispatch({
       type: GET_CARD,

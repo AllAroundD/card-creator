@@ -1,11 +1,11 @@
-import API from "../utils/API";
+import api from "../utils/api";
 
 import { GET_DECKS, DECK_ERROR, GET_DECK } from "./types";
 
 // Get decks
 export const getDecks = () => async (dispatch) => {
   try {
-    const res = await API.getDecks();
+    const res = await api.getDecks();
 
     dispatch({
       type: GET_DECKS,
@@ -22,7 +22,7 @@ export const getDecks = () => async (dispatch) => {
 // Get deck
 export const getCurrentDeck = (id) => async (dispatch) => {
   try {
-    const res = await API.getDeck(id);
+    const res = await api.getDeck(id);
 
     dispatch({
       type: GET_DECK,

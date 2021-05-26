@@ -1,4 +1,4 @@
-import { GET_DECKS, DECK_ERROR, GET_DECK } from "../actions/types";
+import { GET_DECKS, DECK_ERROR } from "../actions/types";
 
 const initialState = {
   decks: [],
@@ -12,12 +12,6 @@ export default function deckReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_DECK:
-      return {
-        ...state,
-        deck: payload,
-        loading: false,
-      };
     case GET_DECKS:
       return {
         ...state,

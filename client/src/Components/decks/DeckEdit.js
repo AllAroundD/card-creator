@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useAlert } from "react-alert";
 import API from "../../utils/API";
 import { useHistory } from "react-router-dom";
-import { getCurrentDeck } from "../../actions/deck";
 // import "../../styles/DeckEdit.css";
 
-const initialState = {
-  name: "",
-  desc: "",
-  imgId: "",
-};
-
-function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
+function DeckEdit(props) {
+  // let attrEnum
   const alert = useAlert();
   // Setting our component's initial state
-  const [deckInfo, setDeckInfo] = useState(initialState);
+  const [deckInfo, setDeckInfo] = useState({
+    name: "",
+    desc: "",
+    imgId: "",
+  });
 
   const handleChange = (evt) => {
     const value = evt.target.value;
@@ -35,13 +31,11 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
   useEffect(() => {
     let id = window.location.pathname.substr(10);
     loadDeckInfo(id);
-    // eslint-disable-next-line
   }, []);
 
   // Loads all deck info and sets them to Deck
   const loadDeckInfo = (id) => {
     // console.log("calling API.getDeck")
-    getCurrentDeck(id);
     API.getDeck(id)
       .then((res) => setDeckInfo(res.data))
       .catch((err) => console.log(err));
@@ -65,14 +59,12 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
     history.push("/");
   };
 
-  return loading && deck === null ? (
-    <h1>Loading...</h1>
-  ) : (
+  return (
     <div className="deckEdit">
       <h1>Edit Deck</h1>
       <div className="col-md-6 col-lg-8" id="deckForm">
         <form id="mediaForm" encType="multipart/form-data" method="POST">
-          {/* <input
+          <input
             className="d-none"
             type="text"
             name="deckId"
@@ -85,7 +77,7 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
             name="deckImgUrl"
             id="deckImgUrl"
             value="defaultImgUrl"
-          /> */}
+          />
           <div className="form-group">
             <label htmlFor="deckNameInput">
               <h5>Name of Deck</h5>
@@ -153,13 +145,4 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
   );
 }
 
-DeckEdit.propTypes = {
-  getCurrentDeck: PropTypes.func.isRequired,
-  deck: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  deck: state.deck,
-});
-
-export default connect(mapStateToProps, { getCurrentDeck })(DeckEdit);
+export default DeckEdit;

@@ -92,10 +92,10 @@ function CardEdit({ getCurrentCard, card: { card, loading } }) {
   // Load all card info and store them with setCard
   useEffect(() => {
     loadCardInfo(id);
-    // eslint-disable-next-line
   }, []);
 
   const loadCardInfo = (id) => {
+    // console.log("calling API.getCard", id);
     getCurrentCard(id);
     api.getCard(id)
       .then((res) => {

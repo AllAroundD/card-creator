@@ -35,29 +35,12 @@ module.exports = {
             res.status(422).json(err)
         }
     },
-    update: async (req, res) => {
+    update: function (req, res) {
         // console.log('req.body ', req.body)
-        try {
-            const { name, desc, cards } = req.body
-            const { path, mimetype } = req.file
-            const deck = {
-                name,
-                desc,
-                file_path: path,
-                file_mimetype: mimetype,
-                cards: JSON.parse(cards)
-            }
-            await db.Decks.findOneAndUpdate({_id: req.params.id}, deck)
-            res.send('file uploaded successfully')
-            // let response = await db.Cards.create(req.body)
-            // response = res.json(response)
-        } catch (err) {
-            res.status(422).json(err)
-        }
-        // db.Cards
-        //     .findOneAndUpdate({ _id: req.params.id }, req.body)
-        //     .then(dbModel => res.json(dbModel))
-        //     .catch(err => res.status(422).json(err));
+        db.Decks
+            .findOneAndUpdate({ _id: req.params.id }, req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     },
     remove: function (req, res) {
         db.Decks

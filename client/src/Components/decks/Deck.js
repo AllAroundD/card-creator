@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DeckActions from "./DeckActions";
 import { useAlert } from "react-alert";
-import api from "../../utils/api";
+import API from "../../utils/API";
 // import "../../styles/Decard.css";
 import { Img } from "react-image";
 
@@ -10,7 +10,7 @@ export default function Deck({ id, title, src, context }) {
   const [deck, setDeck] = useState({ id, title, src });
 
   const deleteDeck = () => {
-    api.deleteDeck(id)
+    API.deleteDeck(id)
       .then(alert.success("Deleted deck"))
       .catch((err) => console.log(err));
     setDeck("");

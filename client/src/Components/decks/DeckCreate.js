@@ -3,7 +3,7 @@ import CardsList from "../cards/CardsList";
 import SaveIcon from "@material-ui/icons/Save";
 import ClearIcon from "@material-ui/icons/Clear";
 import { useAlert } from "react-alert";
-import api from "../../utils/api";
+import API from "../../utils/API";
 // import DeckAttributes from './DeckAttributes'
 import { useHistory } from "react-router-dom";
 // import DeckAttributes from './DeckAttributes'
@@ -87,7 +87,7 @@ function DeckCreate(props) {
     setDeckInfo(newDeckInfo);
 
     console.log("deckInfo in saveDeck: ", newDeckInfo);
-    // api.createDeck(deckInfo)
+    // API.createDeck(deckInfo)
     //     .then(alert.success('Saved card')
     // )
     // .catch(err => console.log(err));
@@ -105,7 +105,7 @@ function DeckCreate(props) {
           formData.append("cards", JSON.stringify(cards));
           setErrorMsg("");
           console.log("formData: ", formData);
-          await api.createDeck(formData);
+          await API.createDeck(formData);
           alert.success("Saved deck");
         } else {
           setErrorMsg("Please select a file to add.");

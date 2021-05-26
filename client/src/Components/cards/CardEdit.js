@@ -5,7 +5,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import ClearIcon from "@material-ui/icons/Clear";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useAlert } from "react-alert";
-import api from "../../utils/api";
+import API from "../../utils/API";
 import { useHistory, useParams } from "react-router-dom";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import Dropzone from "react-dropzone";
@@ -97,7 +97,7 @@ function CardEdit({ getCurrentCard, card: { card, loading } }) {
   const loadCardInfo = (id) => {
     // console.log("calling API.getCard", id);
     getCurrentCard(id);
-    api.getCard(id)
+    API.getCard(id)
       .then((res) => {
         console.log("res.data", res.data);
         setCardInfo(res.data);
@@ -126,7 +126,7 @@ function CardEdit({ getCurrentCard, card: { card, loading } }) {
 
   // const saveCard = (e) => {
   //   e.preventDefault();
-  //   api.editCard(cardInfo._id, cardInfo)
+  //   API.editCard(cardInfo._id, cardInfo)
   //     .then(alert.success("Saved card"))
   //     .catch((err) => console.log(err));
   // };
@@ -140,7 +140,7 @@ function CardEdit({ getCurrentCard, card: { card, loading } }) {
     setCardInfo(newCardInfo);
 
     // console.log("cardInfo in saveCard: ", newCardInfo);
-    // api.createCard(cardInfo)
+    // API.createCard(cardInfo)
     //     .then(alert.success('Saved card')
     // )
     // .catch(err => console.log(err));
@@ -158,7 +158,7 @@ function CardEdit({ getCurrentCard, card: { card, loading } }) {
           formData.append("properties", JSON.stringify(properties));
           setErrorMsg("");
           // console.log("formData: ", formData);
-          await api.editCard(id, formData);
+          await API.editCard(id, formData);
           alert.success("Saved card");
         } else {
           setErrorMsg("Please select a file to add.");
@@ -187,7 +187,7 @@ function CardEdit({ getCurrentCard, card: { card, loading } }) {
 
   const deleteCard = (e) => {
     e.preventDefault();
-    api.deleteCard(cardInfo._id)
+    API.deleteCard(cardInfo._id)
       .then(alert.success("Deleted card"))
       .catch((err) => console.log(err));
     // console.log(`Deleted card ${cardInfo._id} . Redirecting`);

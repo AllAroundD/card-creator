@@ -5,7 +5,7 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
 import { useAlert } from "react-alert";
-import api from "../../utils/api";
+import API from "../../utils/API";
 import { Link } from "react-router-dom";
 
 export default function DeckActions({id, title, src, context}) {
@@ -13,7 +13,7 @@ export default function DeckActions({id, title, src, context}) {
     const [deck, setDeck] = useState({ id, title, src });
 
     const deleteDeck = () => {
-        api.deleteDeck(id)
+        API.deleteDeck(id)
           .then(alert.success("Deleted deck"))
           .catch((err) => console.log(err));
         setDeck("");

@@ -1,4 +1,5 @@
 import "./App.scss";
+import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom";
 import Cookies from 'js-cookie'
 
@@ -21,14 +22,14 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 function App() {
-  const [auth,setAuth] = React.useState(false)
-  const readCookie = () => {
-    const user = Cookies.get('user')
-    if (user) {setAuth(true)}
-    React.useEffect(()=>{
-      readCookie()
-    }, [])
-  }
+  // const [auth,setAuth] = React.useState(false)
+  // const readCookie = () => {
+  //   const user = Cookies.get('user')
+  //   if (user) {setAuth(true)}
+  //   React.useEffect(()=>{
+  //     readCookie()
+  //   }, [])
+  // }
   return (
     <Provider store={store}>
       <div className="app">
@@ -73,4 +74,3 @@ function App() {
 }
 
 export default App;
-© 2021 GitHub, Inc.

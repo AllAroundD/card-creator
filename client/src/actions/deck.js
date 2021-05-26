@@ -1,20 +1,11 @@
-<<<<<<< HEAD
-import api from "../utils/api";
+import API from "../utils/API";
 
 import { GET_DECKS, DECK_ERROR, GET_DECK } from "./types";
-=======
-import axios from "axios";
-import { GET_DECKS, DECK_ERROR } from "./types";
->>>>>>> parent of 7f9e693 (added redux for decks)
 
 // Get decks
 export const getDecks = () => async (dispatch) => {
   try {
-<<<<<<< HEAD
-    const res = await api.getDecks();
-=======
-    const res = await axios.get("/api/decks");
->>>>>>> parent of 7f9e693 (added redux for decks)
+    const res = await API.getDecks();
 
     dispatch({
       type: GET_DECKS,
@@ -27,12 +18,11 @@ export const getDecks = () => async (dispatch) => {
     });
   }
 };
-<<<<<<< HEAD
 
 // Get deck
 export const getCurrentDeck = (id) => async (dispatch) => {
   try {
-    const res = await api.getDeck(id);
+    const res = await API.getDeck(id);
 
     dispatch({
       type: GET_DECK,
@@ -45,5 +35,3 @@ export const getCurrentDeck = (id) => async (dispatch) => {
     });
   }
 };
-=======
->>>>>>> parent of 7f9e693 (added redux for decks)

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = {
+const API = {
     // Gets all cards
     getCards: function () {
         return axios.get("/api/cards");
@@ -43,4 +43,4 @@ const api = {
     },
 };
 
-export default api;
+export default API;

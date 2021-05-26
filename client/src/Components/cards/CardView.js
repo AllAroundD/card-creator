@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, Fragment } from "react";
-import api from "../../utils/api";
+import API from "../../utils/API";
 // import CardProperties from './CardProperties'
 import { useHistory } from "react-router-dom";
 // import CardProperties from './CardProperties'
@@ -30,7 +30,7 @@ function CardView(props) {
   }, []);
 
   const loadCardInfo = (id) => {
-    api.getCard(id)
+    API.getCard(id)
       .then((res) => {
         // console.log("res.data", res.data);
         setCardInfo(res.data);

@@ -23,12 +23,13 @@ function DeckCreate(props) {
   // Setting our component's initial state
   const [deckInfo, setDeckInfo] = useState(initialState);
   const [deckAttributes, setDeckAttributes] = useState([]);
-  const [cards, setCards] = useState([])
+  const [cards, setCards] = useState([]);
 
   const [file, setFile] = useState(null);
   const [previewSrc, setPreviewSrc] = useState("/assets/img/decksample2.png");
   const [errorMsg, setErrorMsg] = useState("");
   const [isPreviewAvailable, setIsPreviewAvailable] = useState(false);
+  const [cardsSelection, setCardsSelection] = useState([]);
   const dropRef = useRef();
 
   const handleChange = (evt) => {
@@ -37,8 +38,7 @@ function DeckCreate(props) {
       [evt.target.name]: evt.target.value,
     });
   };
-  
-    
+
   // const handleAttributeChange = (index, event) => {
   //   const values = [...deckAttributes];
   //   if (event.target.name === "attrInput") {
@@ -83,7 +83,7 @@ function DeckCreate(props) {
     e.preventDefault();
 
     const newDeckInfo = deckInfo;
-    newDeckInfo.properties = deckAttributes;
+    newDeckInfo.cards = cardsSelection;
 
     setDeckInfo(newDeckInfo);
 
@@ -95,15 +95,15 @@ function DeckCreate(props) {
     // history.push('/cardedit')
 
     try {
-      const { name, desc, properties } = newDeckInfo;
-      console.log("properties: ", properties);
+      const { name, desc, cards } = newDeckInfo;
+      console.log("cards: ", cards);
       if (name.trim() !== "" && desc.trim() !== "") {
         if (file) {
           const formData = new FormData();
           formData.append("file", file);
           formData.append("name", name);
           formData.append("desc", desc);
-          formData.append("properties", JSON.stringify(properties));
+          formData.append("cards", JSON.stringify(cards));
           setErrorMsg("");
           console.log("formData: ", formData);
           await API.createDeck(formData);
@@ -125,10 +125,10 @@ function DeckCreate(props) {
     setDeckInfo({
       name: "",
       desc: "",
-      properties: [],
+      cards: [],
     });
     setFile("");
-    setDeckAttributes([]);
+    setCardsSelection([]);
     //   setDeckInfo(...initialState)
     // console.log('deckAttributes: ', deckAttributes)
     alert.success("Cleared deck");

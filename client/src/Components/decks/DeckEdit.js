@@ -9,16 +9,18 @@ import { useHistory, useParams } from "react-router-dom";
 import { getCurrentDeck } from "../../actions/deck";
 // import "../../styles/DeckEdit.css";
 
-const initialState = {
-  name: "",
-  desc: "",
-  imgId: "",
-};
-
 function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
+  const initialState = {
+    name: "",
+    desc: "",
+    file_path: "/assets/img/cardsample2.jpg",
+    properties: [],
+  };
   const alert = useAlert();
   // Setting our component's initial state
   const [deckInfo, setDeckInfo] = useState(initialState);
+  const [previewSrc, setPreviewSrc] = useState("");
+  const [isPreviewAvailable, setIsPreviewAvailable] = useState(false);
 
   const handleChange = (evt) => {
     const value = evt.target.value;
@@ -34,45 +36,43 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
 
   // Load all deck info and store them with setDeck
   useEffect(() => {
-    // let id = window.location.pathname.substr(10);
     getCurrentDeck(id);
-
-    loadDeckInfo(id);
 
     // eslint-disable-next-line
   }, []);
 
-  // Loads all deck info and sets them to Deck
-  const loadDeckInfo = (id) => {
-    // console.log("calling API.getDeck")
-    // setDeckInfo(deck);
-    console.log("id: ", id);
-    console.log("deck: ", deck);
-    API.getDeck(id)
-      .then((res) => setDeckInfo(res.data))
-      .catch((err) => console.log(err));
+  useEffect(() => {
+    loadDeckInfo();
+    // eslint-disable-next-line
+  }, [deck]);
 
-    // console.log("deckInfo load ", deckInfo)
+  // Loads all deck info and sets them to Deck
+  const loadDeckInfo = () => {
+    let file_path = deck?.file_path.startsWith("assets")
+      ? `/${deck?.file_path}`
+      : `/uploads/${deck?.file_path.split(/[\\\/]/).slice(-1)[0]}`;
+    setPreviewSrc(file_path);
+    setIsPreviewAvailable(file_path);
   };
 
   const saveDeck = (e) => {
     e.preventDefault();
     // console.log("deckInfo in saveDeck: ", saveDeck)
-    API.editDeck(deckInfo._id, deckInfo)
+    API.editDeck(deck._id, deckInfo)
       .then(alert.success("Saved deck"))
       .catch((err) => console.log(err));
   };
 
   const deleteDeck = (e) => {
     e.preventDefault();
-    API.deleteDeck(deckInfo._id)
+    API.deleteDeck(deck._id)
       .then(alert.success("Deleted deck"))
       .catch((err) => console.log(err));
     // console.log(`Deleted deck ${deckInfo._id} . Redirecting`);
     history.push("/");
   };
 
-  return loading && deck === null ? (
+  return loading ? (
     <h1>Loading...</h1>
   ) : (
     <div className="deckEdit">
@@ -105,7 +105,7 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
               className="form-control"
               placeholder="Sample Deck Name"
               // onInput={previewMatch(cardNameInputId)}
-              value={deckInfo.name}
+              value={deck?.name}
             />
           </div>
           <div className="form-group">
@@ -119,7 +119,7 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
               className="form-control"
               placeholder="Some quick example text to build on the deck title and make up the bulk of the card's content."
               // onInput={previewMatch(deckNameInputDesc)}
-              value={deckInfo.desc}
+              value={deck?.desc}
             />
           </div>
           <div className="form-group">
@@ -141,17 +141,18 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
       <div className="deckPreviewBlock">
         <div className="card" id="deckPreview">
           <h5 className="card-title card-body" id="deckNamePreview">
-            {deckInfo.name ? deckInfo.name : "Sample Deck Name"}
+            {deck?.name ? deck.name : "Sample Deck Name"}
           </h5>
           <img
-            src={`/assets/img/${deckInfo.imgId}`}
+            src={previewSrc}
+            // src="/assets/img/decksample1.jpg"
             className="card-img-top img-fluid"
             id="deckImgPreview"
             alt="example"
           />
           <p className="card-text card-body" id="deckDescPreview">
-            {deckInfo.desc
-              ? deckInfo.desc
+            {deck?.desc
+              ? deck?.desc
               : "Some quick example text to build on the card title and make up the bulk of the card's content."}
           </p>
         </div>

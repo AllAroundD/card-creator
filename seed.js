@@ -21,6 +21,7 @@ const updateDeck = async (cardName, deckName) => {
 const updateSeed = async () => {
   let card1 = await updateDeck("Doug", "Doug Deck");
   let card2 = await updateDeck("Eddi", "Eddi Deck");
+  let card3 = await updateDeck("Eddi", "Doug Deck");
 };
 
 // Add all the data to the array to be used
@@ -167,6 +168,17 @@ let deckSeed = [
     cards: [],
   },
 ];
+
+// delete any data that was there and then insert the data
+db.Cards.deleteMany({})
+  .then(() => db.Cards.collection.insertMany(cardSeed))
+  .then((data) => {
+    console.log("Cards: " + data.result.n + " records inserted!");
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
 
 db.Decks.deleteMany({})
   .then(() => db.Decks.collection.insertMany(deckSeed))

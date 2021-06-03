@@ -2,19 +2,30 @@ require("dotenv").config();
 let mongoose = require("mongoose");
 let db = require("./models");
 const config = require("./config");
+const { connectDB, disconnectDB } = require("./utils/dbUtils");
+const { Cards, Decks } = require("./models");
 // connect to the mongo DB using mongoose
-mongoose.connect(
-  config.dbUrl,
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
-  (err) => {
-    if (err) throw err;
-    console.log("DB Connected Successfully");
-  }
-);
+connectDB();
+
+// Function to get sample data
+const updateDeck = async (cardName, deckName) => {
+  const cardID = await Cards.findOne({ name: cardName }, "id").exec();
+  const deckID = await Decks.findOne({ name: deckName }, "id").exec();
+  const deckUpdate = await db.Decks.findByIdAndUpdate(deckID, {
+    cards: [cardID],
+  });
+  return deckUpdate;
+};
+
+// function with seed updates
+const updateSeed = async () => {
+  let card1 = await updateDeck("Doug", "Doug Deck");
+  let card2 = await updateDeck("Eddi", "Eddi Deck");
+};
+
 // Add all the data to the array to be used
 let cardSeed = [
   {
-    // _id: '507c35dd8fada716c89d0013',
     name: "Doug",
     desc: "hi",
     file_path: "assets/img/cardsample1.jpg",
@@ -25,7 +36,6 @@ let cardSeed = [
     ],
   },
   {
-    // _id: '507c35dd8fada716c89d0014',
     name: "Eddi",
     desc: "it me",
     file_path: "assets/img/cardsample2.jpg",
@@ -158,22 +168,14 @@ let deckSeed = [
   },
 ];
 
-// delete any data that was there and then insert the data
-db.Cards.deleteMany({})
-  .then(() => db.Cards.collection.insertMany(cardSeed))
-  .then((data) => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
 db.Decks.deleteMany({})
   .then(() => db.Decks.collection.insertMany(deckSeed))
-  .then((data) => {
-    console.log(data.result.n + " records inserted!");
+  .then(async (data) => {
+    await updateSeed();
+    console.log("Decks: " + data.result.n + " records inserted!");
+  })
+  .then(() => {
+    disconnectDB();
     process.exit(0);
   })
   .catch((err) => {

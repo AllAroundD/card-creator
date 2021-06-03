@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // connect to DB
-connectDB();
+const db = connectDB();
 // mongoose connect
 // mongoose.connect(
 //   config.dbUrl,

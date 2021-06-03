@@ -5,14 +5,15 @@ const db = config.dbUrl;
 // function to connect to DB
 const connectDB = async () => {
   try {
-    await mongoose.connect(db, {
+    const connectionDB = await mongoose.connect(db, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
       useFindAndModify: false,
     });
 
-    console.log("MongoDB connected...");
+    //TODO remove db from console log before pushing to prod
+    console.log("MongoDB connected...", db);
   } catch (err) {
     console.error(err.message);
     process.exit(1);

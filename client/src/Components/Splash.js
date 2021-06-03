@@ -1,6 +1,7 @@
 import React from "react";
 import { ReactComponent as DecardTitle } from "../decard-title-plain.svg";
 import InfoChunk from "./InfoChunk.js";
+import SignUp from './SignUp'
 // import '../styles/Splash.css'
 
 export default function Splash() {
@@ -11,6 +12,7 @@ export default function Splash() {
         style={{ marginTop: "5%" }}
         id="jumboIntro"
       >
+        <SignUp />
         <h1 className="display-4" style={{ textAlign: "center" }}>
           <DecardTitle />
         </h1>

@@ -1,9 +1,10 @@
 require("dotenv").config();
 let mongoose = require("mongoose");
 let db = require("./models");
+const config = require("./config");
 // connect to the mongo DB using mongoose
 mongoose.connect(
-  process.env.MONGODB_URI || process.env.DB_URL,
+  config.dbUrl,
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
   (err) => {
     if (err) throw err;

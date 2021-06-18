@@ -12,8 +12,11 @@ const connectDB = async () => {
       useFindAndModify: false,
     });
 
-    //TODO remove db from console log before pushing to prod
-    console.log("MongoDB connected...", db);
+    console.log(
+      `MongoDB connected for ${
+        process.env.NODE_ENV === "production" ? "production" : "development"
+      }...`
+    );
   } catch (err) {
     console.error(err.message);
     process.exit(1);

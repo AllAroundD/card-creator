@@ -10,18 +10,29 @@ connectDB();
 // Function to get sample data
 const updateDeck = async (cardName, deckName) => {
   const cardID = await Cards.findOne({ name: cardName }, "id").exec();
-  const deckID = await Decks.findOne({ name: deckName }, "id").exec();
-  const deckUpdate = await db.Decks.findByIdAndUpdate(deckID, {
-    cards: [cardID],
-  });
-  return deckUpdate;
+  const query = { name: deckName };
+  const updateDocument = {
+    $addToSet: { cards: cardID },
+  };
+  const result = await Decks.updateOne(query, updateDocument);
+  if (result.nModified)
+    console.log(`'${cardName}' was added to '${deckName}'.`);
 };
 
 // function with seed updates
 const updateSeed = async () => {
-  let card1 = await updateDeck("Doug", "Doug Deck");
-  let card2 = await updateDeck("Eddi", "Eddi Deck");
-  let card3 = await updateDeck("Eddi", "Doug Deck");
+  console.log("Updating decks to assign cards...");
+
+  let deckUpdate1 = await updateDeck("Doug", "Doug Deck");
+  let deckUpdate2 = await updateDeck("Eddi", "Eddi Deck");
+  let deckUpdate3 = await updateDeck("Developers", "New Deck");
+  let deckUpdate4 = await updateDeck("Lego 1", "Awesome Deck");
+  let deckUpdate5 = await updateDeck("Joker", "Cool Deck");
+  let deckUpdate6 = await updateDeck("Lego Galaxy Blue", "Deck Test");
+  let deckUpdate7 = await updateDeck("Lego Galaxy Blue 2", "Card Deck");
+  let deckUpdate8 = await updateDeck("Lego Galaxy", "Doug Deck");
+  let deckUpdate9 = await updateDeck("Eddi", "New Deck");
+  let deckUpdate10 = await updateDeck("Developers", "Doug Deck");
 };
 
 // Add all the data to the array to be used
@@ -182,9 +193,11 @@ db.Cards.deleteMany({})
 
 db.Decks.deleteMany({})
   .then(() => db.Decks.collection.insertMany(deckSeed))
-  .then(async (data) => {
-    await updateSeed();
+  .then((data) => {
     console.log("Decks: " + data.result.n + " records inserted!");
+  })
+  .then(async () => {
+    let data = await updateSeed();
   })
   .then(() => {
     disconnectDB();

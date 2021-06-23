@@ -30,7 +30,7 @@ export default function CardActions({ id, title, src, context, loadCards }) {
   //     }
   // }
 
-  if (context == "review") {
+  if (context === "review") {
     return (
       <>
         <Link className="edit__icon card__action" to={`/cardedit/${id}`}>

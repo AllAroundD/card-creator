@@ -34,7 +34,7 @@ module.exports = {
     }
   },
   update: async (req, res) => {
-    // console.log('req.body ', req.body)
+    // console.log("req.body ", req.body);
     try {
       const { name, desc, cards } = req.body;
       const { path, mimetype } = req.file;

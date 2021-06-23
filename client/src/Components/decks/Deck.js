@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import DeckActions from "./DeckActions";
-import { useAlert } from "react-alert";
-import API from "../../utils/API";
+// import { useAlert } from "react-alert";
+// import API from "../../utils/API";
 // import "../../styles/Decard.css";
 import { Img } from "react-image";
 
-export default function Deck({ id, title, src, context }) {
-  const alert = useAlert();
+export default function Deck({ id, title, src, context, loadDecks }) {
+  // const alert = useAlert();
+
   const [deck, setDeck] = useState({ id, title, src });
 
-  const deleteDeck = () => {
-    API.deleteDeck(id)
-      .then(alert.success("Deleted deck"))
-      .catch((err) => console.log(err));
-    setDeck("");
-  };
+  // const deleteDeck = () => {
+  //   API.deleteDeck(id)
+  //     .then(alert.success("Deleted deck"))
+  //     .catch((err) => console.log(err));
+  //   setDeck("");
+  // };
 
   return (
     deck && (
@@ -28,7 +29,13 @@ export default function Deck({ id, title, src, context }) {
             alt="deck"
           />
           <div className="deck__actions">
-            <DeckActions context={context} id={id} title={title} src={src} />
+            <DeckActions
+              context={context}
+              id={id}
+              title={title}
+              src={src}
+              loadDecks={loadDecks}
+            />
           </div>
           <div className="deck__title">
             <h3>{title}</h3>

@@ -22,15 +22,9 @@ export default function Card({ id, title, src, context, loadCards }) {
   //     .catch((err) => console.log(err));
   // };
 
-  const handleCardClick = (e) => {
-    console.log("card clicked", e);
-    console.log("card clicked", e.target);
-    // history.push(`/card/${id}`);
-  };
-
   return (
     card && (
-      <div className="card cardMain" onClick={handleCardClick}>
+      <div className="card cardMain">
         <div className="card__image rounded-top">
           <Link to={`/card/${id}`}>
             <Img

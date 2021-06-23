@@ -9,7 +9,7 @@ import API from "../../utils/API";
 import { getCurrentDeck } from "../../actions/deck";
 import { Link } from "react-router-dom";
 
-export default function DeckActions({ id, title, src, context }) {
+export default function DeckActions({ id, title, src, context, loadDecks }) {
   const alert = useAlert();
   const [deck, setDeck] = useState({ id, title, src });
 
@@ -18,8 +18,9 @@ export default function DeckActions({ id, title, src, context }) {
       .then(alert.success("Deleted deck"))
       .catch((err) => console.log(err));
     setDeck("");
+    loadDecks();
   };
-  if (context == "review") {
+  if (context === "review") {
     return (
       <>
         <Link className="edit__icon deck__action" to={`/deckedit/${id}`}>

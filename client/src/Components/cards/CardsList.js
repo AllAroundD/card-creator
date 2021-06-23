@@ -19,7 +19,7 @@ export default function CardsList({ context }) {
 
   async function loadCards() {
     try {
-      if (context != "selection") {
+      if (context !== "selection") {
         let result = await API.getCards();
         setCards(result.data);
       }
@@ -33,7 +33,7 @@ export default function CardsList({ context }) {
       <HorizontalScroll
         style={{ width: "100%", height: "350px", textAlign: "left" }}
       >
-        {context == "review" ? (
+        {context === "review" ? (
           <DecardSectionTitle title={"Cards"} src={`assets/`} />
         ) : (
           ""

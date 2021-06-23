@@ -1,4 +1,3 @@
-import axios from "axios";
 import API from "../utils/API";
 
 import { GET_CARD, CARD_ERROR } from "./types";

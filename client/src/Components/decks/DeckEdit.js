@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import SaveIcon from "@material-ui/icons/Save";
@@ -7,6 +7,8 @@ import { useAlert } from "react-alert";
 import API from "../../utils/API";
 import { useHistory, useParams } from "react-router-dom";
 import { getCurrentDeck } from "../../actions/deck";
+import { Form, Row, Col, Button } from "react-bootstrap";
+import Dropzone from "react-dropzone";
 // import "../../styles/DeckEdit.css";
 
 function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
@@ -18,9 +20,12 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
   };
   const alert = useAlert();
   // Setting our component's initial state
-  const [deckInfo, setDeckInfo] = useState(initialState);
+  const [deckInfo, setDeckInfo] = useState(deck ? deck : initialState);
   const [previewSrc, setPreviewSrc] = useState("");
   const [isPreviewAvailable, setIsPreviewAvailable] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [file, setFile] = useState(null);
+  const dropRef = useRef();
 
   const handleChange = (evt) => {
     const value = evt.target.value;
@@ -37,14 +42,15 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
   // Load all deck info and store them with setDeck
   useEffect(() => {
     getCurrentDeck(id);
+    loadDeckInfo();
 
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    loadDeckInfo();
-    // eslint-disable-next-line
-  }, [deck]);
+  // useEffect(() => {
+  //   loadDeckInfo();
+  //   // eslint-disable-next-line
+  // }, [deck]);
 
   // Loads all deck info and sets them to Deck
   const loadDeckInfo = () => {
@@ -55,12 +61,36 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
     setIsPreviewAvailable(file_path);
   };
 
-  const saveDeck = (e) => {
+  const saveDeck = async (e) => {
     e.preventDefault();
-    // console.log("deckInfo in saveDeck: ", saveDeck)
-    API.editDeck(deck._id, deckInfo)
-      .then(alert.success("Saved deck"))
-      .catch((err) => console.log(err));
+    // console.log("deckInfo in saveDeck: ", deckInfo);
+
+    // API.editDeck(deck._id, deckInfo)
+    //   .then(alert.success("Saved deck"))
+    //   .catch((err) => console.log(err));
+
+    try {
+      const { name, desc, cards } = deckInfo;
+      if (name.trim() !== "" && desc.trim() !== "") {
+        if (file) {
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("name", name);
+          formData.append("desc", desc);
+          formData.append("cards", JSON.stringify(cards));
+          setErrorMsg("");
+          await API.editDeck(id, formData);
+          alert.success("Saved deck");
+        } else {
+          setErrorMsg("Please select a file to add.");
+        }
+      } else {
+        setErrorMsg("Please enter all the field values.");
+      }
+    } catch (error) {
+      alert.error("Invalid file format.");
+      error.response && setErrorMsg("Invalid file format.");
+    }
   };
 
   const deleteDeck = (e) => {
@@ -72,13 +102,34 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
     history.push("/");
   };
 
+  const onDrop = (files) => {
+    const [uploadedFile] = files;
+    setFile(uploadedFile);
+
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setPreviewSrc(fileReader.result);
+    };
+    fileReader.readAsDataURL(uploadedFile);
+    setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
+  };
+
+  const updateBorder = (dragState) => {
+    if (dragState === "over") {
+      dropRef.current.style.border = "2px solid #000";
+    } else if (dragState === "leave") {
+      dropRef.current.style.border = "2px dashed #e9ebeb";
+    }
+  };
+
   return loading ? (
     <h1>Loading...</h1>
   ) : (
     <div className="deckEdit">
       <h1>Edit Deck</h1>
       <div className="col-md-6 col-lg-8" id="deckForm">
-        <form id="mediaForm" encType="multipart/form-data" method="POST">
+        {/* <form id="mediaForm" encType="multipart/form-data" method="POST"> */}
+        <Form className="search-form" onSubmit={saveDeck}>
           {/* <input
             className="d-none"
             type="text"
@@ -105,7 +156,7 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
               className="form-control"
               placeholder="Sample Deck Name"
               // onInput={previewMatch(cardNameInputId)}
-              value={deck?.name}
+              value={deckInfo?.name}
             />
           </div>
           <div className="form-group">
@@ -119,13 +170,37 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
               className="form-control"
               placeholder="Some quick example text to build on the deck title and make up the bulk of the card's content."
               // onInput={previewMatch(deckNameInputDesc)}
-              value={deck?.desc}
+              value={deckInfo?.desc}
             />
           </div>
           <div className="form-group">
             <label htmlFor="imageFile">
               <h5>Deck art</h5>
             </label>
+            <div className="upload-section">
+              <Dropzone
+                onDrop={onDrop}
+                onDragEnter={() => updateBorder("over")}
+                onDragLeave={() => updateBorder("leave")}
+              >
+                {({ getRootProps, getInputProps }) => (
+                  <div
+                    {...getRootProps({ className: "drop-zone" })}
+                    ref={dropRef}
+                  >
+                    <input {...getInputProps()} />
+                    <Button className="btn btn-secondary mt-3">
+                      Drag and drop a file OR click here to select a file
+                    </Button>
+                    {file && (
+                      <div>
+                        <strong>Selected file:</strong> {file.name}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </Dropzone>
+            </div>
           </div>
           <div id="apiMessage" className="alert alert-success d-none"></div>
           <div className="deckEdit__buttons">
@@ -136,12 +211,19 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
               <DeleteIcon />
             </button>
           </div>
-        </form>
+
+          {/* </form> */}
+        </Form>
+        {errorMsg && (
+          <p className="errorMsg">
+            <strong>{errorMsg}</strong>
+          </p>
+        )}
       </div>
       <div className="deckPreviewBlock">
         <div className="card" id="deckPreview">
           <h5 className="card-title card-body" id="deckNamePreview">
-            {deck?.name ? deck.name : "Sample Deck Name"}
+            {deckInfo?.name}
           </h5>
           <img
             src={previewSrc}
@@ -151,9 +233,7 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
             alt="example"
           />
           <p className="card-text card-body" id="deckDescPreview">
-            {deck?.desc
-              ? deck?.desc
-              : "Some quick example text to build on the card title and make up the bulk of the card's content."}
+            {deckInfo?.desc}
           </p>
         </div>
       </div>

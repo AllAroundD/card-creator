@@ -4,18 +4,18 @@ import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-ro
 import Cookies from 'js-cookie'
 
 
-import Splash from "./components/Splash";
-// import Card from './components/Card';
-import Actions from "./components/Actions";
-import Drawer from "./components/Drawer";
-import CardEdit from "./components/cards/CardEdit";
-import DecksList from "./components/decks/DecksList";
-import DeckCreate from "./components/decks/DeckCreate";
-import DeckEdit from "./components/decks/DeckEdit";
-import CardsList from "./components/cards/CardsList";
-import CardCreate from "./components/cards/CardCreate";
-import CardView from "./components/cards/CardView";
-import NotFound from "./components/layout/NotFound";
+import Splash from "./Components/Splash";
+// import Card from './Components/Card';
+import Actions from "./Components/Actions";
+import Drawer from "./Components/Drawer";
+import CardEdit from "./Components/cards/CardEdit";
+import DecksList from "./Components/decks/DecksList";
+import DeckCreate from "./Components/decks/DeckCreate";
+import DeckEdit from "./Components/decks/DeckEdit";
+import CardsList from "./Components/cards/CardsList";
+import CardCreate from "./Components/cards/CardCreate";
+import CardView from "./Components/cards/CardView";
+import NotFound from "./Components/layout/NotFound";
 
 // Redux
 import { Provider } from "react-redux";

@@ -132,7 +132,7 @@ let deckSeed = [
   {
     name: "Doug Deck",
     desc: "hi deck",
-    file_path: "assets/img/decksample1.jpg",
+    file_path: "assets/img/decksample1.png",
     file_mimetype: "image/jpg",
     cards: [],
   },
@@ -146,7 +146,7 @@ let deckSeed = [
   {
     name: "New Deck",
     desc: "This is a new deck",
-    file_path: "assets/img/decksample1.jpg",
+    file_path: "assets/img/decksample1.png",
     file_mimetype: "image/jpg",
     cards: [],
   },

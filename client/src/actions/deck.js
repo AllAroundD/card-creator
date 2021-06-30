@@ -24,6 +24,7 @@ export const getCurrentDeck = (id) => async (dispatch) => {
   try {
     const res = await API.getDeck(id);
 
+    // console.log("getCurrentDeck res.data", res.data);
     dispatch({
       type: GET_DECK,
       payload: res.data,

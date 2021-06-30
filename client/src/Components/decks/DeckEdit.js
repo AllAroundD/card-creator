@@ -41,7 +41,6 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
 
   // Load all deck info and store them with setDeck
   useEffect(() => {
-    getCurrentDeck(id);
     loadDeckInfo();
 
     // eslint-disable-next-line
@@ -53,12 +52,20 @@ function DeckEdit({ getCurrentDeck, deck: { deck, loading } }) {
   // }, [deck]);
 
   // Loads all deck info and sets them to Deck
-  const loadDeckInfo = () => {
-    let file_path = deck?.file_path.startsWith("assets")
-      ? `/${deck?.file_path}`
-      : `/uploads/${deck?.file_path.split(/[\\\/]/).slice(-1)[0]}`;
-    setPreviewSrc(file_path);
-    setIsPreviewAvailable(file_path);
+  const loadDeckInfo = async () => {
+    getCurrentDeck(id);
+    API.getDeck(id)
+      .then((res) => {
+        // console.log("data", res.data);
+        setDeckInfo(res.data);
+        let file_path = res.data.file_path.startsWith("assets")
+          ? `/${res.data.file_path}`
+          : `/uploads/${res.data.file_path.split(/[\\\/]/).slice(-1)[0]}`;
+        setPreviewSrc(file_path);
+        setIsPreviewAvailable(file_path);
+      })
+
+      .catch((err) => console.log(err));
   };
 
   const saveDeck = async (e) => {

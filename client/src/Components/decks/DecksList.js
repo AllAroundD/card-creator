@@ -22,7 +22,7 @@ const DecksList = ({ context, getDecks, deck: { decks, loading } }) => {
   async function loadDecks() {
     try {
       let result = await API.getDecks();
-      console.log("result", result.data);
+      // console.log("result", result.data);
       setDeckList(result.data);
     } catch (err) {
       console.error(err);

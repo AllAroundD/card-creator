@@ -5,12 +5,12 @@ import DecardSectionTitle from "../DecardSectionTitle";
 import API from "../../utils/API";
 // import '../../styles/DecksList.css'
 import HorizontalScroll from "react-scroll-horizontal";
-import { useAlert } from "react-alert";
+// import { useAlert } from "react-alert";
 import { connect } from "react-redux";
 import { getDecks } from "../../actions/deck";
 
 const DecksList = ({ context, getDecks, deck: { decks, loading } }) => {
-  const alert = useAlert();
+  // const alert = useAlert();
 
   let [deckList, setDeckList] = useState([]);
 

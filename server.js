@@ -25,22 +25,6 @@ if (process.env.NODE_ENV === "production") {
 
 // connect to DB
 const db = connectDB();
-// mongoose connect
-// mongoose.connect(
-//   config.dbUrl,
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//   },
-//   (err) => {
-//     if (err) {
-//       throw err;
-//     }
-//     console.log("DB Connected Successfully");
-//   }
-// );
 
 // if app terminated, disconnect DB
 process.on("SIGINT", function () {
@@ -49,6 +33,17 @@ process.on("SIGINT", function () {
 
 // Add routes, both API and view
 app.use(routes);
+
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "localhost"); // update to match the domain you will make the request from
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   res.header("Cross-Origin-Embedder-Policy", "require-corp");
+//   res.header("Cross-Origin-Opener-Policy", "same-origin");
+//   next();
+// });
 
 // send all requests to React app
 app.get("*", function (req, res) {

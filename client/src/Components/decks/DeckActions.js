@@ -26,7 +26,7 @@ export default function DeckActions({ id, title, src, context, loadDecks }) {
         <Link className="edit__icon deck__action" to={`/deckedit/${id}`}>
           <EditIcon />
         </Link>
-        <Link className="delete__icon deck__action">
+        <Link className="delete__icon deck__action" to="">
           <DeleteIcon onClick={deleteDeck} />
         </Link>
       </>

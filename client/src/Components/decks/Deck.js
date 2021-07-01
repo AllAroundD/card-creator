@@ -24,7 +24,7 @@ export default function Deck({ id, title, src, context, loadDecks }) {
           <Img
             src={[src, "assets/img/decksample2.jpg"]}
             loader={"assets/img/spinner.gif"}
-            onError={console.log(`error at ${src}`)}
+            // onError={console.log(`error at ${src}`)}
             className="deck__img__top rounded-top"
             alt="deck"
           />

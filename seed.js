@@ -9,30 +9,38 @@ connectDB();
 
 // Function to get sample data
 const updateDeck = async (cardName, deckName) => {
-  const cardID = await Cards.findOne({ name: cardName }, "id").exec();
-  const query = { name: deckName };
-  const updateDocument = {
-    $addToSet: { cards: cardID },
-  };
-  const result = await Decks.updateOne(query, updateDocument);
-  if (result.nModified)
-    console.log(`'${cardName}' was added to '${deckName}'.`);
+  try {
+    const cardID = await Cards.findOne({ name: cardName }, "id").exec();
+    const query = { name: deckName };
+    const updateDocument = {
+      $addToSet: { cards: cardID },
+    };
+    const result = await Decks.updateOne(query, updateDocument);
+    if (result.nModified)
+      console.log(`'${cardName}' was added to '${deckName}'.`);
+  } catch (err) {
+    console.error("error in updateDeck: ", err);
+  }
 };
 
 // function with seed updates
 const updateSeed = async () => {
-  console.log("Updating decks to assign cards...");
+  try {
+    console.log("Updating decks to assign cards...");
 
-  let deckUpdate1 = await updateDeck("Doug", "Doug Deck");
-  let deckUpdate2 = await updateDeck("Eddi", "Eddi Deck");
-  let deckUpdate3 = await updateDeck("Developers", "New Deck");
-  let deckUpdate4 = await updateDeck("Lego 1", "Awesome Deck");
-  let deckUpdate5 = await updateDeck("Joker", "Cool Deck");
-  let deckUpdate6 = await updateDeck("Lego Galaxy Blue", "Deck Test");
-  let deckUpdate7 = await updateDeck("Lego Galaxy Blue 2", "Card Deck");
-  let deckUpdate8 = await updateDeck("Lego Galaxy", "Doug Deck");
-  let deckUpdate9 = await updateDeck("Eddi", "New Deck");
-  let deckUpdate10 = await updateDeck("Developers", "Doug Deck");
+    let deckUpdate1 = await updateDeck("Doug", "Doug Deck");
+    let deckUpdate2 = await updateDeck("Eddi", "Eddi Deck");
+    let deckUpdate3 = await updateDeck("Developers", "New Deck");
+    let deckUpdate4 = await updateDeck("Lego 1", "Awesome Deck");
+    let deckUpdate5 = await updateDeck("Joker", "Cool Deck");
+    let deckUpdate6 = await updateDeck("Lego Galaxy Blue", "Deck Test");
+    let deckUpdate7 = await updateDeck("Lego Galaxy Blue 2", "Card Deck");
+    let deckUpdate8 = await updateDeck("Lego Galaxy", "Doug Deck");
+    let deckUpdate9 = await updateDeck("Eddi", "New Deck");
+    let deckUpdate10 = await updateDeck("Developers", "Doug Deck");
+  } catch (err) {
+    console.error("error updating decks: ", err);
+  }
 };
 
 // Add all the data to the array to be used

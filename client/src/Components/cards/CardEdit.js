@@ -21,7 +21,6 @@ const initialState = {
 };
 
 function CardEdit({ getCurrentCard, card: { card, loading } }) {
-  let attrEnum;
   const alert = useAlert();
   // Setting our component's initial state
   const [cardInfo, setCardInfo] = useState(initialState);
@@ -104,7 +103,8 @@ function CardEdit({ getCurrentCard, card: { card, loading } }) {
         setCardInfo(res.data);
         let file_path = res.data.file_path.startsWith("assets")
           ? `/${res.data.file_path}`
-          : `/uploads/${res.data.file_path.split(/[\\\/]/).slice(-1)[0]}`;
+          : //eslint-disable-next-line
+            `/uploads/${res.data.file_path.split(/[\\\/]/).slice(-1)[0]}`;
         setPreviewSrc(file_path);
         setIsPreviewAvailable(file_path);
         setCardProperties(res.data.properties);

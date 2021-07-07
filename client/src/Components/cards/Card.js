@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import CardActions from "./CardActions";
-import { useAlert } from "react-alert";
-import API from "../../utils/API";
+// import { useAlert } from "react-alert";
+// import API from "../../utils/API";
 // import "../../styles/Decard.css";
 import { Img } from "react-image";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Card({ id, title, src, context, loadCards }) {
-  const alert = useAlert();
+  // const alert = useAlert();
   const [card, setCard] = useState({ id, title, src });
   // router
-  let history = useHistory();
+  // let history = useHistory();
 
   // const deleteCard = () => {
   //   API.deleteCard(id)
@@ -30,7 +30,7 @@ export default function Card({ id, title, src, context, loadCards }) {
             <Img
               src={[src, "assets/img/cardsample2.jpg"]}
               loader={"assets/img/spinner.gif"}
-              onError={console.log(`error at ${src}`)}
+              // onError={console.log(`error at ${src}`)}
               className="card__img__top rounded-top"
               alt="card"
             />

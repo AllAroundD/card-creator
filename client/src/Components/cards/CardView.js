@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import API from "../../utils/API";
 // import CardProperties from './CardProperties'
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 // import CardProperties from './CardProperties'
 import { Form, Row, Col } from "react-bootstrap";
 // import "../../styles/CardView.css";
@@ -19,14 +19,15 @@ function CardView(props) {
   const [cardProperties, setCardProperties] = useState([]);
 
   const [previewSrc, setPreviewSrc] = useState("/assets/img/cardsample2.jpg");
-  const [errorMsg, setErrorMsg] = useState("");
+  // const [errorMsg, setErrorMsg] = useState("");
   const [isPreviewAvailable, setIsPreviewAvailable] = useState(false);
-  const dropRef = useRef();
+  // const dropRef = useRef();
 
   let id = window.location.pathname.substr(6);
   // Load all card info and store with setCard
   useEffect(() => {
     loadCardInfo(id);
+    // eslint-disable-next-line
   }, []);
 
   const loadCardInfo = (id) => {
@@ -36,7 +37,8 @@ function CardView(props) {
         setCardInfo(res.data);
         let file_path = res.data.file_path.startsWith("assets")
           ? `/${res.data.file_path}`
-          : `/uploads/${res.data.file_path.split(/[\\\/]/).slice(-1)[0]}`;
+          : //eslint-disable-next-line
+            `/uploads/${res.data.file_path.split(/[\\\/]/).slice(-1)[0]}`;
         setPreviewSrc(file_path);
         setIsPreviewAvailable(file_path);
         setCardProperties(res.data.properties);
@@ -46,7 +48,7 @@ function CardView(props) {
     // setPreviewSrc(cardInfo.file_path);
   };
 
-  let history = useHistory();
+  // let history = useHistory();
 
   return (
     <div className="cardView">

@@ -5,8 +5,8 @@ import API from "../../utils/API";
 // import "../../styles/CardsList.css";
 import HorizontalScroll from "react-scroll-horizontal";
 import { useAlert } from "react-alert";
-import CardView from "./CardView";
-import { Link } from "react-router-dom";
+// import CardView from "./CardView";
+// import { Link } from "react-router-dom";
 
 export default function CardsList({ context }) {
   const alert = useAlert();
@@ -15,6 +15,7 @@ export default function CardsList({ context }) {
 
   useEffect(() => {
     loadCards();
+    // eslint-disable-next-line
   }, []);
 
   async function loadCards() {

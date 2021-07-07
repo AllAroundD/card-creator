@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 export default function CardActions({ id, title, src, context, loadCards }) {
   const alert = useAlert();
-  const [card, setCard] = useState({ id, title, src });
+  // const [card, setCard] = useState({ id, title, src });
 
   const deleteCard = () => {
     API.deleteCard(id)
@@ -19,7 +19,7 @@ export default function CardActions({ id, title, src, context, loadCards }) {
         loadCards();
       })
       .catch((err) => console.log(err));
-    setCard("");
+    // setCard("");
   };
 
   // const addCard = () => {

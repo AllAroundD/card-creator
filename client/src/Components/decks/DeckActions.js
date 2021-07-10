@@ -15,10 +15,12 @@ export default function DeckActions({ id, title, src, context, loadDecks }) {
 
   const deleteDeck = () => {
     API.deleteDeck(id)
-      .then(alert.success("Deleted deck"))
+      .then(() => {
+        alert.success("Deleted deck");
+        setDeck("");
+        loadDecks();
+      })
       .catch((err) => console.log(err));
-    setDeck("");
-    loadDecks();
   };
   if (context === "review") {
     return (

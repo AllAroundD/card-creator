@@ -78,7 +78,6 @@ THINGS COMPLETE
 - bugs to fix
   - constant monitoring of cardList component (useEffect responsible?) -- possibly fixed
   - some errors in console log
-- card edit properties (+/-) functionality
 - unite UI (css → react bootstrap)
   - fix cardList appearance
   - fix create/edit appearance

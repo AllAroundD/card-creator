@@ -160,7 +160,7 @@ function DeckCreate(props) {
                     onChange={handleChange}
                   />
                 </Form.Group>
-                <Form.Group controlId="desc">
+                <Form.Group>
                   <Form.Label>
                     <h5>Description of Deck</h5>
                   </Form.Label>

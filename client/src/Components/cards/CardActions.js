@@ -36,7 +36,7 @@ export default function CardActions({ id, title, src, context, loadCards }) {
         <Link className="edit__icon card__action" to={`/cardedit/${id}`}>
           <EditIcon />
         </Link>
-        <Link className="delete__icon card__action">
+        <Link className="delete__icon card__action" to="">
           <DeleteIcon onClick={deleteCard} />
         </Link>
       </>

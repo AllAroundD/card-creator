@@ -3,9 +3,9 @@
   align-items: center;
   padding: 10px;
   width: 100%;
-  background-color: rgb(83, 77, 77);
+  background-color: hsl(0, 4%, 31%);
   margin: 10px;
-  color: white;
+  color: hsl(0, 0%, 100%);
 }
 
 .cardAttrNameLabel {
@@ -55,12 +55,12 @@
   justify-content: center;
   align-items: center;
   margin: 10px;
-  background-color: rgb(83, 77, 77);
+  background-color: hsl(0, 4%, 31%);
   border-radius: 6px;
   border: none;
 }
 
-.cardAttributes__btn>.MuiSvgIcon-root {
+.cardAttributes__btn > .MuiSvgIcon-root {
   padding: 4px;
   color: white;
   font-size: large;
@@ -71,8 +71,8 @@
   /* border: 2px solid blue; */
 }
 
-.cardAttributes__btn>.MuiSvgIcon-root:hover {
-  color: rgb(19, 34, 167);
+.cardAttributes__btn > .MuiSvgIcon-root:hover {
+  color: hsl(234, 80%, 36%);
   /* background-color: rgb(83, 77, 77); */
   /* transform: scale(1.1); */
 }

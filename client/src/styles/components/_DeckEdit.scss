@@ -25,7 +25,7 @@
   height: 80%;
   justify-content: center;
   align-items: center;
-  background-color: gray;
+  background-color: hsl(0, 0%, 50%);
   border-radius: 6px;
 }
 
@@ -62,7 +62,7 @@
   justify-content: center;
   align-items: center;
   margin: 10px;
-  background-color: rgb(83, 77, 77);
+  background-color: hsl(0, 4%, 31%);
   border-radius: 6px;
   border: none;
 }
@@ -79,7 +79,7 @@
 }
 
 .deckEdit__btn > .MuiSvgIcon-root:hover {
-  color: rgb(19, 34, 167);
+  color: hsl(234, 80%, 36%);
   /* background-color: rgb(83, 77, 77); */
   /* transform: scale(1.1); */
 }

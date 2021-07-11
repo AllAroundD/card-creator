@@ -7,7 +7,7 @@
   min-width: 150px;
   height: 275px;
   min-height: 175px;
-  background-color: rgb(196, 196, 196);
+  background-color: hsl(0, 0%, 77%);
   margin: 10px;
   color: white;
   user-select: none;
@@ -21,7 +21,7 @@
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color: silver;
+  background-color: hsl(0, 0%, 75%);
   background-image: radial-gradient(
       circle at 100% 150%,
       silver 24%,
@@ -198,18 +198,19 @@
 }
 
 .card__btn > .MuiSvgIcon-root:hover {
-  color: rgb(19, 34, 167);
+  color: hsl(234, 80%, 36%);
   /* background-color: rgb(83, 77, 77); */
   /* transform: scale(1.1); */
 }
 
-.card__action, .deck__action {
-  pointer-events:auto;
+.card__action,
+.deck__action {
+  pointer-events: auto;
 }
 
 a.card__action {
   color: white;
-  background-color: rgba(0, 0, 0, 0.452);
+  background-color: hsla(0, 0%, 0%, 0.452);
 }
 
 .decard__section__title {
@@ -232,13 +233,13 @@ a.card__action {
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color: #e5e5f7;
+  background-color: hsl(240, 53%, 93%);
   opacity: 0.4;
   background-image: repeating-radial-gradient(
       circle at 0 0,
       transparent 0,
-      #e5e5f7 20px
+      hsl(240, 53%, 93%) 20px
     ),
-    repeating-linear-gradient(#444cf755, #444cf7);
+    repeating-linear-gradient(hsla(237, 92%, 62%, 0.333), hsl(237, 92%, 62%));
   position: relative;
 }
